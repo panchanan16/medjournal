@@ -2,7 +2,16 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Search, Menu, X, ChevronDown, ArrowRight, Clock, FileText, Award } from 'lucide-react';
+import {
+  Search,
+  Menu,
+  X,
+  ChevronDown,
+  ArrowRight,
+  Clock,
+  FileText,
+  Award,
+} from "lucide-react";
 import JournalHeader from "./JournalHeader";
 
 export default function Navbar() {
@@ -11,7 +20,7 @@ export default function Navbar() {
     about: false,
     archives: false,
     author: false,
-    special: false
+    special: false,
   });
 
   const toggleDropdown = (menu) => {
@@ -20,14 +29,13 @@ export default function Navbar() {
     setDropdownOpen(newState);
   };
 
-
   return (
     <>
       <JournalHeader isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg border-t border-gray-200">
-          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4 z-10">
             <Link
               href="/"
               className="text-red-800 font-medium hover:text-red-600 transition"
@@ -61,6 +69,12 @@ export default function Navbar() {
                     className="text-gray-700 hover:text-red-600 transition"
                   >
                     Editorial Board
+                  </Link>
+                  <Link
+                    href="/volume"
+                    className="text-gray-700 hover:text-red-600 transition"
+                  >
+                    Volumes
                   </Link>
                 </div>
               )}
@@ -214,6 +228,12 @@ export default function Navbar() {
                 >
                   Editorial Board
                 </Link>
+                <Link
+                  href="/volume"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Volumes
+                </Link>
               </div>
             </li>
             <li className="group relative">
@@ -243,7 +263,7 @@ export default function Navbar() {
               </button>
               <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-64">
                 <Link
-                  href="/authors/guidelines"
+                  href="/guidelines"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Submission Guidelines
@@ -263,16 +283,54 @@ export default function Navbar() {
               </button>
               <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-48">
                 <Link
-                  href="/special/current"
+                  href="/special"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Current Special Issue
                 </Link>
                 <Link
-                  href="/special/upcoming"
+                  href="/special/1"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Upcoming Special Issues
+                </Link>
+                <Link
+                  href="/articless"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Article
+                </Link>
+              </div>
+            </li>
+            <li className="group relative">
+              <button className="px-4 py-3 font-medium hover:bg-red-800 transition flex items-center">
+                For Reviewers
+                <ChevronDown size={16} className="ml-1" />
+              </button>
+              <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-48">
+                <Link
+                  href="/guidelines"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Guidelines for reviewers
+                </Link>
+                <Link
+                  href="/review"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Reviews
+                </Link>
+                <Link
+                  href="/reviewer"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Reviewers
+                </Link>
+                <Link
+                  href="/articless"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Article
                 </Link>
               </div>
             </li>
