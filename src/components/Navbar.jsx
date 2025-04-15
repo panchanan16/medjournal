@@ -226,6 +226,12 @@ export default function Navbar() {
                   href="/editorial-policies"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
+                  Editorial Policies
+                </Link>
+                <Link
+                  href="/editorial-policies"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
                   Editorial Board
                 </Link>
                 <Link
