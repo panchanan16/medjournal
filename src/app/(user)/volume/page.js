@@ -1,6 +1,5 @@
-import Head from 'next/head';
 import { Poppins } from 'next/font/google';
-import ArticleCard from '../../components/Volumecard';
+import ArticleCard from '@/components/Volumecard';
 
 const poppins = Poppins({ 
   weight: ['400', '500', '600', '700'],

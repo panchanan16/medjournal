@@ -1,5 +1,3 @@
-'use client'
-
 import StyleSheet from "@/components/StyleSheet";
 
 const journalHtmlContent = {
@@ -134,19 +132,22 @@ const journalHtmlContent = {
 };
 
 
-function AboutUs() {
+async function AboutUsPage() {
+    const htmlRequest = await fetch('http://localhost:3100/api/v1/entity/about/readAll')
+    const html = await htmlRequest.json()
+
     return (
         <main className="container mx-auto px-6 py-8">
             {/* Custom CSS to style the rendered HTML */}
             <StyleSheet />
             <div className="bg-white shadow-sm rounded-lg p-8">
-                <h1 className="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">About the Journal</h1>
+                <h1 className="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">{html.data[0].title}</h1>
 
                 <section className="mb-10">
                     {/* Using dangerouslySetInnerHTML to render the HTML content */}
                     <div
                         className="html-content"
-                        dangerouslySetInnerHTML={{ __html: journalHtmlContent.AboutUs }}
+                        dangerouslySetInnerHTML={{ __html: html.data[0].content }}
                     />
                 </section>
             </div>
@@ -162,4 +163,4 @@ function AboutUs() {
     )
 }
 
-export default AboutUs
+export default AboutUsPage

@@ -1,18 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  Search,
-  Menu,
-  X,
-  ChevronDown,
-  ArrowRight,
-  Clock,
-  FileText,
-  Award,
-} from "lucide-react";
+import { ChevronDown, FileText } from "lucide-react";
 import JournalHeader from "./JournalHeader";
+import { policy } from "@/utils/policy";
+import { _GET } from "@/request/request";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -200,19 +193,19 @@ export default function Navbar() {
 
       {/* Desktop Navigation */}
       <div className="hidden md:block bg-gradient-to-r from-red-700 to-red-500 text-white shadow">
-        <nav className="container mx-auto px-4">
-          <ul className="flex space-x-1">
+        <nav className="container mx-auto px-2">
+          <ul className="flex">
             <li className="group relative">
               <Link
                 href="/"
-                className="px-4 py-3 inline-block font-medium hover:bg-red-800 transition"
+                className="px-4 py-3 text-sm inline-block font-medium hover:bg-red-800 transition"
               >
                 Home
               </Link>
             </li>
-            <li className="group relative">
-              <button className="px-4 py-3 font-medium hover:bg-red-800 transition flex items-center">
-                About
+            <li className="group relative min-w-fit">
+              <button className="px-4 py-3 font-medium text-sm hover:bg-red-800 transition flex items-center">
+                Journal Info
                 <ChevronDown size={16} className="ml-1" />
               </button>
               <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-48">
@@ -220,31 +213,61 @@ export default function Navbar() {
                   href="/about-us"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
-                  Journal Information
+                  About Us
                 </Link>
                 <Link
-                  href="/editorial-policies"
+                  href="/about-us"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
-                  Editorial Policies
+                  Indexing
                 </Link>
                 <Link
-                  href="/editorial-policies"
+                  href="/editor-board/1"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Editor In Chief
+                </Link>
+                <Link
+                  href="/editor-board"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Editorial Board
                 </Link>
                 <Link
-                  href="/volume"
+                  href="/editor-board"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
-                  Volumes
+                  Former Editorial Board
+                </Link>
+                <Link
+                  href="/editor-board"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Peer Review Process
+                </Link>
+                <Link
+                  href="/editor-board"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Supplement & Series
+                </Link>
+                <Link
+                  href="/editor-board"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Advertising Policies
+                </Link>
+                <Link
+                  href="/editorial-policies"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Testingmonials
                 </Link>
               </div>
             </li>
-            <li className="group relative">
-              <button className="px-4 py-3 font-medium hover:bg-red-800 transition flex items-center">
-                Archives
+            <li className="group relative min-w-fit">
+              <button className="px-4 py-3 font-medium text-sm hover:bg-red-800 transition flex items-center">
+                For Authors
                 <ChevronDown size={16} className="ml-1" />
               </button>
               <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-48">
@@ -252,19 +275,37 @@ export default function Navbar() {
                   href="/archives/2024"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
-                  2024 Issues
+                  Authors Instruction
                 </Link>
                 <Link
                   href="/archives/2023"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
-                  2023 Issues
+                  Online Submission
+                </Link>
+                <Link
+                  href="/archives/2023"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Submit Mutimedia Files
+                </Link>
+                <Link
+                  href="/archives/2023"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Refference Style
+                </Link>
+                <Link
+                  href="/archives/2023"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Interview With Outstanding Authors
                 </Link>
               </div>
             </li>
-            <li className="group relative">
-              <button className="px-4 py-3 font-medium hover:bg-red-800 transition flex items-center">
-                Author Information
+            <li className="group relative min-w-fit">
+              <button className="px-4 py-3 font-medium text-sm hover:bg-red-800 transition flex items-center">
+                For Reviewers
                 <ChevronDown size={16} className="ml-1" />
               </button>
               <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-64">
@@ -272,18 +313,39 @@ export default function Navbar() {
                   href="/guidelines"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
-                  Submission Guidelines
+                  Guidelines For Reviewers
                 </Link>
                 <Link
                   href="/authors/review"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
-                  Review Process
+                  Reviewers
                 </Link>
               </div>
             </li>
-            <li className="group relative">
-              <button className="px-4 py-3 font-medium hover:bg-red-800 transition flex items-center">
+            <li className="group relative min-w-fit">
+              <button className="px-4 py-3 font-medium text-sm hover:bg-red-800 transition flex items-center">
+                Ethics & Policies
+                <ChevronDown size={16} className="ml-1" />
+              </button>
+              <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-64">
+                {policy &&
+                  policy.length &&
+                  policy.map((pol, ind) => (
+                    <Link
+                      key={ind}
+                      href={
+                        pol.pageLink ? `/${pol.pageLink}` : pol.redirectLink
+                      }
+                      className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                    >
+                      {pol.name}
+                    </Link>
+                  ))}
+              </div>
+            </li>
+            <li className="group relative min-w-fit z-30">
+              <button className="px-4 py-3 font-medium text-sm hover:bg-red-800 transition flex items-center">
                 Special Issues
                 <ChevronDown size={16} className="ml-1" />
               </button>
@@ -308,9 +370,9 @@ export default function Navbar() {
                 </Link>
               </div>
             </li>
-            <li className="group relative">
-              <button className="px-4 py-3 font-medium hover:bg-red-800 transition flex items-center">
-                For Reviewers
+            <li className="group relative min-w-fit z-30">
+              <button className="px-4 py-3 font-medium text-sm hover:bg-red-800 transition flex items-center">
+                Archives
                 <ChevronDown size={16} className="ml-1" />
               </button>
               <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-48">
@@ -340,10 +402,26 @@ export default function Navbar() {
                 </Link>
               </div>
             </li>
-            <li className="group relative">
+            <li className="group relative min-w-fit">
+              <Link
+                href="/"
+                className="px-4 py-3 text-sm inline-block font-medium hover:bg-red-800 transition"
+              >
+                Online First
+              </Link>
+            </li>
+            <li className="group relative min-w-fit">
+              <Link
+                href="/"
+                className="px-4 py-3 text-sm inline-block font-medium hover:bg-red-800 transition"
+              >
+                Article Processing Charges
+              </Link>
+            </li>
+            <li className="group relative min-w-fit">
               <Link
                 href="/submit"
-                className="bg-orange-600 hover:bg-orange-700 px-4 py-3 inline-block font-medium transition"
+                className="bg-red-700 hover:bg-orange-700 px-4 py-3 inline-block font-medium text-sm transition"
               >
                 Submit Article
               </Link>

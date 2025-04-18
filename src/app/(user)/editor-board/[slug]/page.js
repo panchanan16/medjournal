@@ -1,8 +1,12 @@
-'use client'
-
 import Image from 'next/image';
 
-export default function EditorProfile() {
+export function generateStaticParams() {
+    return [{ slug: '1' }, { slug: '2' }, { slug: '3' }]
+}
+
+export default async function EditorProfile({ params }) {
+    const { slug } = await params
+
     const editorData = {
         name: "Gary Y Yang, MD",
         position: "Editor-in-Chief",
@@ -30,6 +34,7 @@ export default function EditorProfile() {
                     <div className="bg-gradient-to-r from-red-700 to-red-900 px-6 py-8 text-white">
                         <h1 className="text-3xl font-bold mb-1">{editorData.name}</h1>
                         <div className="text-xl text-red-100">{editorData.position}</div>
+                        <div className="text-xl text-red-100">{slug}</div>
                     </div>
 
                     <div className="p-6 md:p-8">
@@ -99,14 +104,3 @@ export default function EditorProfile() {
         </div>
     );
 }
-
-// // This function can be used to fetch data from an API in a real application
-// export async function getServerSideProps(context) {
-//   // In a real app, you would fetch the editor data based on the slug
-//   // const { slug } = context.params;
-//   // const data = await fetchEditorData(slug);
-
-// //   return {
-// //     props: {}, // Will be passed to the page component as props
-// //   };
-// }
