@@ -14,6 +14,7 @@ import {
   ShoppingBag,
   Siren,
   Users,
+  Notebook,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -21,6 +22,7 @@ import { useState } from "react";
 function AdminAsidebar() {
   const [openSections, setOpenSections] = useState({
     dashboard: true,
+    journalInfo: false,
     users: false,
     products: false,
     analytics: false,
@@ -28,12 +30,24 @@ function AdminAsidebar() {
     content: false,
   });
 
+  const [openSubSections, setOpenSubSections] = useState({
+    editorialTeam: false,
+  });
+
   const toggleSection = (section) => {
-    setOpenSections({
-      ...openSections,
-      [section]: !openSections[section],
-    });
+    setOpenSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
   };
+
+  const toggleSubSection = (section) => {
+    setOpenSubSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
+
   return (
     <div className="hidden md:flex md:flex-shrink-0">
       <div className="flex flex-col w-64">
@@ -93,12 +107,12 @@ function AdminAsidebar() {
                 </button>
                 {openSections.content && (
                   <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/content/all">
+                    <Link href="/admin/content/all">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
                         All Content
                       </div>
                     </Link>
-                    <Link href="/content/create">
+                    <Link href="/admin/content/create">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md bg-red-600 text-white hover:bg-red-500">
                         Create New
                       </div>
@@ -106,6 +120,65 @@ function AdminAsidebar() {
                     <Link href="/content/categories">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
                         Categories
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* <!--- Journal Info (Admin Section) ---> */}
+              <div>
+                <button
+                  onClick={() => toggleSection("journalInfo")}
+                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
+                >
+                  <div className="flex">
+                    <Notebook className="mr-3 h-5 w-5" />
+                    <span className="">Journal Info</span>
+                  </div>
+                  {openSections.journalInfo ? (
+                    <ChevronDown className="w-5 h-5" />
+                  ) : (
+                    <ChevronRight className="w-5 h-5" />
+                  )}
+                </button>
+                {openSections.journalInfo && (
+                  <div className="pl-10 space-y-1 mt-1">
+                    <Link href="/admin/journal-info/about-us">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        About Us
+                      </div>
+                    </Link>
+                    <Link href="/users/admins">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Indexing
+                      </div>
+                    </Link>
+
+                    <Link href="/users/admins">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Editorial Team
+                      </div>
+                    </Link>
+
+                    <Link href="/users/customers">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Peer Review Process
+                      </div>
+                    </Link>
+                    <Link href="/users/customers">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Supplement & Series
+                      </div>
+                    </Link>
+                    <Link href="/users/customers">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Adversiting Policies
+                      </div>
+                    </Link>
+                    <Link href="/users/customers">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Testingmonials
                       </div>
                     </Link>
                   </div>
@@ -156,7 +229,7 @@ function AdminAsidebar() {
                   className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
                 >
                   <div className="flex">
-                    <BookA  className="mr-3 h-5 w-5" />
+                    <BookA className="mr-3 h-5 w-5" />
                     <span className="">For Reviewers</span>
                   </div>
                   {openSections.products ? (
@@ -259,8 +332,8 @@ function AdminAsidebar() {
                   </div>
                 )}
               </div>
-               {/* Archives Section */}
-               <div>
+              {/* Archives Section */}
+              <div>
                 <button
                   onClick={() => toggleSection("settings")}
                   className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
@@ -295,14 +368,14 @@ function AdminAsidebar() {
                   </div>
                 )}
               </div>
-               {/* new Section */}
-               <div>
+              {/* new Section */}
+              <div>
                 <button
                   onClick={() => toggleSection("settings")}
                   className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
                 >
                   <div className="flex">
-                    <Newspaper  className="mr-3 h-5 w-5" />
+                    <Newspaper className="mr-3 h-5 w-5" />
                     <span className="">News</span>
                   </div>
                   {openSections.settings ? (
@@ -331,14 +404,14 @@ function AdminAsidebar() {
                   </div>
                 )}
               </div>
-               {/* Settings Section */}
-               <div>
+              {/* Settings Section */}
+              <div>
                 <button
                   onClick={() => toggleSection("settings")}
                   className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
                 >
                   <div className="flex">
-                    <BadgeDollarSign  className="mr-3 h-5 w-5" />
+                    <BadgeDollarSign className="mr-3 h-5 w-5" />
                     <span className="">Charges</span>
                   </div>
                   {openSections.settings ? (
