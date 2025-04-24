@@ -15,6 +15,11 @@ import {
   Siren,
   Users,
   Notebook,
+  Star,
+  BadgeAlert,
+  ArchiveRestore,
+  ChevronsLeftRightEllipsis,
+  HandCoins,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -23,6 +28,15 @@ function AdminAsidebar() {
   const [openSections, setOpenSections] = useState({
     dashboard: true,
     journalInfo: false,
+    forAuthors: false,
+    forReviewers: false,
+    ethicsAndPloicies: false,
+    specialIssues: false,
+    archives: false,
+    onlineFirst: false,
+    articleProcessingCharges: false,
+
+    // Currently not in use 👇
     users: false,
     products: false,
     analytics: false,
@@ -138,7 +152,7 @@ function AdminAsidebar() {
                 )}
               </div>
 
-              {/* <!--- Journal Info (Admin Section) ---> */}
+              {/* <!--- Journal Info Section ---> */}
               <div>
                 <button
                   onClick={() => toggleSection("journalInfo")}
@@ -199,119 +213,232 @@ function AdminAsidebar() {
                 )}
               </div>
 
-              {/* Users Section */}
+              {/* <!--- For Authors Section ---> */}
               <div>
                 <button
-                  onClick={() => toggleSection("users")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
+                  onClick={() => toggleSection("forAuthors")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
+                    "forAuthors"
+                  )}`}
                 >
                   <div className="flex">
-                    <Users className="mr-3 h-5 w-5" />
-                    <span className="">For authors</span>
+                    <BookA className="mr-3 h-5 w-5" />
+                    <span className="">For Authors</span>
                   </div>
-                  {openSections.users ? (
+                  {openSections.forAuthors ? (
                     <ChevronDown className="w-5 h-5" />
                   ) : (
                     <ChevronRight className="w-5 h-5" />
                   )}
                 </button>
-                {openSections.users && (
+                {openSections.forAuthors && (
                   <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/users/all">
+                    <Link href="/admin/journal-info/about-us">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        All Users
+                        Authors Instructions
                       </div>
                     </Link>
                     <Link href="/users/admins">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Admins
+                        Indexing
+                      </div>
+                    </Link>
+
+                    <Link href="/users/admins">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Online Submission
+                      </div>
+                    </Link>
+
+                    <Link href="/users/customers">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Submit Multimedia Files
                       </div>
                     </Link>
                     <Link href="/users/customers">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Customers
+                        Refference Style
+                      </div>
+                    </Link>
+                    <Link href="/users/customers">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Interview With Outstanding Authors{" "}
                       </div>
                     </Link>
                   </div>
                 )}
               </div>
 
-              {/* Products Section */}
+              {/* <!--- For Reviewers Section ---> */}
               <div>
                 <button
-                  onClick={() => toggleSection("products")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
+                  onClick={() => toggleSection("forReviewers")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
+                    "forReviewers"
+                  )}`}
                 >
                   <div className="flex">
-                    <BookA className="mr-3 h-5 w-5" />
+                    <Star className="mr-3 h-5 w-5" />
                     <span className="">For Reviewers</span>
                   </div>
-                  {openSections.products ? (
+                  {openSections.forReviewers ? (
                     <ChevronDown className="w-5 h-5" />
                   ) : (
                     <ChevronRight className="w-5 h-5" />
                   )}
                 </button>
-                {openSections.products && (
+                {openSections.forReviewers && (
                   <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/products/inventory">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Inventory
+                    <Link href="/admin/journal-info/about-us">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Guidelines For Reviewers{" "}
                       </div>
                     </Link>
-                    <Link href="/products/categories">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Categories
-                      </div>
-                    </Link>
-                    <Link href="/products/orders">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Orders
+                    <Link href="/users/admins">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Reviewers
                       </div>
                     </Link>
                   </div>
                 )}
               </div>
 
-              {/* Analytics Section */}
-              <div>
-                <button
-                  onClick={() => toggleSection("analytics")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
+              {/* <!--- Ethics & Policies Section ---> */}
+              <Link href="/admin/content/all">
+                <div
+                  onClick={() => toggleSection("ethicsAndPloicies")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("ethicsAndPloicies")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
                 >
                   <div className="flex">
                     <Siren className="mr-3 h-5 w-5" />
                     <span className="">Ethics & Policies</span>
                   </div>
-                  {openSections.analytics ? (
+                </div>
+              </Link>
+
+              {/* <!--- Special Issues Section ---> */}
+              <div>
+                <button
+                  onClick={() => toggleSection("specialIssues")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
+                    "specialIssues"
+                  )}`}
+                >
+                  <div className="flex">
+                    <BadgeAlert className="mr-3 h-5 w-5" />
+                    <span className="">Special Issues</span>
+                  </div>
+                  {openSections.specialIssues ? (
                     <ChevronDown className="w-5 h-5" />
                   ) : (
                     <ChevronRight className="w-5 h-5" />
                   )}
                 </button>
-                {openSections.analytics && (
+                {openSections.specialIssues && (
                   <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/analytics/sales">
+                    <Link href="/admin/journal-info/about-us">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Sales
+                        Current Special Issue
                       </div>
                     </Link>
-                    <Link href="/analytics/traffic">
+                    <Link href="/users/admins">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Traffic
+                        Upcoming Special Issue
                       </div>
                     </Link>
-                    <Link href="/analytics/conversion">
+                    <Link href="/users/admins">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Conversion
+                        Article
                       </div>
                     </Link>
                   </div>
                 )}
               </div>
 
-              {/* Settings Section */}
+              {/* <!--- Archives Section ---> */}
               <div>
+                <button
+                  onClick={() => toggleSection("archives")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
+                    "archives"
+                  )}`}
+                >
+                  <div className="flex">
+                    <ArchiveRestore className="mr-3 h-5 w-5" />
+                    <span className="">Archives</span>
+                  </div>
+                  {openSections.archives ? (
+                    <ChevronDown className="w-5 h-5" />
+                  ) : (
+                    <ChevronRight className="w-5 h-5" />
+                  )}
+                </button>
+                {openSections.archives && (
+                  <div className="pl-10 space-y-1 mt-1">
+                    <Link href="/admin/journal-info/about-us">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Guidelines For Reviewers{" "}
+                      </div>
+                    </Link>
+                    <Link href="/users/admins">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Reviews
+                      </div>
+                    </Link>
+                    <Link href="/users/admins">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Reviewers
+                      </div>
+                    </Link>
+                    <Link href="/users/admins">
+                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
+                        Article
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* <!--- Online First Section ---> */}
+              <Link href="/admin/content/all">
+                <div
+                  onClick={() => toggleSection("onlineFirst")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("onlineFirst")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <ChevronsLeftRightEllipsis className="mr-3 h-5 w-5" />
+                    <span className="">Online First</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* <!--- Article Processing Charges Section ---> */}
+              <Link href="/admin/content/all">
+                <div
+                  onClick={() => toggleSection("articleProcessingCharges")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("articleProcessingCharges")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <HandCoins className="mr-3 h-5 w-5" />
+                    <span className="">Article Processing Charges</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Settings Section */}
+              {/* <div>
                 <button
                   onClick={() => toggleSection("settings")}
                   className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
@@ -345,9 +472,9 @@ function AdminAsidebar() {
                     </Link>
                   </div>
                 )}
-              </div>
+              </div> */}
               {/* Archives Section */}
-              <div>
+              {/* <div>
                 <button
                   onClick={() => toggleSection("settings")}
                   className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
@@ -381,9 +508,9 @@ function AdminAsidebar() {
                     </Link>
                   </div>
                 )}
-              </div>
+              </div> */}
               {/* new Section */}
-              <div>
+              {/* <div>
                 <button
                   onClick={() => toggleSection("settings")}
                   className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
@@ -417,9 +544,9 @@ function AdminAsidebar() {
                     </Link>
                   </div>
                 )}
-              </div>
+              </div> */}
               {/* Settings Section */}
-              <div>
+              {/* <div>
                 <button
                   onClick={() => toggleSection("settings")}
                   className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
@@ -453,10 +580,10 @@ function AdminAsidebar() {
                     </Link>
                   </div>
                 )}
-              </div>
+              </div> */}
 
               {/* Settings Section */}
-              <div>
+              {/* <div>
                 <button
                   onClick={() => toggleSection("settings")}
                   className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
@@ -490,7 +617,7 @@ function AdminAsidebar() {
                     </Link>
                   </div>
                 )}
-              </div>
+              </div> */}
             </nav>
           </div>
         </div>
