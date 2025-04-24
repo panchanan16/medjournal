@@ -35,10 +35,15 @@ function AdminAsidebar() {
   });
 
   const toggleSection = (section) => {
-    setOpenSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
+    setOpenSections((prev) => {
+      const newState = Object.fromEntries(
+        Object.keys(prev).map((key) => [key, false])
+      );
+      return {
+        ...newState,
+        [section]: !prev[section],
+      };
+    });
   };
 
   const toggleSubSection = (section) => {
@@ -47,6 +52,9 @@ function AdminAsidebar() {
       [section]: !prev[section],
     }));
   };
+
+  const isSectionOpen = (section) =>
+    openSections?.[section] ? "bg-red-700" : "";
 
   return (
     <div className="hidden md:flex md:flex-shrink-0">
@@ -61,7 +69,9 @@ function AdminAsidebar() {
               <div>
                 <button
                   onClick={() => toggleSection("dashboard")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white bg-red-700 hover:bg-red-700 group"
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
+                    "dashboard"
+                  )}`}
                 >
                   <div className="flex">
                     <Home className="mr-3 h-5 w-5" />
@@ -93,7 +103,9 @@ function AdminAsidebar() {
               <div>
                 <button
                   onClick={() => toggleSection("content")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-600 group"
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
+                    "content"
+                  )}`}
                 >
                   <div className="flex">
                     <FileText className="mr-3 h-5 w-5" />
@@ -130,7 +142,9 @@ function AdminAsidebar() {
               <div>
                 <button
                   onClick={() => toggleSection("journalInfo")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
+                    "journalInfo"
+                  )}`}
                 >
                   <div className="flex">
                     <Notebook className="mr-3 h-5 w-5" />
