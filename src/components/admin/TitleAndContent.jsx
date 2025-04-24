@@ -10,7 +10,7 @@ const TextEditor = dynamic(() => import("@/components/admin/TextEditor"), {
   ssr: false,
 });
 
-function TitleAndContent() {
+function TitleAndContent({ endpoints }) {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -38,7 +38,7 @@ function TitleAndContent() {
       }
 
       // This is where you would make your API call
-      const response = await _POST("about/create", formData);
+      const response = await _POST(endpoints, formData);
 
       toast.success("Submitted successfully");
       console.log("Submitted form data response:", response);

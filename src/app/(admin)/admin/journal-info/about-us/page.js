@@ -1,5 +1,4 @@
 import TitleAndContent from "@/components/admin/TitleAndContent";
-import TitleAndOneSection from "@/components/admin/TitleAndOneSection";
 
 function Page() {
   return (
@@ -16,7 +15,7 @@ function Page() {
             </div>
           </div>
           {/* Main tinymce section */}
-          <TitleAndContent />
+          <TitleAndContent endpoints="about/create" />
         </div>
       </div>
     </div>

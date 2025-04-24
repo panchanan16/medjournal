@@ -63,7 +63,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="min-h-screen bg-gray-50">
+        <main className="min-h-screen bg-gray-50">
           <div className="flex h-screen overflow-hidden">
             {/* <!--- Side navbar ---> */}
             <AdminAsidebar />
@@ -74,7 +74,7 @@ export default function RootLayout({ children }) {
               {children}
             </div>
           </div>
-        </div>
+        </main>
         <Toaster />
       </body>
     </html>

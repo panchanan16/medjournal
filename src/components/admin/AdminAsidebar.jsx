@@ -421,7 +421,7 @@ function AdminAsidebar() {
               </Link>
 
               {/* <!--- Article Processing Charges Section ---> */}
-              <Link href="/admin/content/all">
+              <Link href="/admin/article-charges">
                 <div
                   onClick={() => toggleSection("articleProcessingCharges")}
                   className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
