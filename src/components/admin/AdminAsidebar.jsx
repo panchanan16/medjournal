@@ -183,7 +183,7 @@ function AdminAsidebar() {
                       </div>
                     </Link>
 
-                    <Link href="/users/admins">
+                    <Link href="/admin/journal-info/editorial-team">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
                         Editorial Team
                       </div>

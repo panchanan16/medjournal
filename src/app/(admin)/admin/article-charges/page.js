@@ -10,7 +10,7 @@ function Page() {
               <div className="md:flex md:items-center md:justify-between">
                 <div className="flex-1 min-w-0">
                   <h1 className="text-2xl font-semibold text-gray-900">
-                    Create New Content For Article Processing Charges
+                    Create Article Processing Charges Details
                   </h1>
                 </div>
               </div>

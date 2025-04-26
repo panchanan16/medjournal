@@ -1,21 +1,34 @@
-const { entityHead } = require("@/config/api.config");
+import { entityHead, entityCore } from "@/config/api.config";
 
-export async function _POST(endpoint, body = {}) {
+export async function _POST(
+  endpoint,
+  body = {},
+  isMultipart = false,
+  baseURL = entityHead
+) {
   try {
-    const response = await fetch(`${entityHead}/${endpoint}`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+    console.log("Using baseURL:", baseURL); // Optional logging for debugging
 
-    console.log("response", response);
-    if (!response.ok) {
-      throw new Error(response.message || "POST request failed");
+    const options = {
+      method: "POST",
+      headers: {},
+    };
+
+    if (isMultipart) {
+      options.body = body;
+    } else {
+      options.headers["Content-Type"] = "application/json";
+      options.body = JSON.stringify(body);
     }
 
-    const resultData = await response.json();
+    const response = await fetch(`${baseURL}/${endpoint}`, options);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || "POST request failed");
+    }
+
+    const resultData = await response.json().catch(() => ({ data: null }));
 
     return resultData.data;
   } catch (error) {
