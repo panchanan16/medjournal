@@ -41,7 +41,7 @@ function Adminheader() {
             <Bell className="h-6 w-6" />
           </button>
           <button className="ml-3 p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
-            <LogOut  className="h-6 w-6" />
+            <LogOut className="h-6 w-6" />
           </button>
 
           {/* Profile dropdown */}
