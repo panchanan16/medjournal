@@ -89,7 +89,7 @@ function AdminAsidebar() {
                 >
                   <div className="flex">
                     <Home className="mr-3 h-5 w-5" />
-                    <span className="">Dashboard</span>
+                    <span className="">Journal Home</span>
                   </div>
                   {openSections.dashboard ? (
                     <ChevronDown className="w-5 h-5" />
@@ -107,45 +107,6 @@ function AdminAsidebar() {
                     <Link href="/dashboard/performance">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
                         Performance
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              {/* Content Management - New Section */}
-              <div>
-                <button
-                  onClick={() => toggleSection("content")}
-                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
-                    "content"
-                  )}`}
-                >
-                  <div className="flex">
-                    <FileText className="mr-3 h-5 w-5" />
-                    <span className="">About</span>
-                  </div>
-                  {openSections.content ? (
-                    <ChevronDown className="w-5 h-5" />
-                  ) : (
-                    <ChevronRight className="w-5 h-5" />
-                  )}
-                </button>
-                {openSections.content && (
-                  <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/admin/content/all">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        All Content
-                      </div>
-                    </Link>
-                    <Link href="/admin/content/create">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md bg-red-600 text-white hover:bg-red-500">
-                        Create New
-                      </div>
-                    </Link>
-                    <Link href="/content/categories">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Categories
                       </div>
                     </Link>
                   </div>
