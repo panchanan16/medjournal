@@ -63,8 +63,8 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <main className="min-h-screen bg-gray-50">
-          <div className="flex h-screen overflow-hidden">
+        <main className="bg-gray-50 min-h-screen">
+          <div className="flex h-screen overflow-auto">
             {/* <!--- Side navbar ---> */}
             <AdminAsidebar />
             <div className="flex-1">

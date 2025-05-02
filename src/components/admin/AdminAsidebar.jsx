@@ -20,6 +20,10 @@ import {
   ArchiveRestore,
   ChevronsLeftRightEllipsis,
   HandCoins,
+  NewspaperIcon,
+  BoxIcon,
+  BoxesIcon,
+  MessageCircleWarningIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -71,7 +75,7 @@ function AdminAsidebar() {
     openSections?.[section] ? "bg-red-700" : "";
 
   return (
-    <div className="hidden md:flex md:flex-shrink-0">
+    <div className="hidden md:flex md:flex-shrink-0 sticky top-0">
       <div className="flex flex-col w-64">
         <div className="flex flex-col h-0 flex-1 bg-red-800 shadow-lg">
           <div className="flex items-center h-16 flex-shrink-0 px-4 bg-red-900">
@@ -381,6 +385,23 @@ function AdminAsidebar() {
                 </div>
               </Link>
 
+              {/* Article section */}
+              <Link href="/admin/articles">
+                <div
+                  onClick={() => toggleSection("Articles")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("Articles")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <NewspaperIcon className="mr-3 h-5 w-5" />
+                    <span className="">Articles</span>
+                  </div>
+                </div>
+              </Link>
+
               {/* <!--- Article Processing Charges Section ---> */}
               <Link href="/admin/article-charges">
                 <div
@@ -397,6 +418,42 @@ function AdminAsidebar() {
                   </div>
                 </div>
               </Link>
+
+              {/* <!--- Volume Section ---> */}
+              <Link href="/admin/volume">
+                <div
+                  onClick={() => toggleSection("Volume")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("Volume")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <BoxesIcon className="mr-3 h-5 w-5" />
+                    <span className="">Volumes</span>
+                  </div>
+                </div>
+              </Link>
+
+               {/* <!--- Issues Section ---> */}
+               <Link href="/admin/volume">
+                <div
+                  onClick={() => toggleSection("Issues")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("Issues")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <MessageCircleWarningIcon className="mr-3 h-5 w-5" />
+                    <span className="">Issues</span>
+                  </div>
+                </div>
+              </Link>
+
+
 
               {/* Settings Section */}
               {/* <div>
