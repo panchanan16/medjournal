@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-function VolumeTable({ volumes }) {
+function IssueTable({ issues }) {
   const [selectedArticles, setSelectedArticles] = useState([1]);
 
   return (
@@ -19,16 +19,16 @@ function VolumeTable({ volumes }) {
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
               >
-                Volume Name
+                Issues Name
               </th>                      
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {volumes.map((vol, id) => (
+            {issues.map((issue, id) => (
               <tr
                 key={id}
                 className={`hover:bg-red-50 transition-colors ${
-                  selectedArticles.includes(vol.volume_id) ? "bg-red-50" : ""
+                  selectedArticles.includes(issue.is_id) ? "bg-red-50" : ""
                 }`}
               >
                 <td className="px-4 py-4 whitespace-nowrap">
@@ -39,9 +39,9 @@ function VolumeTable({ volumes }) {
                   />
                 </td>
                 <td className="px-4 py-4">
-                  <Link href={`articles/addArticle/${vol.volume_id}`}>
+                  <Link href={`articles/addArticle/${issue.is_id}`}>
                     <div className="text-sm font-medium text-gray-800 hover:text-red-700 cursor-pointer">
-                      {vol.volume_name}
+                      {issue.issue_name}
                     </div>
                   </Link>
                 </td>             
@@ -63,9 +63,9 @@ function VolumeTable({ volumes }) {
             Go
           </button>
 
-          <Link href={`volume/create`}>
+          <Link href={`issues/create`}>
             <button className="min-w-max inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-              Create A New Volume
+              Create New Issue
             </button>
           </Link>
         </div>
@@ -75,4 +75,4 @@ function VolumeTable({ volumes }) {
   );
 }
 
-export default VolumeTable;
+export default IssueTable;

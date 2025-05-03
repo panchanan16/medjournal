@@ -1,11 +1,11 @@
 import { Editor } from "@tinymce/tinymce-react";
 
-function TextEditor({ editorRef }) {
+function TextEditor({ editorRef, initialContent }) {
   return (
     <Editor
       tinymceScriptSrc="/tinymce/tinymce.min.js"
       onInit={(_evt, editor) => (editorRef.current = editor)}
-      initialValue=""
+      initialValue={`${initialContent ? initialContent : ""}`}
       init={{
         selector: "textarea",
         license_key: "gpl",

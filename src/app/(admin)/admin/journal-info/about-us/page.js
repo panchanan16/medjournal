@@ -1,6 +1,9 @@
 import TitleAndContent from "@/components/admin/TitleAndContent";
+import { _GET } from "@/request/request";
 
-function Page() {
+async function Page() {
+  const response = await _GET('about/readAll')
+
   return (
     <div className="h-screen flex flex-col py-6">
       <div className="relative overflow-y-auto focus:outline-none">
@@ -15,7 +18,7 @@ function Page() {
             </div>
           </div>
           {/* Main tinymce section */}
-          <TitleAndContent endpoints="about/create" />
+          <TitleAndContent type={response?.length ? 'PUT' : 'POST'} endpoints={`about/${response?.length ? `update?section_id=${response[0]?.section_id}` : 'create'}`} initialValues={response?.length ? response[0] : null} />
         </div>
       </div>
     </div>

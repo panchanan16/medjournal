@@ -404,7 +404,7 @@ export default function Navbar() {
             </li>
             <li className="group relative min-w-fit">
               <Link
-                href="/"
+                href="/online-first"
                 className="px-4 py-3 text-sm inline-block font-medium hover:bg-red-800 transition"
               >
                 Online First
@@ -412,7 +412,7 @@ export default function Navbar() {
             </li>
             <li className="group relative min-w-fit">
               <Link
-                href="/"
+                href="/article-charges"
                 className="px-4 py-3 text-sm inline-block font-medium hover:bg-red-800 transition"
               >
                 Article Processing Charges

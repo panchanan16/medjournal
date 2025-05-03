@@ -10,10 +10,10 @@ const TextEditor = dynamic(() => import("@/components/admin/TextEditor"), {
   ssr: false,
 });
 
-function TitleAndContent({ endpoints }) {
+function TitleAndContent({ type, endpoints, initialValues }) {
   const [formData, setFormData] = useState({
-    title: "",
-    content: "",
+    title: initialValues?.title ? initialValues.title : "",
+    content: initialValues?.content ? initialValues.content : "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,17 +32,12 @@ function TitleAndContent({ endpoints }) {
     setIsSubmitting(true);
 
     try {
-      // Ensure we have the latest content from the editor
       if (editorRef.current) {
         formData.content = editorRef.current.getContent();
       }
 
-      // This is where you would make your API call
-      const response = await _POST(endpoints, formData);
-
-      toast.success("Submitted successfully");
+      const response = await _POST(endpoints, formData, type);
       console.log("Submitted form data response:", response);
-
       setFormData({ title: "", content: "" });
       if (editorRef.current) {
         editorRef.current.setContent("");
@@ -56,7 +51,7 @@ function TitleAndContent({ endpoints }) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 min-h-max">
       {/* Content Creation Form */}
       <div className="py-4">
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -96,7 +91,7 @@ function TitleAndContent({ endpoints }) {
                   <div className="mt-1">
                     <textarea id="editor" name="content" className="hidden" />
                     {/* TinyMCE will replace this textarea */}
-                    <TextEditor editorRef={editorRef} />
+                    <TextEditor editorRef={editorRef} initialContent={formData.content} />
                   </div>
                 </div>
 

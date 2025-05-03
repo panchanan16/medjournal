@@ -1,16 +1,17 @@
 import { entityHead, entityCore } from "@/config/api.config";
+import toast from "react-hot-toast";
 
 export async function _POST(
   endpoint,
   body = {},
+  type,
   isMultipart = false,
   baseURL = entityHead
+
 ) {
   try {
-    console.log("Using baseURL:", baseURL); // Optional logging for debugging
-
     const options = {
-      method: "POST",
+      method: type,
       headers: {},
     };
 
@@ -22,15 +23,15 @@ export async function _POST(
     }
 
     const response = await fetch(`${baseURL}/${endpoint}`, options);
+    const res = await response.json()
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(errorText || "POST request failed");
+    if (res.status) {
+      toast.success(res.message)
+      return res.data
     }
-
-    const resultData = await response.json().catch(() => ({ data: null }));
-
-    return resultData.data;
+    
+    toast.error(res.message)
+    throw new Error(res.message || "POST request failed");
   } catch (error) {
     console.error("POST Error:", error.message);
     throw error;
