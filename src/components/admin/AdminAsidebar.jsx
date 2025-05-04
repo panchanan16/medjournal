@@ -198,7 +198,7 @@ function AdminAsidebar() {
                 </button>
                 {openSections.forAuthors && (
                   <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/admin/journal-info/about-us">
+                    <Link href="/admin/authorInstruction">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
                         Authors Instructions
                       </div>
@@ -269,7 +269,7 @@ function AdminAsidebar() {
               </div>
 
               {/* <!--- Ethics & Policies Section ---> */}
-              <Link href="/admin/content/all">
+              <Link href="/admin/ethics-policies">
                 <div
                   onClick={() => toggleSection("ethicsAndPloicies")}
                   className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${

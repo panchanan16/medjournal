@@ -33,7 +33,7 @@ export async function _POST(
     toast.error(res.message)
     throw new Error(res.message || "POST request failed");
   } catch (error) {
-    console.error("POST Error:", error.message);
+    console.log("POST Error:", error);
     throw error;
   }
 }

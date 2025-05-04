@@ -316,7 +316,7 @@ export default function Navbar() {
                   Guidelines For Reviewers
                 </Link>
                 <Link
-                  href="/authors/review"
+                  href="/review"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Reviewers
