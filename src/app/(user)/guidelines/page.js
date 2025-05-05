@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useRef, useState } from 'react';
 import StyleSheet from '@/components/StyleSheet';
 import { guidelineData } from '@/utils/data/guideline';

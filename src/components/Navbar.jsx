@@ -4,10 +4,9 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ChevronDown, FileText } from "lucide-react";
 import JournalHeader from "./JournalHeader";
-import { policy } from "@/utils/policy";
 import { _GET } from "@/request/request";
 
-export default function Navbar() {
+export default function Navbar({ policy }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState({
     about: false,
@@ -335,7 +334,7 @@ export default function Navbar() {
                     <Link
                       key={ind}
                       href={
-                        pol.pageLink ? `/${pol.pageLink}` : pol.redirectLink
+                        pol.pageUrl ? `/policy/${pol.pageUrl}` : pol.redirectLink
                       }
                       className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                     >

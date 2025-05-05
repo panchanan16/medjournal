@@ -20,15 +20,14 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const reponse = await _GET("policy/readAll");
-  console.log(reponse);
+  const response = await _GET("policy/readAll");
 
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
+        <Navbar policy={response} />
         {children}
         <Footer />
       </body>
