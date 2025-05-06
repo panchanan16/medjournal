@@ -3,7 +3,6 @@ import { _GET } from "@/request/request"
 
 async function AuthorInstructionPage() {
   const response = await _GET('authorinstruct/readAll')
-  console.log(response)
 
   return (
     <AuthorInstruction pageData={response[0]} />

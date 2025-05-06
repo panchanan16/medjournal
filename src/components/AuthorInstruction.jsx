@@ -22,9 +22,11 @@ function AuthorInstruction({ pageData }) {
   useEffect(() => {
     const generateTOC = () => {
       if (!contentRef.current || !sidebarRef.current) return;
-
       const headings = contentRef.current.querySelectorAll("h2, h3, h4");
       const toc = [];
+      console.log(contentRef.current)
+
+      console.log(headings)
 
       headings.forEach((heading, index) => {
         const id = `section-${index}`;

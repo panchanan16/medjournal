@@ -271,7 +271,7 @@ export default function Navbar({ policy }) {
               </button>
               <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-48">
                 <Link
-                  href="/archives/2024"
+                  href="/author-instruction"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Authors Instruction
