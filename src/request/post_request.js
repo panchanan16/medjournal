@@ -6,7 +6,7 @@ export async function _POST(
   body = {},
   type,
   isMultipart = false,
-  baseURL = entityHead
+  baseURL = 'en'
 
 ) {
   try {
@@ -22,7 +22,7 @@ export async function _POST(
       options.body = JSON.stringify(body);
     }
 
-    const response = await fetch(`${baseURL}/${endpoint}`, options);
+    const response = await fetch(`${baseURL == 'en' ? entityHead : entityCore}/${endpoint}`, options);
     const res = await response.json()
 
     if (res.status) {

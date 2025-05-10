@@ -7,7 +7,7 @@ import JournalInfo from "./JournalInfo";
 import JournalMetrics from "./JournalMetrics";
 import ArticlesSection from "./ArticlesSection";
 
-export default function HomePage() {
+export default function HomePage({ articles }) {
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -31,7 +31,7 @@ export default function HomePage() {
 
         {/* Latest Artcles */}
         {/* <LatestArticles /> */}
-        <ArticlesSection />
+        <ArticlesSection articleList={articles} />
 
         {/* CTA Section */}
         <section className="bg-gradient-to-r from-red-700 to-red-600 text-white py-12 md:py-16">

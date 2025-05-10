@@ -1,0 +1,39 @@
+          {/* Correspondence */}
+              <div className="mb-6 text-sm text-gray-600">
+                <strong>Correspondence to:</strong> {articleData.correspondence} Email: {articleData.authors[0].email}
+              </div>
+
+                         
+              {/* Affiliations */}
+              <div className="mb-6 text-sm text-gray-600">
+                {articleData.affiliations.map((affiliation, index) => (
+                  <div key={index}>
+                    <sup>{affiliation.id}</sup>{affiliation.text}
+                  </div>
+                ))}
+              </div>
+
+              
+            {/* Authors */}
+            <div className="mb-6">
+              {articleData.authors.map((author, index) => (
+                <span key={index} className="inline-block">
+                  <span>{author.name}<sup>{author.superscript}</sup></span>
+                  {index < articleData.authors.length - 1 && ', '}
+                </span>
+              ))}
+            </div>
+
+
+            
+            {/* Download Citation Card */}
+            <div className="bg-white rounded-lg shadow-md p-5 mb-6">
+              <h3 className="text-lg font-bold text-gray-800 border-b pb-2 mb-4">Download Citation</h3>
+              <ul className="space-y-0">
+                {articleData.citationFormats.map((format, index) => (
+                  <li key={index}>
+                    <Link href="#" className="text-red-700 hover:underline block py-1">{format}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>

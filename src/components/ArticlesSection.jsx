@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 // Mock data for the tabs
@@ -94,12 +95,12 @@ const articles = {
   ],
 };
 
-const ArticleCard = ({ title, author, publishDate }) => {
+const ArticleCard = ({ id, title, author, publishDate, articleType }) => {
   return (
     <div className="shadow-lg rounded-lg p-4 mb-4 hover:shadow-none transition-shadow duration-300">
-      <div className="text-sm text-gray-500 mb-2">Review Article</div>
+      <div className="text-sm text-gray-500 mb-2">{articleType}</div>
       <h3 className="text-lg font-semibold mb-2 text-gray-800 hover:text-red-700 transition-colors">
-        {title}
+        <Link href={`/article-read/${id}`}>{title}</Link>
       </h3>
       <div className="text-sm text-gray-600 mb-2">{author}</div>
       <div className="text-sm text-gray-500 mb-4">Published: {publishDate}</div>
@@ -149,7 +150,7 @@ const ArticleCard = ({ title, author, publishDate }) => {
   );
 };
 
-function ArticlesSection() {
+function ArticlesSection({ articleList }) {
   const [activeTab, setActiveTab] = useState("latest");
 
   return (
@@ -187,14 +188,17 @@ function ArticlesSection() {
         </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {articles[activeTab].map((article, index) => (
-          <ArticleCard
-            key={index}
-            title={article.title}
-            author={article.author}
-            publishDate={article.publishedDate}
-          />
-        ))}
+        {articleList?.length &&
+          articleList.map((article, index) => (
+            <ArticleCard
+              key={index}
+              id={article.ariticle_id}
+              articleType={article.articleType}
+              title={article.title}
+              author={article.author}
+              publishDate={article.published_date}
+            />
+          ))}
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ export default async function ArticlesPreview() {
   
   return (
     <div className="max-w-[95%] mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-10">
-        <AllArticles articles={articles} />
+        <AllArticles articles={articles?.articleList} />
     </div>
   );
 }

@@ -1,11 +1,10 @@
-import { useState } from "react";
 import TabLayout from "./TabLayout";
 
-function ArticleMainTab({ activeTab, handleNextSection }) {
+function ArticleMainTab({ activeTab, handleNextSection, setArticleId }) {
   const initialValues = {
-    isInHome: true,
-    isOpenAccess: true,
-    isInPress: false,
+    isInHome: 1,
+    isOpenaccess: 0,
+    isInPress: 0,
     issueNo: "",
     url: "",
     articleType: "",
@@ -19,17 +18,22 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
     page_to: "",
     keywords: "",
     how_to_cite: "",
-    receive_date: "",
-    revised_date: "",
-    accepted_date: "",
+    recieve_date: "",
+    Revised_date: "",
+    Accepted_date: "",
     published_date: "",
     available_date: "",
-    downloads: 0,
-    views: 0,
+    Downloads: "",
+    Views: "",
+    citation_apa: "",
+    citation_mla: "",
+    citation_chicago: "",
+    citation_harvard: "",
+    citation_vancouver: "",
     pdflink: "",
     xmllink: "",
   };
-
+  
   function TabArticleMainUi({ handleChange, formData }) {
     return (
       <form>
@@ -51,10 +55,10 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
             <div className="flex items-center space-x-3">
               <input
-                id="isOpenAccess"
-                name="isOpenAccess"
+                id="isOpenaccess"
+                name="isOpenaccess"
                 type="checkbox"
-                checked={formData.isOpenAccess}
+                checked={formData.isOpenaccess}
                 onChange={handleChange}
                 className="h-4 w-4 text-teal-500 border-gray-300 rounded focus:ring-teal-500"
               />
@@ -96,8 +100,8 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
                   className="block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
                 >
                   <option value="">---------</option>
-                  <option value="issue1">Issue 1</option>
-                  <option value="issue2">Issue 2</option>
+                  <option value="1">Issue 1</option>
+                  <option value="issue2">Issue 2 </option>
                   <option value="issue3">Issue 3</option>
                 </select>
                 {/* <div className="ml-2 flex space-x-1">
@@ -208,32 +212,32 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
           <div>
             <label
-              htmlFor="url"
+              htmlFor="DOI"
               className="block text-sm font-medium text-gray-700"
             >
               DOI:
             </label>
             <input
-              id="url"
-              name="url"
+              id="DOI"
+              name="DOI"
               rows="3"
-              value={formData.url}
+              value={formData.DOI}
               onChange={handleChange}
               className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
             />
           </div>
           <div>
             <label
-              htmlFor="url"
+              htmlFor="DOIlink"
               className="block text-sm font-medium text-gray-700"
             >
               DOI Link:
             </label>
             <textarea
-              id="url"
-              name="url"
+              id="DOIlink"
+              name="DOIlink"
               rows="3"
-              value={formData.url}
+              value={formData.DOIlink}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
             ></textarea>
@@ -243,32 +247,32 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
           <div>
             <label
-              htmlFor="url"
+              htmlFor="PMID"
               className="block text-sm font-medium text-gray-700"
             >
               PMID:
             </label>
             <input
-              id="url"
-              name="url"
+              id="PMID"
+              name="PMID"
               rows="3"
-              value={formData.url}
+              value={formData.PMID}
               onChange={handleChange}
               className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
             />
           </div>
           <div>
             <label
-              htmlFor="url"
+              htmlFor="PMID_Link"
               className="block text-sm font-medium text-gray-700"
             >
               PMID Link:
             </label>
             <textarea
-              id="url"
-              name="url"
+              id="PMID_Link"
+              name="PMID_Link"
               rows="3"
-              value={formData.url}
+              value={formData.PMID_Link}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
             ></textarea>
@@ -276,16 +280,16 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
           <div>
             <label
-              htmlFor="url"
+              htmlFor="abstract"
               className="block text-sm font-medium text-gray-700"
             >
               Abstract:
             </label>
             <textarea
-              id="url"
-              name="url"
+              id="abstract"
+              name="abstract"
               rows="3"
-              value={formData.url}
+              value={formData.abstract}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
             ></textarea>
@@ -295,16 +299,16 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label
-                htmlFor="issueNo"
+                htmlFor="page_from"
                 className="block text-sm font-medium text-gray-700"
               >
                 Page from:*
               </label>
               <input
-                id="url"
-                name="url"
+                id="page_from"
+                name="page_from"
                 rows="3"
-                value={formData.url}
+                value={formData.page_from}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -318,10 +322,10 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
                 Page to:*
               </label>
               <input
-                id="url"
-                name="url"
+                id="page_to"
+                name="page_to"
                 rows="3"
-                value={formData.url}
+                value={formData.page_to}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -330,16 +334,16 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
           <div>
             <label
-              htmlFor="url"
+              htmlFor="keywords"
               className="block text-sm font-medium text-gray-700"
             >
               Keywords:
             </label>
             <textarea
-              id="url"
-              name="url"
+              id="keywords"
+              name="keywords"
               rows="3"
-              value={formData.url}
+              value={formData.keywords}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
             ></textarea>
@@ -347,16 +351,16 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
           <div>
             <label
-              htmlFor="url"
+              htmlFor="how_to_cite"
               className="block text-sm font-medium text-gray-700"
             >
               How to Cite:
             </label>
             <textarea
-              id="url"
-              name="url"
+              id="how_to_cite"
+              name="how_to_cite"
               rows="3"
-              value={formData.url}
+              value={formData.how_to_cite}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
             ></textarea>
@@ -367,17 +371,17 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label
-                htmlFor="issueNo"
+                htmlFor="recieve_date"
                 className="block text-sm font-medium text-gray-700"
               >
                 Recieved On:*
               </label>
               <input
                 type="date"
-                id="url"
-                name="url"
+                id="recieve_date"
+                name="recieve_date"
                 rows="3"
-                value={formData.url}
+                value={formData.recieve_date}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -385,17 +389,17 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
             <div>
               <label
-                htmlFor="articleType"
+                htmlFor="Revised_date"
                 className="block text-sm font-medium text-gray-700"
               >
                 Revised On:*
               </label>
               <input
                 type="date"
-                id="url"
-                name="url"
+                id="Revised_date"
+                name="Revised_date"
                 rows="3"
-                value={formData.url}
+                value={formData.Revised_date}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -403,17 +407,17 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
             <div>
               <label
-                htmlFor="issueNo"
+                htmlFor="Accepted_date"
                 className="block text-sm font-medium text-gray-700"
               >
                 Accepted On:*
               </label>
               <input
                 type="date"
-                id="url"
-                name="url"
+                id="Accepted_date"
+                name="Accepted_date"
                 rows="3"
-                value={formData.url}
+                value={formData.Accepted_date}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -423,17 +427,17 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label
-                htmlFor="articleType"
+                htmlFor="published_date"
                 className="block text-sm font-medium text-gray-700"
               >
                 Published On:*
               </label>
               <input
                 type="date"
-                id="url"
-                name="url"
+                id="published_date"
+                name="published_date"
                 rows="3"
-                value={formData.url}
+                value={formData.published_date}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -441,17 +445,17 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
             <div>
               <label
-                htmlFor="issueNo"
+                htmlFor="available_date"
                 className="block text-sm font-medium text-gray-700"
               >
                 Available On:*
               </label>
               <input
                 type="date"
-                id="url"
-                name="url"
+                id="available_date"
+                name="available_date"
                 rows="3"
-                value={formData.url}
+                value={formData.available_date}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -462,16 +466,16 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label
-                htmlFor="issueNo"
+                htmlFor="Downloads"
                 className="block text-sm font-medium text-gray-700"
               >
                 Downloads:*
               </label>
               <input
-                id="url"
-                name="url"
+                id="Downloads"
+                name="Downloads"
                 rows="3"
-                value={formData.url}
+                value={formData.Downloads}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -479,16 +483,16 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
             <div>
               <label
-                htmlFor="issueNo"
+                htmlFor="Views"
                 className="block text-sm font-medium text-gray-700"
               >
                 Views:*
               </label>
               <input
-                id="url"
-                name="url"
+                id="Views"
+                name="Views"
                 rows="3"
-                value={formData.url}
+                value={formData.Views}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -499,17 +503,16 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label
-                htmlFor="issueNo"
+                htmlFor="pdflink"
                 className="block text-sm font-medium text-gray-700"
               >
                 PDF:*
               </label>
               <input
                 type="file"
-                id="url"
-                name="url"
+                id="pdflink"
+                name="pdflink"
                 rows="3"
-                value={formData.url}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -517,17 +520,16 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
 
             <div>
               <label
-                htmlFor="issueNo"
+                htmlFor="xmllink"
                 className="block text-sm font-medium text-gray-700"
               >
                 XML:*
               </label>
               <input
                 type="file"
-                id="url"
-                name="url"
+                id="xmllink"
+                name="xmllink"
                 rows="3"
-                value={formData.url}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
@@ -564,6 +566,93 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
               </label>
             </div>
           </div>
+
+          {/* Citation Section */}
+
+          <div>
+            <label
+              htmlFor="citation_apa"
+              className="block text-sm font-medium text-gray-700"
+            >
+              APA Citation:
+            </label>
+            <textarea
+              id="citation_apa"
+              name="citation_apa"
+              rows="3"
+              value={formData.citation_apa}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+            ></textarea>
+          </div>
+
+          <div>
+            <label
+              htmlFor="citation_mla"
+              className="block text-sm font-medium text-gray-700"
+            >
+              MLA Citaion:
+            </label>
+            <textarea
+              id="citation_mla"
+              name="citation_mla"
+              rows="3"
+              value={formData.citation_mla}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+            ></textarea>
+          </div>
+
+          <div>
+            <label
+              htmlFor="citation_harvard"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Harvard:
+            </label>
+            <textarea
+              id="citation_harvard"
+              name="citation_harvard"
+              rows="3"
+              value={formData.citation_harvard}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+            ></textarea>
+          </div>
+
+          <div>
+            <label
+              htmlFor="citation_chicago"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Chicago:
+            </label>
+            <textarea
+              id="citation_chicago"
+              name="citation_chicago"
+              rows="3"
+              value={formData.citation_chicago}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+            ></textarea>
+          </div>
+
+          <div>
+            <label
+              htmlFor="citation_vancouver"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Vancouver:
+            </label>
+            <textarea
+              id="citation_vancouver"
+              name="citation_vancouver"
+              rows="3"
+              value={formData.citation_vancouver}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+            ></textarea>
+          </div>
         </div>
       </form>
     );
@@ -577,6 +666,7 @@ function ArticleMainTab({ activeTab, handleNextSection }) {
         InitialValue={initialValues}
         activeTab={activeTab}
         GoToNext={handleNextSection}
+        setArticleId={setArticleId}
       />
     </>
   );
