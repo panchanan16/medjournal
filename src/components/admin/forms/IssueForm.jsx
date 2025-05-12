@@ -1,120 +1,122 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2 } from "lucide-react";
-import { _POST } from "@/request/post_request";
+import StandardIssueTab from "../tabs/issueTab/StandardIssueTab";
+import SpecialIssueTab from "../tabs/issueTab/SpecialIssueTab";
+import SpeciaEditors from "../tabs/issueTab/SpeciaEditors";
 
 export default function IssueForm({ SelectVolumes }) {
-  // Form state
+  const [activeTab, setActiveTab] = useState("Issues");
+  const [issueId, setIssueId] = useState(null);
   const [formData, setFormData] = useState({
-    volume_id: "",
-    issue_name: "",
+    citation_apa: "",
+    citation_mla: "",
+    citation_chicago: "",
+    citation_harvard: "",
+    citation_vancouver: "",
+    // Add fields for other tabs as needed
+    authors: [],
+    sections: [],
+    citations: [],
   });
 
-  // UI states
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [tabStatus, setTabStatus] = useState({
+    Issues: "current",
+    // citations: "pending",
+    Special_Issues: "pending",
+    Special_Authors: "pending",
+  });
 
-  // Handle form field changes
   const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
 
-    if (type === "checkbox") {
-      setFormData({ ...formData, [name]: checked });
-    } else if (type === "file") {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
+  const handleTabClick = (tab) => {
+    // Only allow navigation to tabs that aren't disabled
+    if (tabStatus[tab] !== "disabled") {
+      setActiveTab(tab);
     }
   };
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const handleNextSection = () => {
+    // Update current tab status to 'completed'
+    setTabStatus({
+      ...tabStatus,
+      [activeTab]: "completed",
+    });
 
-    try {
-      await _POST("issue/create", formData);
-      console.log("Form data submitted:", formData);
-      for (const key in formData) {
-        formData[key] = "";
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    } finally {
-      setIsSubmitting(false);
+    // Determine next tab
+    const tabOrder = ["Issues", "Special_Issues", "Special_Authors"]; // "citations",
+    const currentIndex = tabOrder.indexOf(activeTab);
+    const nextTab = tabOrder[currentIndex + 1];
+
+    if (nextTab) {
+      // Update next tab status to 'current'
+      setTabStatus((prev) => ({
+        ...prev,
+        [nextTab]: "current",
+      }));
+      setActiveTab(nextTab);
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-red-700 mb-6">
-        Create a New Issue
-      </h1>
-
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <label
-            htmlFor="volume_id"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Select a Volume
-          </label>
-          <select
-            id="volume_id"
-            name="volume_id"
-            value={formData.volume_id}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-          >
-            <option value="" disabled>
-              Select a Volume First
-            </option>
-            {SelectVolumes?.length &&
-              SelectVolumes.map((item, ind) => (
-                <option value={item.volume_id} key={ind}>
-                  {item.volume_name}
-                </option>
-              ))}
-          </select>
-        </div>
-        {/* Text Input - Issue name */}
-        <div className="space-y-2">
-          <label
-            htmlFor="issue_name"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Volume Name <span className="text-red-600">*</span>
-          </label>
-          <input
-            type="text"
-            id="issue_name"
-            name="issue_name"
-            required
-            value={formData.issue_name}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-            placeholder="Enter Volume Name..."
-          />
-        </div>
-
-        {/* Submit Button */}
-        <div className="pt-4">
+    <div className="mx-auto px-4 py-6 max-w-6xl">
+      <div className="mb-6">
+        <nav className="flex border-b border-gray-200">
           <button
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={() => handleTabClick("Issues")}
+            className={`px-4 py-3 text-sm font-medium border-b-2 ${
+              activeTab === "Issues"
+                ? "text-red-600 border-red-700"
+                : tabStatus.Issues === "completed"
+                ? "text-green-600 border-green-500"
+                : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
+            }`}
           >
-            {isSubmitting ? (
-              <span className="flex items-center justify-center">
-                <Loader2 size={20} className="animate-spin mr-2" />
-                Submitting...
-              </span>
-            ) : (
-              "Create Issue"
-            )}
+            STANDARD ISSUES
           </button>
-        </div>
+
+          <button
+            onClick={() => handleTabClick("Special_Issues")}
+            className={`px-4 py-3 text-sm font-medium border-b-2 ${
+              activeTab === "Special_Issues"
+                ? "text-red-600 border-red-700"
+                : tabStatus.Special_Issues === "completed"
+                ? "text-green-600 border-green-500"
+                : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
+            }`}
+            disabled={tabStatus.Special_Issues === "disabled"}
+          >
+            SPECIAL ISSUES
+          </button>
+          <button
+            onClick={() => handleTabClick("Special_Authors")}
+            className={`px-4 py-3 text-sm font-medium border-b-2 ${
+              activeTab === "Special_Authors"
+                ? "text-red-600 border-red-700"
+                : tabStatus.Special_Authors === "completed"
+                ? "text-green-600 border-green-500"
+                : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
+            }`}
+            disabled={tabStatus.Special_Authors === "disabled"}
+          >
+            SPECIAL ISSUES EDITORS
+          </button>
+        </nav>
       </div>
+      {/* ARTICLE TAB */}
+      <StandardIssueTab VolumeList={SelectVolumes} activeTab={activeTab} setIssueId={setIssueId} />
+
+      {/* ARTICLE SECTIONS TAB */}
+      <SpecialIssueTab activeTab={activeTab} IssueId={issueId} />
+
+      {/* AUTHORS TAB */}
+      <SpeciaEditors activeTab={activeTab} IssueId={issueId} />
     </div>
   );
 }

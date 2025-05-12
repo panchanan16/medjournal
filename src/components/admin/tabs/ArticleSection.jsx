@@ -18,10 +18,15 @@ function ArticleSection({ activeTab, handleNextSection, articleId }) {
 
   console.log("Article Id section tab is: ", articleId);
 
-  const [sections, setSections] = useState([{ ariticle_id: articleId, Article_Heading: "", article_content: "" }]);
+  const [sections, setSections] = useState([
+    { ariticle_id: articleId, Article_Heading: "", article_content: "" },
+  ]);
 
   const addSection = () => {
-    setSections([...sections, { ariticle_id: articleId, Article_Heading: "", article_content: "" }]);
+    setSections([
+      ...sections,
+      { ariticle_id: articleId, Article_Heading: "", article_content: "" },
+    ]);
   };
 
   const removeSection = (index) => {
@@ -34,21 +39,21 @@ function ArticleSection({ activeTab, handleNextSection, articleId }) {
     setSections(updated);
   };
 
-
   async function handleuser(params) {
-    const user = await _POST('api/300')
+    const user = await _POST("api/300");
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    sections.length && sections.map((secItem, ind) => secItem.ariticle_id = articleId)
+    sections.length &&
+      sections.map((secItem, ind) => (secItem.ariticle_id = articleId));
     const payload = { section: sections };
     try {
       if (articleId) {
-        const response = await _POST(`articledetails/create`, payload, 'POST')
-        console.log(response)
+        const response = await _POST(`articledetails/create`, payload, "POST");
+        console.log(response);
       } else {
-        toast.error("Select or Add a Article first")
+        toast.error("Select or Add a Article first");
       }
 
       // const data = await response.json();
@@ -83,6 +88,9 @@ function ArticleSection({ activeTab, handleNextSection, articleId }) {
         <form className="space-y-6">
           {sections.map((section, index) => (
             <div key={index} className="p-4 rounded-md bg-gray-50 relative">
+              <p className="text-red-700 mb-5 px-3 py-1 w-max rounded-lg text-sm font-bold bg-red-100">
+                Section #{index + 1}
+              </p>
               <label className="block font-medium mb-1">
                 Heading:
                 <input
@@ -95,17 +103,7 @@ function ArticleSection({ activeTab, handleNextSection, articleId }) {
                 />
               </label>
 
-              <label className="block font-medium mt-4 mb-1">
-                Content:
-                {/* <textarea
-                  value={section.content}
-                  onChange={(e) =>
-                    handleChange(index, "content", e.target.value)
-                  }
-                  className="w-full mt-1 p-2 border rounded resize-none"
-                  rows={4}
-                /> */}
-              </label>
+              <label className="block font-medium mt-4 mb-1">Content:</label>
               <div className="mt-1">
                 {/* TinyMCE will replace this textarea */}
                 <Editor
@@ -152,7 +150,7 @@ function ArticleSection({ activeTab, handleNextSection, articleId }) {
               <button
                 type="button"
                 onClick={() => removeSection(index)}
-                className="absolute top-2 right-2 text-red-500 font-bold"
+                className="absolute top-4 right-2 bg-red-500 rounded-lg text-white px-3 py-1 text-sm hover:bg-red-700 font-bold"
               >
                 Remove
               </button>
@@ -168,7 +166,7 @@ function ArticleSection({ activeTab, handleNextSection, articleId }) {
           </button>
 
           <button
-          onClick={(e)=> handleSubmit(e)}
+            onClick={(e) => handleSubmit(e)}
             type="button"
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700"
           >

@@ -51,7 +51,7 @@ function SpecialIssuePage() {
                                         <p className="text-gray-600 text-sm mt-1">{article.authors}</p>
                                         <div className="mt-2 flex justify-between items-center">
                                             <span className="text-xs text-gray-500">Posted on 2020-07-21 01:30:16</span>
-                                            <Link href="#" className="text-red-600 hover:text-red-800 text-sm font-medium inline-flex items-center">
+                                            <Link href="/special/1" className="text-red-600 hover:text-red-800 text-sm font-medium inline-flex items-center">
                                                 Read article
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"

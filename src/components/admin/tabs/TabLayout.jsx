@@ -11,12 +11,6 @@ function TabLayout({
 }) {
   const [formData, setFormData] = useState(InitialValue);
   const handleChange = (e) => {
-    // const { name, value, type, checked } = e.target;
-    // setFormData({
-    //   ...formData,
-    //   [name]: type === "checkbox" ? checked : value,
-    // });
-
     const { name, value, type, checked, files } = e.target;
 
     if (type === "checkbox") {
@@ -30,10 +24,7 @@ function TabLayout({
 
   async function handleSaveSection(params) {
     try {
-      // Create FormData object for file uploads
       const submitData = new FormData();
-
-      // Append all form fields to FormData
       Object.keys(formData).forEach((key) => {
         if (key === "coverImage" && formData[key]) {
           submitData.append(key, formData[key]);
@@ -44,7 +35,7 @@ function TabLayout({
         }
       });
 
-      // Dummy API call simulation ----
+
       const response = await _POST(
         "articleMain/create",
         submitData,
