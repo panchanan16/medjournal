@@ -350,7 +350,7 @@ export default function Navbar({ policy }) {
               </button>
               <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-48">
                 <Link
-                  href="/special"
+                  href="/published-special-issue"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Current Special Issue
@@ -370,36 +370,12 @@ export default function Navbar({ policy }) {
               </div>
             </li>
             <li className="group relative min-w-fit z-30">
-              <button className="px-4 py-3 font-medium text-sm hover:bg-red-800 transition flex items-center">
+               <Link
+                href="/archives"
+                className="px-4 py-3 text-sm inline-block font-medium hover:bg-red-800 transition"
+              >
                 Archives
-                <ChevronDown size={16} className="ml-1" />
-              </button>
-              <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-48">
-                <Link
-                  href="/guidelines"
-                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
-                >
-                  Guidelines for reviewers
-                </Link>
-                <Link
-                  href="/review"
-                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
-                >
-                  Reviews
-                </Link>
-                <Link
-                  href="/reviewer"
-                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
-                >
-                  Reviewers
-                </Link>
-                <Link
-                  href="/articless"
-                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
-                >
-                  Article
-                </Link>
-              </div>
+              </Link>           
             </li>
             <li className="group relative min-w-fit">
               <Link

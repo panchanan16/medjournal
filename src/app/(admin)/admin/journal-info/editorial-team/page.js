@@ -1,5 +1,5 @@
 import EditorialBoardContent from "@/components/admin/EditorialBoardContent";
-import TitleAndContent from "@/components/admin/TitleAndContent";
+
 
 function Page() {
   return (
@@ -16,7 +16,7 @@ function Page() {
             </div>
           </div>
           {/* Main tinymce section */}
-          <EditorialBoardContent endpoints="editorBoard/create" />
+          <EditorialBoardContent />
         </div>
       </div>
     </div>

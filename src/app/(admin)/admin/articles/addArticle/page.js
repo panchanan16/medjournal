@@ -1,6 +1,9 @@
 import ArticleForm from '@/components/admin/ArticleForm';
+import { _GET } from '@/request/request';
 
-export default function ArticleSubmissionPage() {
+export default async function ArticleSubmissionPage() {
+  const issueList = await _GET('issue/readAll')
+
   return (
     <div className="min-h-screen bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -9,7 +12,7 @@ export default function ArticleSubmissionPage() {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="bg-white shadow-sm rounded-lg">
-            <ArticleForm />
+            <ArticleForm issueList={issueList} />
           </div>
         </div>
       </main>

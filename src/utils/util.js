@@ -1,18 +1,18 @@
 const dummyData = {
-    title: "Reviewer of the Month (2020-21)",
-    postedOn: "2021-04-06 15:19:00",
-    description: `Over the years, many JGO reviewers have made outstanding contributions to the peer review process. They demonstrated professional effort and enthusiasm in their reviews and provided comments that genuinely help the authors to enhance their work.`,
-    highlightText: `Hereby, we would like to highlight some of our outstanding reviewers, with a brief interview of their thoughts and insights as a reviewer. Allow us to express our heartfelt gratitude for their tremendous effort and valuable contributions to the scientific process.`,
-    reviewers: [
-      {
-        id: 1,
-        month: "December",
-        names: [
-          {
-            rid: 11,
-            name: "Samuel M Miller",
-            affiliation: "Yale University, United States",
-            details: `
+  title: "Reviewer of the Month (2020-21)",
+  postedOn: "2021-04-06 15:19:00",
+  description: `Over the years, many JGO reviewers have made outstanding contributions to the peer review process. They demonstrated professional effort and enthusiasm in their reviews and provided comments that genuinely help the authors to enhance their work.`,
+  highlightText: `Hereby, we would like to highlight some of our outstanding reviewers, with a brief interview of their thoughts and insights as a reviewer. Allow us to express our heartfelt gratitude for their tremendous effort and valuable contributions to the scientific process.`,
+  reviewers: [
+    {
+      id: 1,
+      month: "December",
+      names: [
+        {
+          rid: 11,
+          name: "Samuel M Miller",
+          affiliation: "Yale University, United States",
+          details: `
             <div class="reviewer-details">
               <h3>Samuel M Miller</h3>
               <div class="profile-content">
@@ -27,12 +27,12 @@ const dummyData = {
               </div>
             </div>
           `,
-          },
-          {
-            rid: 22,
-            name: "Erin L. Van Blarigan",
-            affiliation: "University of California, United States",
-            details: `
+        },
+        {
+          rid: 22,
+          name: "Erin L. Van Blarigan",
+          affiliation: "University of California, United States",
+          details: `
             <div class="reviewer-details">
               <h3>Baluram M Miller</h3>
               <div class="profile-content">
@@ -47,18 +47,18 @@ const dummyData = {
               </div>
             </div>
           `,
-          },
-        ],
-      },
-      {
-        id: 2,
-        month: "November",
-        names: [
-          {
-            rid: 33,
-            name: "Erin L. Van Blarigan",
-            affiliation: "University of California, United States",
-            details: `
+        },
+      ],
+    },
+    {
+      id: 2,
+      month: "November",
+      names: [
+        {
+          rid: 33,
+          name: "Erin L. Van Blarigan",
+          affiliation: "University of California, United States",
+          details: `
             <div class="reviewer-details">
               <h3>Erin L. Van Blarigan</h3>
               <div class="profile-content">
@@ -71,9 +71,50 @@ const dummyData = {
                 </div>
               </div>
             </div>`,
-          },
-        ],
-      },
-      // Add more reviewers as needed
-    ],
-  };
+        },
+      ],
+    },
+    // Add more reviewers as needed
+  ],
+};
+
+
+
+export function transformVolumes(volumeArray) {
+  const monthDates = [
+    { issue: 1, date: 'February 29' },
+    { issue: 2, date: 'April 30' },
+    { issue: 3, date: 'June 30' },
+    { issue: 4, date: 'August 31' },
+    { issue: 5, date: 'October 31' },
+    { issue: 6, date: 'December 31' }
+  ];
+
+  let result = {};
+  let idCounter = 1;
+
+  // Group by year
+  const groupedByYear = volumeArray.reduce((acc, volume) => {
+    const year = volume.volume_year;
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(volume);
+    return acc;
+  }, {});
+
+  // Build the final structure
+  for (const [year, volumes] of Object.entries(groupedByYear)) {
+    result[year] = volumes.map((volume, index) => {
+      const issueInfo = monthDates[index % monthDates.length];
+      return {
+        id: idCounter++,
+        volume: volume.volume_id,
+        issue: issueInfo.issue,
+        date: `${issueInfo.date}, ${year}`,
+        title: volume.volume_name,
+        image: '/archives.jpeg'
+      };
+    });
+  }
+
+  return result;
+}

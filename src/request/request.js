@@ -6,7 +6,6 @@ export async function _GET(endpoint, baseUrl = 'en' ) {
   const response = await request.json();
 
   if (response.status) {
-    console.log(response.data)
     return response.data;
   }
 }

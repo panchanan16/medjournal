@@ -1,6 +1,5 @@
 "use client";
 
-import { entityCore } from "@/config/api.config";
 import { _POST } from "@/request/post_request";
 
 import { Save } from "lucide-react";
@@ -12,13 +11,14 @@ const TextEditor = dynamic(() => import("@/components/admin/TextEditor"), {
   ssr: false,
 });
 
-function EditorialBoardContent({ endpoints }) {
+function EditorialBoardContent() {
   const [formData, setFormData] = useState({
     editor_type: "",
     name: "",
     qualification: "",
     designation: "",
     institution: "",
+    biography: "",
     editorImg: null,
   });
 
@@ -27,11 +27,15 @@ function EditorialBoardContent({ endpoints }) {
   const editorRef = useRef(null);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { name, value, type, checked, files } = e.target;
+
+    if (type === "checkbox") {
+      setFormData({ ...formData, [name]: checked ? 1 : 0 });
+    } else if (type === "file") {
+      setFormData({ ...formData, [name]: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleImageChange = (e) => {
@@ -71,9 +75,8 @@ function EditorialBoardContent({ endpoints }) {
         return;
       }
 
-      let biographyContent = "";
       if (editorRef.current) {
-        biographyContent = editorRef.current.getContent() || "";
+        formData.biography = editorRef.current.getContent();
       }
 
       const submitData = new FormData();
@@ -82,15 +85,21 @@ function EditorialBoardContent({ endpoints }) {
       submitData.append("qualification", qualification);
       submitData.append("designation", designation);
       submitData.append("institution", institution);
-      submitData.append("biography", biographyContent);
+      submitData.append("biography", formData.biography);
 
       if (formData.editorImg) {
         submitData.append("editorImg", formData.editorImg);
       }
 
-      const response = await _POST(endpoints, submitData, true, entityCore);
-      toast.success("Submitted successfully");
-      console.log("Submitted form data response:", response);
+      const response = await _POST(
+        "editorBoard/create",
+        submitData,
+        "POST",
+        true,
+        "core"
+      );
+
+      console.log(response);
 
       // Reset form
       setFormData({
@@ -134,7 +143,7 @@ function EditorialBoardContent({ endpoints }) {
               <select
                 name={name}
                 id={name}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 focus:ring-red-500 focus:border-red-500 text-sm"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:ring-red-500 focus:border-red-500 text-sm"
                 value={formData[name]}
                 onChange={handleInputChange}
                 required
@@ -144,6 +153,8 @@ function EditorialBoardContent({ endpoints }) {
                 <option value="editor">Editor</option>
                 <option value="reviewer">Reviewer</option>
                 <option value="administrator">Administrator</option>
+                <option value="editor in chief">Editor in chief</option>
+                <option value="Former board">Former Board</option>
               </select>
             ) : (
               <input
@@ -163,7 +174,10 @@ function EditorialBoardContent({ endpoints }) {
           <label className="block text-sm font-medium text-gray-700 pb-2">
             Biography (Optional)
           </label>
-          <TextEditor editorRef={editorRef} />
+          <TextEditor
+            editorRef={editorRef}
+            initialContent={formData.biography}
+          />
         </div>
 
         <div className="flex items-center">

@@ -1,46 +1,12 @@
+import { _GET } from "@/request/request";
 import Link from "next/link";
 
+export default async function SeriesDetail({ params }) {
+    const { slug } = await params
+    const specialIssueMain = await _GET(`specialissuefull/readOne?sp_issue_id=${slug}`, 'core')
+    console.log(specialIssueMain)
 
-// This would normally come from an API or database
-const getSeriesById = (id) => {
-    const seriesData = [
-        {
-            id: 1,
-            title: "Precision Radiation Oncology in GI Cancers",
-            date: "2024-11-16 11:39:18",
-            editors: [
-                { name: "Falk Roeder", affiliation: "Paracelsus Medical University Hospital, Salzburg, Austria" },
-                { name: "Thomas Brunner", affiliation: "Medical University of Graz, Graz, Austria" }
-            ],
-            content: `
-        <p>This special series focuses on the latest advancements in precision radiation oncology for gastrointestinal cancers. Recent technological developments have significantly improved our ability to deliver precise radiation doses to tumors while sparing surrounding healthy tissues.</p>
-        
-        <h2>Topics covered in this series include:</h2>
-        <ul>
-          <li>Stereotactic body radiation therapy (SBRT) for pancreatic cancer</li>
-          <li>Intensity-modulated radiation therapy (IMRT) approaches for rectal cancer</li>
-          <li>Particle therapy for hepatocellular carcinoma</li>
-        </ul>
-        
-        <p>The series features contributions from leading international experts who provide comprehensive reviews of current evidence and practical clinical guidance. Articles discuss patient selection criteria, treatment planning considerations, expected outcomes, and management of treatment-related toxicities.</p>
-      `,
-            articles: [
-                { title: "Current Status of Stereotactic Body Radiation Therapy for Pancreatic Cancer", authors: "Schmidt M, et al." },
-                { title: "Advances in MRI-guided Radiotherapy for Rectal Cancer", authors: "Johnson K, et al." },
-                { title: "Proton Therapy for Hepatocellular Carcinoma: A Systematic Review", authors: "Wang L, et al." },
-                { title: "Combined Chemoradiation Strategies for Locally Advanced Esophageal Cancer", authors: "Takahashi N, et al." },
-                { title: "Radiation-Induced Liver Disease: Prevention and Management", authors: "Gonzalez A, et al." }
-            ]
-        }
-    ];
-
-    return seriesData.find(series => series.id === parseInt(id));
-};
-
-export default function SeriesDetail({ params }) {
-    const series = getSeriesById(params.slug);
-
-    if (!series) {
+    if (!specialIssueMain) {
         return (
             <main className="flex-grow container mx-auto px-4 py-8 max-w-6xl">
                 <div className="bg-white shadow-lg rounded-lg p-6">
@@ -59,7 +25,7 @@ export default function SeriesDetail({ params }) {
             <main className="flex-grow container mx-auto px-4 py-8 w-full">
                 <div className="bg-white shadow-lg rounded-lg overflow-hidden">
                     <div className="bg-gradient-to-r from-red-900 to-red-700 px-6 py-4">
-                        <Link href="/" className="text-red-200 hover:text-white mb-2 inline-flex items-center">
+                        <Link href="/published-special-issue" className="text-red-200 hover:text-white mb-2 inline-flex items-center">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-4 w-4 mr-1" viewBox="0 0 20 20"
@@ -69,8 +35,8 @@ export default function SeriesDetail({ params }) {
                             </svg>
                             Back to Special Series
                         </Link>
-                        <h1 className="text-2xl md:text-3xl font-bold text-white">{series.title}</h1>
-                        <p className="text-red-100 mt-2">Posted on {series.date}</p>
+                        <h1 className="text-2xl md:text-3xl font-bold text-white">{specialIssueMain?.special_issue_title}</h1>
+                        <p className="text-red-100 mt-2">Posted on {specialIssueMain?.publish_date}</p>
                     </div>
 
                     <div className="p-3 md:p-6">
@@ -80,23 +46,23 @@ export default function SeriesDetail({ params }) {
                                 src="/special.jpeg"
 
                             />
-                            {series.editors.map((editor, index) => (
+                            {specialIssueMain?.authors?.map((editor, index) => (
                                 <div key={index} className="last:mb-0 mt-5">
                                     <span className="font-semibold">{editor.name}</span>
-                                    <span className="text-gray-600"> ({editor.affiliation})</span>
+                                    <span className="text-gray-600"> ({editor.afflication})</span>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: series.content }} />
+                        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: specialIssueMain?.special_issue_about }} />
 
                         <div className="mt-8">
                             <h2 className="text-xl font-bold text-red-800 mb-4 pb-2 border-b border-red-100">Articles in this Series</h2>
                             <div className="space-y-4">
-                                {series.articles.map((article, index) => (
+                                {specialIssueMain?.articles?.map((article, index) => (
                                     <div key={index} className="p-4 border border-gray-200 rounded-lg hover:bg-red-50 transition-colors">
                                         <h3 className="font-medium text-red-700">{article.title}</h3>
-                                        <p className="text-gray-600 text-sm mt-1">{article.authors}</p>
+                                        {/* <p className="text-gray-600 text-sm mt-1">{article.authors}</p> */}
                                         <div className="mt-2 flex justify-between items-center">
                                             <div className="flex gap-2">
                                                 <a
@@ -118,7 +84,7 @@ export default function SeriesDetail({ params }) {
                                                     {`Get PDF`}
                                                 </a>
                                             </div>
-                                            <Link href="#" className="text-red-600 hover:text-red-800 text-sm font-medium inline-flex items-center">
+                                            <Link href={`/article-read/${article.ariticle_id}`} className="text-red-600 hover:text-red-800 text-sm font-medium inline-flex items-center">
                                                 Read article
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"

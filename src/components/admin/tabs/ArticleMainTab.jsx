@@ -1,6 +1,11 @@
 import TabLayout from "./TabLayout";
 
-function ArticleMainTab({ activeTab, handleNextSection, setArticleId }) {
+function ArticleMainTab({
+  IssueForSelect,
+  activeTab,
+  handleNextSection,
+  setArticleId,
+}) {
   const initialValues = {
     isInHome: 1,
     isOpenaccess: 0,
@@ -33,7 +38,7 @@ function ArticleMainTab({ activeTab, handleNextSection, setArticleId }) {
     pdflink: "",
     xmllink: "",
   };
-  
+
   function TabArticleMainUi({ handleChange, formData }) {
     return (
       <form>
@@ -100,56 +105,12 @@ function ArticleMainTab({ activeTab, handleNextSection, setArticleId }) {
                   className="block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
                 >
                   <option value="">---------</option>
-                  <option value="1">Issue 1</option>
-                  <option value="issue2">Issue 2 </option>
-                  <option value="issue3">Issue 3</option>
+                  {IssueForSelect?.length &&
+                    IssueForSelect?.map((isu, key) => (
+                      <option key={key} value={isu.is_id}>{isu.issue_name} {`(${isu.volume_name})`}</option>
+                    ))}
                 </select>
-                {/* <div className="ml-2 flex space-x-1">
-                  <button
-                    type="button"
-                    className="p-1 text-teal-500 hover:bg-teal-100 rounded"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 4v16m8-8H4"
-                      ></path>
-                    </svg>
-                  </button>
-                  <button
-                    type="button"
-                    className="p-1 text-teal-500 hover:bg-teal-100 rounded"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      ></path>
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                      ></path>
-                    </svg>
-                  </button>
-                </div> */}
+               
               </div>
             </div>
 
@@ -169,9 +130,9 @@ function ArticleMainTab({ activeTab, handleNextSection, setArticleId }) {
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               >
                 <option value="">---------</option>
-                <option value="original">Original Research</option>
-                <option value="review">Review Article</option>
-                <option value="case">Case Study</option>
+                <option value="Original Research">Original Research</option>
+                <option value="Review Article">Review Article</option>
+                <option value="Case Study">Case Study</option>
               </select>
             </div>
           </div>

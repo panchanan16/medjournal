@@ -1,8 +1,9 @@
+import { _GET } from '@/request/request';
 import Link from 'next/link';
 
+async function SpecialIssuePage() {
+    const publishedIssues = await _GET('specialissue/readAll?isPublished=1')
 
-
-function SpecialIssuePage() {
     const series =
     {
         id: 1,
@@ -45,14 +46,14 @@ function SpecialIssuePage() {
                         <div className="mt-8">
                             <h2 className="text-xl font-bold text-red-800 mb-4 pb-2 border-b border-red-100">Special Series (Published)</h2>
                             <div className="space-y-4">
-                                {series.articles.map((article, index) => (
+                                {publishedIssues && publishedIssues.map((issue, index) => (
                                     <div key={index} className="p-4 border border-gray-200 rounded-lg hover:bg-red-50 transition-colors">
-                                        <h3 className="font-medium text-red-700">{article.title}</h3>
-                                        <p className="text-gray-600 text-sm mt-1">{article.authors}</p>
+                                        <h3 className="font-medium text-red-700">{issue.special_issue_title}</h3>
+                                        <div className="text-gray-600 text-sm mt-1" dangerouslySetInnerHTML={{__html: issue.special_issue_about.split('</p>')[0]}}></div>
                                         <div className="mt-2 flex justify-between items-center">
-                                            <span className="text-xs text-gray-500">Posted on 2020-07-21 01:30:16</span>
-                                            <Link href="/special/1" className="text-red-600 hover:text-red-800 text-sm font-medium inline-flex items-center">
-                                                Read article
+                                            <span className="text-xs text-gray-500">published on {issue.publish_date}</span>
+                                            <Link href={`/published-special-issue/${issue.sp_issue_id}`} className="text-red-600 hover:text-red-800 text-sm font-medium inline-flex items-center">
+                                                Read Articles
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     className="h-3 w-3 ml-1"

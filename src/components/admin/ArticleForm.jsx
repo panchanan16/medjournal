@@ -5,7 +5,7 @@ import ArticleMainTab from "./tabs/ArticleMainTab";
 import ArticleSection from "./tabs/ArticleSection";
 import ArticleAuthorsTab from "./tabs/ArticleAuthorsTab";
 
-export default function ArticleForm() {
+export default function ArticleForm({ issueList }) {
   const [activeTab, setActiveTab] = useState("article");
   const [articleId, setarticleId] = useState(null);
   const [formData, setFormData] = useState({
@@ -63,7 +63,6 @@ export default function ArticleForm() {
       setActiveTab(nextTab);
     }
   };
-
 
   return (
     <div className="mx-auto px-4 py-6 max-w-6xl">
@@ -127,6 +126,7 @@ export default function ArticleForm() {
         activeTab={activeTab}
         handleNextSection={handleNextSection}
         setArticleId={setarticleId}
+        IssueForSelect={issueList}
       />
 
       {/* ARTICLE SECTIONS TAB */}

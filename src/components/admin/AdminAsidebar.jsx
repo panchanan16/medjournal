@@ -142,7 +142,7 @@ function AdminAsidebar() {
                         About Us
                       </div>
                     </Link>
-                    <Link href="/users/admins">
+                    <Link href="/admin/indexing">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
                         Indexing
                       </div>
