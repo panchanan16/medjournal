@@ -1,8 +1,10 @@
-const ArticleCard = ({ article }) => {
+import Link from "next/link";
+
+const ArticleCard = ({ article, links }) => {
   return (
     <div className="mb-8 pb-6 border-b border-gray-200 last:border-b-0 last:pb-0">
       <h3 className="text-lg font-semibold mb-2 hover:text-red-700">
-        <a href="#">{article.title}</a>
+        <Link href={`/article-read/${article.ariticle_id}`}>{article.title}</Link>
       </h3>
       <p className="text-sm text-gray-600 mb-3">{article.authors}</p>
 
@@ -13,7 +15,7 @@ const ArticleCard = ({ article }) => {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {article.links.map((link, index) => {
+        {links.map((link, index) => {
           const isButton = link === "Get Permission";
           return isButton ? (
             <button

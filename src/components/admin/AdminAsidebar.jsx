@@ -24,6 +24,7 @@ import {
   BoxIcon,
   BoxesIcon,
   MessageCircleWarningIcon,
+  BoltIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -39,6 +40,7 @@ function AdminAsidebar() {
     archives: false,
     onlineFirst: false,
     articleProcessingCharges: false,
+    siteSettings: false,
 
     // Currently not in use 👇
     users: false,
@@ -84,38 +86,20 @@ function AdminAsidebar() {
           <div className="flex-1 flex flex-col overflow-y-auto">
             <nav className="flex-1 px-2 py-4 space-y-1">
               {/* Dashboard Section */}
-              <div>
-                <button
-                  onClick={() => toggleSection("dashboard")}
-                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
-                    "dashboard"
-                  )}`}
+              
+               <Link href="/admin/journal-home">
+                <div
+                  onClick={() => toggleSection("Issues")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("Issues") ? "bg-red-700" : "hover:bg-red-700"
+                  }`}
                 >
                   <div className="flex">
                     <Home className="mr-3 h-5 w-5" />
                     <span className="">Journal Home</span>
                   </div>
-                  {openSections.dashboard ? (
-                    <ChevronDown className="w-5 h-5" />
-                  ) : (
-                    <ChevronRight className="w-5 h-5" />
-                  )}
-                </button>
-                {openSections.dashboard && (
-                  <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Overview
-                      </div>
-                    </Link>
-                    <Link href="/dashboard/performance">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Performance
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div>
+                </div>
+              </Link>
 
               {/* <!--- Journal Info Section ---> */}
               <div>
@@ -424,9 +408,7 @@ function AdminAsidebar() {
                 <div
                   onClick={() => toggleSection("Volume")}
                   className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
-                    isSectionOpen("Volume")
-                      ? "bg-red-700"
-                      : "hover:bg-red-700"
+                    isSectionOpen("Volume") ? "bg-red-700" : "hover:bg-red-700"
                   }`}
                 >
                   <div className="flex">
@@ -436,14 +418,12 @@ function AdminAsidebar() {
                 </div>
               </Link>
 
-               {/* <!--- Issues Section ---> */}
-               <Link href="/admin/issues">
+              {/* <!--- Issues Section ---> */}
+              <Link href="/admin/issues">
                 <div
                   onClick={() => toggleSection("Issues")}
                   className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
-                    isSectionOpen("Issues")
-                      ? "bg-red-700"
-                      : "hover:bg-red-700"
+                    isSectionOpen("Issues") ? "bg-red-700" : "hover:bg-red-700"
                   }`}
                 >
                   <div className="flex">
@@ -453,189 +433,20 @@ function AdminAsidebar() {
                 </div>
               </Link>
 
-
-
-              {/* Settings Section */}
-              {/* <div>
-                <button
-                  onClick={() => toggleSection("settings")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
+              {/* Settings section */}
+              <Link href="/admin/site-settings">
+                <div
+                  onClick={() => toggleSection("siteSettings")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("siteSettings") ? "bg-red-700" : "hover:bg-red-700"
+                  }`}
                 >
                   <div className="flex">
-                    <Settings className="mr-3 h-5 w-5" />
-                    <span className="">Special Contents</span>
+                    <BoltIcon className="mr-3 h-5 w-5" />
+                    <span className="">Site Settings</span>
                   </div>
-                  {openSections.settings ? (
-                    <ChevronDown className="w-5 h-5" />
-                  ) : (
-                    <ChevronRight className="w-5 h-5" />
-                  )}
-                </button>
-                {openSections.settings && (
-                  <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/settings/general">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        General
-                      </div>
-                    </Link>
-                    <Link href="/settings/security">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Security
-                      </div>
-                    </Link>
-                    <Link href="/settings/notifications">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Notifications
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div> */}
-              {/* Archives Section */}
-              {/* <div>
-                <button
-                  onClick={() => toggleSection("settings")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
-                >
-                  <div className="flex">
-                    <PackageOpen className="mr-3 h-5 w-5" />
-                    <span className="">Archives</span>
-                  </div>
-                  {openSections.settings ? (
-                    <ChevronDown className="w-5 h-5" />
-                  ) : (
-                    <ChevronRight className="w-5 h-5" />
-                  )}
-                </button>
-                {openSections.settings && (
-                  <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/settings/general">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        General
-                      </div>
-                    </Link>
-                    <Link href="/settings/security">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Security
-                      </div>
-                    </Link>
-                    <Link href="/settings/notifications">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Notifications
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div> */}
-              {/* new Section */}
-              {/* <div>
-                <button
-                  onClick={() => toggleSection("settings")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
-                >
-                  <div className="flex">
-                    <Newspaper className="mr-3 h-5 w-5" />
-                    <span className="">News</span>
-                  </div>
-                  {openSections.settings ? (
-                    <ChevronDown className="w-5 h-5" />
-                  ) : (
-                    <ChevronRight className="w-5 h-5" />
-                  )}
-                </button>
-                {openSections.settings && (
-                  <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/settings/general">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        General
-                      </div>
-                    </Link>
-                    <Link href="/settings/security">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Security
-                      </div>
-                    </Link>
-                    <Link href="/settings/notifications">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Notifications
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div> */}
-              {/* Settings Section */}
-              {/* <div>
-                <button
-                  onClick={() => toggleSection("settings")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
-                >
-                  <div className="flex">
-                    <BadgeDollarSign className="mr-3 h-5 w-5" />
-                    <span className="">Charges</span>
-                  </div>
-                  {openSections.settings ? (
-                    <ChevronDown className="w-5 h-5" />
-                  ) : (
-                    <ChevronRight className="w-5 h-5" />
-                  )}
-                </button>
-                {openSections.settings && (
-                  <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/settings/general">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        General
-                      </div>
-                    </Link>
-                    <Link href="/settings/security">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Security
-                      </div>
-                    </Link>
-                    <Link href="/settings/notifications">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Notifications
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div> */}
-
-              {/* Settings Section */}
-              {/* <div>
-                <button
-                  onClick={() => toggleSection("settings")}
-                  className="w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-red-700 group"
-                >
-                  <div className="flex">
-                    <Settings className="mr-3 h-5 w-5" />
-                    <span className="">Settings</span>
-                  </div>
-                  {openSections.settings ? (
-                    <ChevronDown className="w-5 h-5" />
-                  ) : (
-                    <ChevronRight className="w-5 h-5" />
-                  )}
-                </button>
-                {openSections.settings && (
-                  <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/settings/general">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        General
-                      </div>
-                    </Link>
-                    <Link href="/settings/security">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Security
-                      </div>
-                    </Link>
-                    <Link href="/settings/notifications">
-                      <div className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Notifications
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div> */}
+                </div>
+              </Link>             
             </nav>
           </div>
         </div>

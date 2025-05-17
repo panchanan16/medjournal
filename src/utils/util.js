@@ -81,15 +81,6 @@ const dummyData = {
 
 
 export function transformVolumes(volumeArray) {
-  const monthDates = [
-    { issue: 1, date: 'February 29' },
-    { issue: 2, date: 'April 30' },
-    { issue: 3, date: 'June 30' },
-    { issue: 4, date: 'August 31' },
-    { issue: 5, date: 'October 31' },
-    { issue: 6, date: 'December 31' }
-  ];
-
   let result = {};
   let idCounter = 1;
 
@@ -101,15 +92,13 @@ export function transformVolumes(volumeArray) {
     return acc;
   }, {});
 
-  // Build the final structure
+
   for (const [year, volumes] of Object.entries(groupedByYear)) {
     result[year] = volumes.map((volume, index) => {
-      const issueInfo = monthDates[index % monthDates.length];
+
       return {
         id: idCounter++,
         volume: volume.volume_id,
-        issue: issueInfo.issue,
-        date: `${issueInfo.date}, ${year}`,
         title: volume.volume_name,
         image: '/archives.jpeg'
       };

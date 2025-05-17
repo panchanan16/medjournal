@@ -133,7 +133,7 @@ export default async function EditorialTeamPage() {
                                     />
                                 </div>
                                 <div className="text-center md:text-left">
-                                    <Link href={`/editors/${chief.editor_id}`}>
+                                    <Link href={`/editor-board/${chief.editor_id}`}>
                                         <h3 className="text-xl font-bold text-red-800 hover:text-red-600 transition-colors duration-300 cursor-pointer mb-2">
                                             {chief.name}
                                         </h3>

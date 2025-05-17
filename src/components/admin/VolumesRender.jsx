@@ -7,97 +7,8 @@ import Image from "next/image";
 import { transformVolumes } from "@/utils/util";
 
 function VolumesRender({ AllVolumes }) {
-  const [activeYear, setActiveYear] = useState("2024");
-
+  const [activeYear, setActiveYear] = useState("2025");
   const filterResult = transformVolumes(AllVolumes);
-  console.log(filterResult);
-
-  const journals = {
-    2024: [
-      {
-        id: 1,
-        volume: 15,
-        issue: 6,
-        date: "Dec 31, 2024",
-        title: "Journal of Gastrointestinal Oncology",
-        image: "/archives.jpeg",
-      },
-      {
-        id: 2,
-        volume: 15,
-        issue: 5,
-        date: "October 31, 2024",
-        title: "Journal of Gastrointestinal Oncology",
-        image: "/archives.jpeg",
-      },
-      {
-        id: 3,
-        volume: 15,
-        issue: 4,
-        date: "August 31, 2024",
-        title: "Journal of Gastrointestinal Oncology",
-        image: "/archives.jpeg",
-      },
-      {
-        id: 4,
-        volume: 15,
-        issue: 3,
-        date: "June 30, 2024",
-        title: "Journal of Gastrointestinal Oncology",
-        image: "/archives.jpeg",
-      },
-      {
-        id: 5,
-        volume: 15,
-        issue: 2,
-        date: "April 30, 2024",
-        title: "Journal of Gastrointestinal Oncology",
-        image: "/archives.jpeg",
-      },
-      {
-        id: 6,
-        volume: 15,
-        issue: 1,
-        date: "February 29, 2024",
-        title: "Journal of Gastrointestinal Oncology",
-        image: "/archives.jpeg",
-      },
-    ],
-    2023: [
-      {
-        id: 7,
-        volume: 14,
-        issue: 6,
-        date: "December 31, 2023",
-        title: "Journal of Gastrointestinal Oncology",
-        image: "/archives.jpeg",
-      },
-      {
-        id: 8,
-        volume: 14,
-        issue: 5,
-        date: "October 31, 2023",
-        title: "Journal of Gastrointestinal Oncology",
-        image: "/archives.jpeg",
-      },
-      {
-        id: 9,
-        volume: 14,
-        issue: 4,
-        date: "August 31, 2023",
-        title: "Journal of Gastrointestinal Oncology",
-        image: "/archives.jpeg",
-      },
-      {
-        id: 10,
-        volume: 14,
-        issue: 3,
-        date: "June 30, 2023",
-        title: "Journal of Gastrointestinal Oncology",
-        image: "/archives.jpeg",
-      },
-    ],
-  };
 
   const years = Object.keys(filterResult).sort((a, b) => b - a);
 
@@ -132,7 +43,7 @@ function VolumesRender({ AllVolumes }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {filterResult[activeYear]?.map((journal) => (
-            <Link href={`/journal/`} key={journal.id}>
+            <Link href={`/volume/${journal.volume}`} key={journal.id}>
               <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer min-w-[18rem]">
                 <div className="relative">
                   <div className="aspect-w-4 aspect-h-3 bg-gray-200">

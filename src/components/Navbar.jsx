@@ -221,7 +221,7 @@ export default function Navbar({ policy }) {
                   Indexing
                 </Link>
                 <Link
-                  href="/editor-board/1"
+                  href="/editor-in-chief"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Editor In Chief
