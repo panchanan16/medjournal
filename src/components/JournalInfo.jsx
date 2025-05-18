@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-function JournalInfo() {
+function JournalInfo({ Info }) {
   return (
     <section className="bg-gray-50 py-12">
       <div className="container mx-auto px-4">
@@ -21,25 +21,33 @@ function JournalInfo() {
                     <span className="font-medium text-gray-700 w-32">
                       ISSN (Print):
                     </span>
-                    <span className="text-gray-600">N/A</span>
+                    <span className="text-gray-600">
+                      {Info.issn_print ? Info.issn_print : "N/A"}
+                    </span>
                   </li>
                   <li className="flex">
                     <span className="font-medium text-gray-700 w-32">
                       ISSN (Online):
                     </span>
-                    <span className="text-gray-600">N/A</span>
+                    <span className="text-gray-600">
+                      {Info.issn_online ? Info.issn_online : "N/A"}
+                    </span>
                   </li>
                   <li className="flex">
                     <span className="font-medium text-gray-700 w-32">
                       Abbreviation:
                     </span>
-                    <span className="text-gray-600">Med Ltr</span>
+                    <span className="text-gray-600">
+                      {Info.abbreviation_name ? Info.abbreviation_name : "N/A"}
+                    </span>
                   </li>
                   <li className="flex">
                     <span className="font-medium text-gray-700 w-32">
                       Disciplines:
                     </span>
-                    <span className="text-gray-600">Medical Science</span>
+                    <span className="text-gray-600">
+                      {Info.subjects ? Info.subjects : "N/A"}
+                    </span>
                   </li>
                   <li className="flex">
                     <span className="font-medium text-gray-700 w-32">
@@ -52,25 +60,13 @@ function JournalInfo() {
                 </ul>
               </div>
               <div>
-                <p className="text-gray-700 mb-4">
-                  <span className="font-semibold text-red-700">MedLetter</span>{" "}
-                  (Medical Letter) is a continuous magazine dedicated to
-                  publishing cutting-edge research, expert opinions, and
-                  analytical views on current global health issues.
-                </p>
-                <p className="text-gray-700 mb-4">
-                  Established by{" "}
-                  <span className="font-semibold">
-                    ResRidge Publication Foundation
-                  </span>
-                  ,{" "}
-                  <span className="font-semibold text-red-700">MedLetter</span>{" "}
-                  serves as a vital platform for researchers, healthcare
-                  professionals, and policymakers to share insights on medical
-                  advancements, public health challenges, and innovations.
-                </p>
+                <div
+                  className="text-gray-700 mb-4"
+                  dangerouslySetInnerHTML={{ __html: Info.about }}
+                ></div>
+
                 <Link
-                  href="/about/scope"
+                  href="/about"
                   className="text-red-700 hover:text-red-800 font-medium inline-flex items-center"
                 >
                   Read full aims & scope

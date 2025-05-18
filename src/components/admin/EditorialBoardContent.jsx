@@ -11,15 +11,16 @@ const TextEditor = dynamic(() => import("@/components/admin/TextEditor"), {
   ssr: false,
 });
 
-function EditorialBoardContent() {
+function EditorialBoardContent({ InitialValues }) {
   const [formData, setFormData] = useState({
-    editor_type: "",
-    name: "",
-    qualification: "",
-    designation: "",
-    institution: "",
-    biography: "",
-    editorImg: null,
+    editor_type: InitialValues ? InitialValues.editor_type : "",
+    name: InitialValues ? InitialValues.name : "",
+    qualification: InitialValues ? InitialValues.qualification : "",
+    designation: InitialValues ? InitialValues.designation : "",
+    institution: InitialValues ? InitialValues.institution : "",
+    biography: InitialValues ? InitialValues.biography : "",
+    editorImg: InitialValues ? InitialValues.imgLink : "",
+    editor_img: {}, // actual file
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,23 +36,6 @@ function EditorialBoardContent() {
       setFormData({ ...formData, [name]: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
-    }
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFileName(file.name);
-      setFormData((prev) => ({
-        ...prev,
-        editorImg: file,
-      }));
-    } else {
-      setFileName("No file chosen, yet.");
-      setFormData((prev) => ({
-        ...prev,
-        editorImg: null,
-      }));
     }
   };
 
@@ -86,20 +70,30 @@ function EditorialBoardContent() {
       submitData.append("designation", designation);
       submitData.append("institution", institution);
       submitData.append("biography", formData.biography);
+      submitData.append("editorImg", formData.editorImg);
 
-      if (formData.editorImg) {
-        submitData.append("editorImg", formData.editorImg);
+      if (formData.editor_img) {
+        submitData.append("editor_img", formData.editor_img);
       }
 
+      const end = `editorBoard/${
+        InitialValues.editor_id
+          ? `update?editor_id=${InitialValues.editor_id}`
+          : "create"
+      }`;
+      // ${InitialValues.editor_id ? "PUT" : "POST"}
+      // console.log(end);
       const response = await _POST(
-        "editorBoard/create",
+        end,
         submitData,
-        "POST",
+        `${InitialValues.editor_id ? "PUT" : "POST"}`,
         true,
         "core"
       );
 
-      console.log(response);
+      // for (const [key, value] of submitData.entries()) {
+      //   console.log(key, value);
+      // }
 
       // Reset form
       setFormData({
@@ -182,20 +176,27 @@ function EditorialBoardContent() {
 
         <div className="flex items-center">
           <label
-            htmlFor="editorImg"
+            htmlFor="editor_img"
             className="block text-sm font-medium cursor-pointer bg-blue-500 text-white p-2 rounded"
           >
             Choose Image
           </label>
           <input
             type="file"
-            name="editorImg"
-            id="editorImg"
+            name="editor_img"
+            id="editor_img"
             accept="image/*"
-            onChange={handleImageChange}
-            className="hidden"
+            onChange={handleInputChange}
+            className=""
           />
           <span className="ml-2 text-sm text-gray-600">{fileName}</span>
+        </div>
+
+        <div className="flex items-center">
+          <span className="ml-2 text-sm text-gray-600">Old Img:</span>
+          <a href={`http://localhost:3100${formData.editorImg}`}>
+            {formData.editorImg && formData.editorImg}
+          </a>
         </div>
 
         <div className="flex justify-end gap-3">

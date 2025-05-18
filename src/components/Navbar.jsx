@@ -215,7 +215,7 @@ export default function Navbar({ policy }) {
                   About Us
                 </Link>
                 <Link
-                  href="/about-us"
+                  href="/indexing"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Indexing
@@ -309,7 +309,7 @@ export default function Navbar({ policy }) {
               </button>
               <div className="absolute left-0 top-full z-10 hidden group-hover:block bg-white shadow-lg rounded-b-lg w-64">
                 <Link
-                  href="/guidelines"
+                  href="/reviewer_guidelines"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Guidelines For Reviewers

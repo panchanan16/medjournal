@@ -25,6 +25,7 @@ import {
   BoxesIcon,
   MessageCircleWarningIcon,
   BoltIcon,
+  BookMarkedIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -38,6 +39,7 @@ function AdminAsidebar() {
     ethicsAndPloicies: false,
     specialIssues: false,
     archives: false,
+    Indexing: false,
     onlineFirst: false,
     articleProcessingCharges: false,
     siteSettings: false,
@@ -238,7 +240,7 @@ function AdminAsidebar() {
                 </button>
                 {openSections.forReviewers && (
                   <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/admin/journal-info/about-us">
+                    <Link href="/admin/reviewer_guidelines">
                       <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
                         Guidelines For Reviewers{" "}
                       </div>
@@ -351,6 +353,23 @@ function AdminAsidebar() {
                   </div>
                 )}
               </div>
+
+                {/* <!--- Indexing Section ---> */}
+              <Link href="/admin/indexing">
+                <div
+                  onClick={() => toggleSection("Indexing")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("Indexing")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <BookMarkedIcon className="mr-3 h-5 w-5" />
+                    <span className="">Indexing</span>
+                  </div>
+                </div>
+              </Link>
 
               {/* <!--- Online First Section ---> */}
               <Link href="/admin/content/all">

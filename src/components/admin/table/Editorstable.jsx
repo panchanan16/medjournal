@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
 import Link from "next/link";
 import { useState } from "react";
 
-function ReviewerTable({ reviews }) {
+function Editorstable({ Editors }) {
   const [selectedArticles, setSelectedArticles] = useState([1]);
 
   return (
@@ -19,16 +19,16 @@ function ReviewerTable({ reviews }) {
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
               >
-                Review Listr
-              </th>                      
+                Editors List
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {reviews.map((rev, id) => (
+            {Editors.map((index, id) => (
               <tr
                 key={id}
                 className={`hover:bg-red-50 transition-colors ${
-                  selectedArticles.includes(rev.is_id) ? "bg-red-50" : ""
+                  selectedArticles.includes(index.editor_id) ? "bg-red-50" : ""
                 }`}
               >
                 <td className="px-4 py-4 whitespace-nowrap">
@@ -39,12 +39,12 @@ function ReviewerTable({ reviews }) {
                   />
                 </td>
                 <td className="px-4 py-4">
-                  <Link href={`reviewers/${rev.revlist_id}/create`}>
+                  <Link href={`editorial-team/create/${index.editor_id}`}>
                     <div className="text-sm font-medium text-gray-800 hover:text-red-700 cursor-pointer">
-                      {rev.title}
+                      {index.name} {`(${index.editor_type})`}
                     </div>
                   </Link>
-                </td>             
+                </td>
               </tr>
             ))}
           </tbody>
@@ -63,9 +63,9 @@ function ReviewerTable({ reviews }) {
             Go
           </button>
 
-          <Link href={`reviewers/create`}>
+          <Link href={`editorial-team/create`}>
             <button className="min-w-max inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-              Create New Review
+              Create New team Member
             </button>
           </Link>
         </div>
@@ -75,4 +75,4 @@ function ReviewerTable({ reviews }) {
   );
 }
 
-export default ReviewerTable;
+export default Editorstable;

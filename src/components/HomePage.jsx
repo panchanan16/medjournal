@@ -7,7 +7,7 @@ import JournalInfo from "./JournalInfo";
 import JournalMetrics from "./JournalMetrics";
 import ArticlesSection from "./ArticlesSection";
 
-export default function HomePage({ articles }) {
+export default function HomePage({ articles, Journal }) {
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -21,13 +21,13 @@ export default function HomePage({ articles }) {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <HeroSection />
+        <HeroSection HeroData={Journal} />
 
         {/* Journal Info */}
-        <JournalInfo />
+        <JournalInfo Info={Journal} />
 
         {/* Journal Metrics */}
-        <JournalMetrics />
+        <JournalMetrics Metrics={Journal} />
 
         {/* Latest Artcles */}
         {/* <LatestArticles /> */}

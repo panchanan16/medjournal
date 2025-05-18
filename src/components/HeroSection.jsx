@@ -3,15 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-function HeroSection() {
+function HeroSection({ HeroData }) {
   return (
     <section className="bg-white py-12 md:py-16">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="md:w-1/2">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-              <span className="text-red-700">Medical Letter:</span> Advancing
-              Global Health Knowledge
+              <span className="text-red-700">{HeroData.journal_name}</span> {HeroData.tagline ? `- ${HeroData.tagline}` : ""}
             </h1>
             <p className="text-lg text-gray-600 mb-6">
               A continuous magazine dedicated to publishing cutting-edge
@@ -49,7 +48,6 @@ function HeroSection() {
           </div>
         </div>
       </div>
-     
     </section>
   );
 }

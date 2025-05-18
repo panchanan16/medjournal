@@ -14,6 +14,7 @@ export default function JournalHomeForm({ initialValues }) {
 
   const [formData, setFormData] = useState({
     journal_name: initialValues ? initialValues?.journal_name : "",
+    tagline: initialValues ? initialValues?.tagline : "",
     abbreviation_name: initialValues ? initialValues?.abbreviation_name : "",
     subjects: initialValues ? initialValues?.subjects : "",
     issn_print: initialValues ? initialValues?.issn_print : "",
@@ -78,12 +79,13 @@ export default function JournalHomeForm({ initialValues }) {
       }
 
       await _POST(
-        `journal/${initialValues ? `update?mj_id=${initialValues.mj_id}` : "create"}`,
+        `journal/${
+          initialValues ? `update?mj_id=${initialValues.mj_id}` : "create"
+        }`,
         submitData,
         `${initialValues ? "PUT" : "POST"}`,
         true,
-        'core'
-
+        "core"
       );
       console.log("Form data submitted:", formData);
       //   for (let [key, value] of submitData.entries()) {
@@ -120,6 +122,25 @@ export default function JournalHomeForm({ initialValues }) {
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             placeholder="Enter the Journal Name..."
+          />
+        </div>
+
+         <div className="space-y-2">
+          <label
+            htmlFor="tagline"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Tageline <span className="text-red-600">*</span>
+          </label>
+          <input
+            type="text"
+            id="tagline"
+            name="tagline"
+            required
+            value={formData.tagline}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+            placeholder="Enter the tagline..."
           />
         </div>
 
