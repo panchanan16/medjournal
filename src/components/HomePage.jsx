@@ -7,7 +7,7 @@ import JournalInfo from "./JournalInfo";
 import JournalMetrics from "./JournalMetrics";
 import ArticlesSection from "./ArticlesSection";
 
-export default function HomePage({ articles, Journal }) {
+export default function HomePage({ articles, Journal, NewsAnnouncement }) {
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -61,7 +61,7 @@ export default function HomePage({ articles, Journal }) {
             </div>
           </div>
         </section>
-        <NewsAnnouncementsSection />
+        <NewsAnnouncementsSection NewsData={NewsAnnouncement} />
       </main>
     </div>
   );

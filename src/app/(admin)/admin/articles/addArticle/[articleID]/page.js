@@ -3,8 +3,11 @@ import { _GET } from '@/request/request';
 
 export default async function ArticleEditPage({ params }) {
     const { articleID } = params
-    const editData = await _GET(`article/readOne?article_id=${articleID}`)
-    console.log(editData)
+    const issueList = await _GET('issue/readAll')
+    const mainData = await _GET(`article/readOne?article_id=${articleID}`)
+    const sectionData = await _GET(`articleSection/readOne?ariticle_id=${articleID}`, 'core')
+    const authorData = await _GET(`articleauthor/readAll?article_id=${articleID}`)
+
 
     console.log("Article to be edit is...", articleID)
     return (
@@ -15,7 +18,7 @@ export default async function ArticleEditPage({ params }) {
             <main>
                 <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                     <div className="bg-white shadow-sm rounded-lg">
-                        <ArticleForm />
+                        <ArticleForm issueList={issueList} ArticleMainTabData={mainData} ArticleSectionData={sectionData} ArticleAuthorData={authorData} />
                     </div>
                 </div>
             </main>

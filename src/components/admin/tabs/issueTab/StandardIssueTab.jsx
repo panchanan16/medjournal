@@ -1,6 +1,5 @@
 import { _POST } from "@/request/post_request";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 
 function StandardIssueTab({ VolumeList, activeTab, setIssueId }) {
   const InitialValue = {
@@ -41,7 +40,7 @@ function StandardIssueTab({ VolumeList, activeTab, setIssueId }) {
   if (activeTab == "Issues") {
     return (
       <div className="mx-auto px-5 py-8">
-        <h1 className="text-2xl font-bold mb-6">Add Article</h1>
+        <h1 className="text-2xl font-bold mb-6">Add Standard Issue</h1>
         <form>
           <div className="space-y-6">
             <div className="space-y-4">

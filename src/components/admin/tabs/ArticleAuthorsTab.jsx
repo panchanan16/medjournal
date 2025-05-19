@@ -4,20 +4,29 @@ import { _POST } from "@/request/post_request";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-function ArticleAuthorsTab({ activeTab, handleNextSection, articleId }) {
-  const [authors, setAuthors] = useState([
-    {
-      ariticle_id: articleId,
-      authors_prefix: "",
-      authors_name: "",
-      authors_middlename: "",
-      authors_lastname: "",
-      author_email: "",
-      orchid_id: "",
-      afflication: "",
-      qualification: "",
-    },
-  ]);
+function ArticleAuthorsTab({
+  activeTab,
+  handleNextSection,
+  articleId,
+  initialValues,
+}) {
+  const [authors, setAuthors] = useState(
+    initialValues
+      ? initialValues
+      : [
+          {
+            ariticle_id: articleId,
+            authors_prefix: "",
+            authors_name: "",
+            authors_middlename: "",
+            authors_lastname: "",
+            author_email: "",
+            orchid_id: "",
+            afflication: "",
+            qualification: "",
+          },
+        ]
+  );
   const addAuthor = () => {
     setAuthors([
       ...authors,
@@ -98,7 +107,7 @@ function ArticleAuthorsTab({ activeTab, handleNextSection, articleId }) {
                 <input
                   type="text"
                   placeholder="Prefix (e.g., Dr.)"
-                  value={author.authors_prefix}
+                  value={author.authors_prefix == null ? "" : author.authors_prefix}
                   onChange={(e) =>
                     handleChange(index, "authors_prefix", e.target.value)
                   }
@@ -116,7 +125,7 @@ function ArticleAuthorsTab({ activeTab, handleNextSection, articleId }) {
                 <input
                   type="text"
                   placeholder="Middle Name"
-                  value={author.authors_middlename}
+                  value={author.authors_middlename == null ? "" : author.authors_middlename}
                   onChange={(e) =>
                     handleChange(index, "authors_middlename", e.target.value)
                   }
@@ -125,7 +134,7 @@ function ArticleAuthorsTab({ activeTab, handleNextSection, articleId }) {
                 <input
                   type="text"
                   placeholder="Last Name"
-                  value={author.authors_lastname}
+                  value={author.authors_lastname == null ?  "" : author.authors_lastname}
                   onChange={(e) =>
                     handleChange(index, "authors_lastname", e.target.value)
                   }

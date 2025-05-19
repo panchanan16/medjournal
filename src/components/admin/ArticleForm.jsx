@@ -5,7 +5,7 @@ import ArticleMainTab from "./tabs/ArticleMainTab";
 import ArticleSection from "./tabs/ArticleSection";
 import ArticleAuthorsTab from "./tabs/ArticleAuthorsTab";
 
-export default function ArticleForm({ issueList }) {
+export default function ArticleForm({ issueList, ArticleMainTabData, ArticleSectionData, ArticleAuthorData }) {
   const [activeTab, setActiveTab] = useState("article");
   const [articleId, setarticleId] = useState(null);
   const [formData, setFormData] = useState({
@@ -127,6 +127,7 @@ export default function ArticleForm({ issueList }) {
         handleNextSection={handleNextSection}
         setArticleId={setarticleId}
         IssueForSelect={issueList}
+        initialValues={ArticleMainTabData}
       />
 
       {/* ARTICLE SECTIONS TAB */}
@@ -134,6 +135,7 @@ export default function ArticleForm({ issueList }) {
         activeTab={activeTab}
         handleNextSection={handleNextSection}
         articleId={articleId}
+        initialValues={ArticleSectionData}
       />
 
       {/* AUTHORS TAB */}
@@ -141,6 +143,7 @@ export default function ArticleForm({ issueList }) {
         activeTab={activeTab}
         handleNextSection={handleNextSection}
         articleId={articleId}
+        initialValues={ArticleAuthorData}
       />
     </div>
   );

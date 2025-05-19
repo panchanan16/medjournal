@@ -5,38 +5,39 @@ function ArticleMainTab({
   activeTab,
   handleNextSection,
   setArticleId,
+  initialValues
 }) {
-  const initialValues = {
-    isInHome: 1,
-    isOpenaccess: 0,
-    isInPress: 0,
-    issueNo: "",
-    url: "",
-    articleType: "",
-    title: "",
-    DOI: "",
-    DOIlink: "",
-    PMID: "",
-    PMID_Link: "",
-    abstract: "",
-    page_from: "",
-    page_to: "",
-    keywords: "",
-    how_to_cite: "",
-    recieve_date: "",
-    Revised_date: "",
-    Accepted_date: "",
-    published_date: "",
-    available_date: "",
-    Downloads: "",
-    Views: "",
-    citation_apa: "",
-    citation_mla: "",
-    citation_chicago: "",
-    citation_harvard: "",
-    citation_vancouver: "",
-    pdflink: "",
-    xmllink: "",
+  const initialSchema = {
+    isInHome: initialValues ? initialValues?.isInHome : 0,
+    isOpenaccess: initialValues ? initialValues?.isOpenaccess : 0,
+    isInPress: initialValues ? initialValues?.isInPress : 0,
+    issueNo: initialValues ? initialValues?.issueNo : "",
+    url: initialValues ? initialValues?.url : "",
+    articleType: initialValues ? initialValues?.articleType : "",
+    title: initialValues ? initialValues?.title : "",
+    DOI: initialValues ? initialValues?.DOI : "",
+    DOIlink: initialValues ? initialValues?.DOIlink : "",
+    PMID: initialValues ? initialValues?.PMID : "",
+    PMID_Link: initialValues ? initialValues?.PMID_Link : "",
+    abstract: initialValues ? initialValues?.abstract : "",
+    page_from: initialValues ? initialValues?.page_from : "",
+    page_to: initialValues ? initialValues?.page_to : "",
+    keywords: initialValues ? initialValues?.keywords : "",
+    how_to_cite: initialValues ? initialValues?.how_to_cite : "",
+    recieve_date: initialValues ? initialValues?.recieve_date : "",
+    Revised_date: initialValues ? initialValues?.Revised_date : "",
+    Accepted_date: initialValues ? initialValues?.Accepted_date : "",
+    published_date: initialValues ? initialValues?.published_date : "",
+    available_date: initialValues ? initialValues?.available_date : "",
+    Downloads: initialValues ? initialValues?.Downloads : "",
+    Views: initialValues ? initialValues?.Views : "",
+    citation_apa: initialValues ? initialValues?.citation_apa : "",
+    citation_mla: initialValues ? initialValues?.citation_mla : "",
+    citation_chicago: initialValues ? initialValues?.citation_chicago : "",
+    citation_harvard: initialValues ? initialValues?.citation_harvard : "",
+    citation_vancouver: initialValues ? initialValues?.citation_vancouver : "",
+    pdflink: initialValues ? initialValues?.pdflink : "",
+    xmllink: initialValues ? initialValues?.xmllink : "",
   };
 
   function TabArticleMainUi({ handleChange, formData }) {
@@ -107,10 +108,11 @@ function ArticleMainTab({
                   <option value="">---------</option>
                   {IssueForSelect?.length &&
                     IssueForSelect?.map((isu, key) => (
-                      <option key={key} value={isu.is_id}>{isu.issue_name} {`(${isu.volume_name})`}</option>
+                      <option key={key} value={isu.is_id}>
+                        {isu.issue_name} {`(${isu.volume_name})`}
+                      </option>
                     ))}
                 </select>
-               
               </div>
             </div>
 
@@ -624,7 +626,7 @@ function ArticleMainTab({
       <TabLayout
         TabUI={TabArticleMainUi}
         TabName={"article"}
-        InitialValue={initialValues}
+        InitialValue={initialSchema}
         activeTab={activeTab}
         GoToNext={handleNextSection}
         setArticleId={setArticleId}

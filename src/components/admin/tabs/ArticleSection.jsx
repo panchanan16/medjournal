@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import dynamic from "next/dynamic";
 import { Editor } from "@tinymce/tinymce-react";
 import toast from "react-hot-toast";
 import { _POST } from "@/request/post_request";
@@ -10,17 +9,19 @@ import { _POST } from "@/request/post_request";
 //   ssr: false,
 // });
 
-function ArticleSection({ activeTab, handleNextSection, articleId }) {
-  const initialValues = {
-    Article_Heading: true,
-    article_content: true,
-  };
-
+function ArticleSection({
+  activeTab,
+  handleNextSection,
+  articleId,
+  initialValues,
+}) {
   console.log("Article Id section tab is: ", articleId);
 
-  const [sections, setSections] = useState([
-    { ariticle_id: articleId, Article_Heading: "", article_content: "" },
-  ]);
+  const [sections, setSections] = useState(
+    initialValues
+      ? initialValues
+      : [{ ariticle_id: articleId, Article_Heading: "", article_content: "" }]
+  );
 
   const addSection = () => {
     setSections([

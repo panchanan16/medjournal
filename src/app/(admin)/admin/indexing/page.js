@@ -3,7 +3,6 @@ import { _GET } from "@/request/request";
 
 async function IndexCreatePage() {
     const issues = await _GET(`index/readAll`)
-    console.log(issues)
 
 
     return (

@@ -26,6 +26,9 @@ import {
   MessageCircleWarningIcon,
   BoltIcon,
   BookMarkedIcon,
+  Mic2Icon,
+  MicIcon,
+  TvIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -43,6 +46,8 @@ function AdminAsidebar() {
     onlineFirst: false,
     articleProcessingCharges: false,
     siteSettings: false,
+    announce: false,
+    news: false,
 
     // Currently not in use 👇
     users: false,
@@ -88,8 +93,8 @@ function AdminAsidebar() {
           <div className="flex-1 flex flex-col overflow-y-auto">
             <nav className="flex-1 px-2 py-4 space-y-1">
               {/* Dashboard Section */}
-              
-               <Link href="/admin/journal-home">
+
+              <Link href="/admin/journal-home">
                 <div
                   onClick={() => toggleSection("Issues")}
                   className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
@@ -354,7 +359,7 @@ function AdminAsidebar() {
                 )}
               </div>
 
-                {/* <!--- Indexing Section ---> */}
+              {/* <!--- Indexing Section ---> */}
               <Link href="/admin/indexing">
                 <div
                   onClick={() => toggleSection("Indexing")}
@@ -367,6 +372,39 @@ function AdminAsidebar() {
                   <div className="flex">
                     <BookMarkedIcon className="mr-3 h-5 w-5" />
                     <span className="">Indexing</span>
+                  </div>
+                </div>
+              </Link>
+              {/* <!--- Announce Section ---> */}
+              <Link href="/admin/announce">
+                <div
+                  onClick={() => toggleSection("announce")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("announce")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <MicIcon className="mr-3 h-5 w-5" />
+                    <span className="">Announcement</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* <!--- news Section ---> */}
+              <Link href="/admin/news">
+                <div
+                  onClick={() => toggleSection("news")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("news")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <TvIcon className="mr-3 h-5 w-5" />
+                    <span className="">News</span>
                   </div>
                 </div>
               </Link>
@@ -457,7 +495,9 @@ function AdminAsidebar() {
                 <div
                   onClick={() => toggleSection("siteSettings")}
                   className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
-                    isSectionOpen("siteSettings") ? "bg-red-700" : "hover:bg-red-700"
+                    isSectionOpen("siteSettings")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
                   }`}
                 >
                   <div className="flex">
@@ -465,7 +505,7 @@ function AdminAsidebar() {
                     <span className="">Site Settings</span>
                   </div>
                 </div>
-              </Link>             
+              </Link>
             </nav>
           </div>
         </div>
