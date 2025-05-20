@@ -30,20 +30,18 @@ function ReviewerListTable({ reviewList, nextpageId }) {
                 className={`hover:bg-red-50 transition-colors ${
                   selectedArticles.includes(pep.is_id) ? "bg-red-50" : ""
                 }`}
-              >
-                <td className="px-4 py-4 whitespace-nowrap">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
-                    // checked={selectedArticles.includes(article.id)}
-                  />
-                </td>
-                <td className="px-4 py-4">
-                  <Link href={`articles/addArticle/${pep.peplist_id}`}>
+              >               
+                <td className="px-4 py-4 w-[30rem]">       
                     <div className="text-sm font-medium text-gray-800 hover:text-red-700 cursor-pointer">
-                      {pep.name}
-                    </div>
-                  </Link>
+                      {pep.month}
+                      <ul>
+                         {
+                          pep.names?.map((item, key) => (
+                            <li key={key}><Link href={'#'}>{item.name}</Link></li>
+                          ))
+                         }
+                      </ul>
+                    </div>                 
                 </td>
               </tr>
             ))}

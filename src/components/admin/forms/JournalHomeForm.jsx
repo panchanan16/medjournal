@@ -125,7 +125,7 @@ export default function JournalHomeForm({ initialValues }) {
           />
         </div>
 
-         <div className="space-y-2">
+        <div className="space-y-2">
           <label
             htmlFor="tagline"
             className="block text-sm font-medium text-gray-700"
@@ -254,6 +254,16 @@ export default function JournalHomeForm({ initialValues }) {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             placeholder="Enter the Email..."
           />
+
+          <div className="flex items-center mt-3">
+            <span className="ml-2 text-xs text-gray-600">Old Thubnail: </span>
+            <a
+              className="text-xs text-red-400"
+              href={`http://localhost:3100${formData.thumbnail}`}
+            >
+              {formData.thumbnail && formData.thumbnail}
+            </a>
+          </div>
         </div>
 
         <div className="space-y-2">

@@ -7,7 +7,7 @@ async function AddReviwerListPage({ params }) {
 
     return (
         <div className="max-w-[95%] mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-10">
-            <ReviewerListTable reviewList={reviews} nextpageId={rlistID} />
+            <ReviewerListTable reviewList={reviews ? reviews.reviewers: []} nextpageId={rlistID} />
         </div>
     )
 }

@@ -36,13 +36,14 @@ function HeroSection({ HeroData }) {
           <div className="md:w-1/2">
             <div className="relative md:w-[70%] lg:ml-28">
               <div className="absolute -top-4 -left-4 w-32 h-32 bg-red-100 rounded-tl-3xl z-0"></div>
-              <Image
+              {/* <Image
                 src="/book-0rg.png"
                 alt="Medical research scientist looking through microscope"
                 className="rounded-lg h-[30rem] shadow-lg relative z-10 w-full"
                 height="500"
                 width="600"
-              />
+              /> */}
+               <img className="transition-transform relative duration-300 hover:scale-105 object-cover w-full h-full z-30" src={`http://localhost:3100${HeroData.thumbnail}`} alt={'Journal thumbnail'} />
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-orange-100 rounded-br-3xl z-0"></div>
             </div>
           </div>
