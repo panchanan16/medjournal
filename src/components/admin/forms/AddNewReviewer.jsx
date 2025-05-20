@@ -47,7 +47,7 @@ export default function AddNewReviewer({ initialValues, ID }) {
 
     try {
       if (editorRef.current) {
-        formData.content = editorRef.current.getContent();
+        formData.biography = editorRef.current.getContent();
       }
 
       await _POST(

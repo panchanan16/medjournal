@@ -1,6 +1,8 @@
-'use client'
+"use client";
 
-function ReviewPeopleSidebar() {
+import Link from "next/link";
+
+function ReviewPeopleSidebar({ List }) {
   return (
     <div className="lg:col-span-3">
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -9,62 +11,17 @@ function ReviewPeopleSidebar() {
         </div>
         <div className="p-4">
           <ul className="space-y-2">
-            <li>
-              <a
-                href="#"
-                className="block p-2 hover:bg-red-50 rounded transition-colors text-red-700 hover:text-red-900"
-              >
-                Reviewer of the Month (2025)
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block p-2 hover:bg-red-50 rounded transition-colors text-red-700 hover:text-red-900"
-              >
-                Reviewer of the Month (2024)
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block p-2 hover:bg-red-50 rounded transition-colors text-red-700 hover:text-red-900"
-              >
-                Reviewer of the Month (2023)
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block p-2 hover:bg-red-50 rounded transition-colors text-red-700 hover:text-red-900"
-              >
-                Reviewer of the Month (2022)
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block p-2 bg-red-100 font-medium rounded text-red-800"
-              >
-                Reviewer of the Month (2020-21)
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block p-2 hover:bg-red-50 rounded transition-colors text-red-700 hover:text-red-900"
-              >
-                The reviewers of JGO 2020
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block p-2 hover:bg-red-50 rounded transition-colors text-red-700 hover:text-red-900"
-              >
-                The reviewers of JGO 2019
-              </a>
-            </li>
+            {List?.length &&
+              List.map((rev, ind) => (
+                <li key={ind}>
+                  <Link
+                    href={`/review/${rev.revlist_id}`}
+                    className="block p-2 hover:bg-red-50 rounded transition-colors text-red-700 hover:text-red-900"
+                  >
+                    {rev.title}
+                  </Link>
+                </li>
+              ))}
           </ul>
         </div>
       </div>

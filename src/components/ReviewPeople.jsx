@@ -53,7 +53,7 @@ function ReviewPeople({ reviews }) {
                           {reviewer.name}
                         </button>
                         <span className="text-gray-600 text-sm md:ml-2">
-                          {reviewer.affiliation}
+                          {reviewer.university}, ( {reviewer.country} )
                         </span>
                       </li>
                     ))}
@@ -65,11 +65,9 @@ function ReviewPeople({ reviews }) {
 
             {activeReviewer?.length && (
               <div className="mt-6 bg-red-50 p-5 rounded-lg">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: activeReviewer[0]?.details,
-                  }}
-                />
+                  <div><h3 className="text-2xl font-bold text-red-800">{activeReviewer[0].name}</h3></div>
+                  <div dangerouslySetInnerHTML={{__html: activeReviewer[0].biography}}>                     
+                  </div>
               </div>
             )}
           </div>

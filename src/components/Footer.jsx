@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Footer = () => {
+const Footer = ({ FooterData }) => {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-10">
@@ -8,8 +8,9 @@ const Footer = () => {
           {/* Brand Section */}
           <div>
             <div className="border-l-4 border-red-700 pl-4 mb-4">
-              <h3 className="text-xl font-bold mb-1">Medical Letter</h3>
-              <p className="text-gray-400 text-sm">Open Access</p>
+              <h3 className="text-xl font-bold mb-1">
+                {FooterData ? FooterData?.journal?.journal_name : ""}
+              </h3>
             </div>
             <div className="flex space-x-3 mt-2">
               <a href="#" className="hover:text-red-300">
@@ -186,7 +187,7 @@ const Footer = () => {
 
         {/* Copyright Notice */}
         <div className="border-t border-gray-800 mt-8 pt-6 text-center text-gray-500 text-sm">
-          <p>© Copyright 2025 Kuwait Scientific Society</p>
+          <p>{FooterData ? FooterData?.setings?.FooterCopyright : ""}</p>
         </div>
       </div>
     </footer>

@@ -1,6 +1,4 @@
-// components/Layout.tsx
 import React, { ReactNode } from 'react';
-import Navbar from './Navbar';
 
 
 function Layout({ children }) {

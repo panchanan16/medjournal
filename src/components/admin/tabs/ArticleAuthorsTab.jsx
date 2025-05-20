@@ -9,13 +9,15 @@ function ArticleAuthorsTab({
   handleNextSection,
   articleId,
   initialValues,
+  editId
 }) {
   const [authors, setAuthors] = useState(
     initialValues
       ? initialValues
       : [
           {
-            ariticle_id: articleId,
+            ar_author_id: "",
+            ariticle_id: articleId || editId,
             authors_prefix: "",
             authors_name: "",
             authors_middlename: "",
@@ -31,7 +33,8 @@ function ArticleAuthorsTab({
     setAuthors([
       ...authors,
       {
-        ariticle_id: articleId,
+        ar_author_id: "",
+        ariticle_id: articleId || editId,
         authors_prefix: "",
         authors_name: "",
         authors_middlename: "",
@@ -57,11 +60,11 @@ function ArticleAuthorsTab({
   const handleSubmit = async (e) => {
     e.preventDefault();
     authors.length &&
-      authors.map((authr, ind) => (authr.ariticle_id = articleId));
+      authors.map((authr, ind) => (authr.ariticle_id = articleId || editId));
     const payload = authors;
-    if (articleId) {
+    if (articleId || editId) {
       try {
-        const response = await _POST("articleauthor/create", payload, "POST");
+        const response = await _POST(`articleauthor/${editId ? `update?article_id=${editId}` : 'create'}`, payload, `${editId ? 'PUT': 'POST'}`);
         console.log("Saved:", response);
         console.log("Saved:", payload);
       } catch (error) {

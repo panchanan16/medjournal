@@ -4,12 +4,13 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { _POST } from "@/request/post_request";
 
-export default function VolumeForm() {
+export default function VolumeForm({ initialValues, editId }) {
   // Form state
   const [formData, setFormData] = useState({
-    volume_name: "",
-    volume_img: "",
-    volume_year: "",
+    volume_id: initialValues ? initialValues.volume_id : "",
+    volume_name: initialValues ? initialValues.volume_name : "",
+    volume_img: initialValues ? initialValues.volume_img : "",
+    volume_year: initialValues ? initialValues.volume_year : "",
   });
 
   // UI states
@@ -34,10 +35,10 @@ export default function VolumeForm() {
     setIsSubmitting(true);
 
     try {
-      await _POST("volume/create", formData);
+      await _POST(`volume/${editId ? `update` : 'create'}`, formData, `${editId ? 'PUT' : 'POST'}`);
       console.log("Form data submitted:", formData);
       for (const key in formData) {
-        formData[key] = ""
+        formData[key] = "";
       }
     } catch (error) {
       console.error("Error submitting form:", error);

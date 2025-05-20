@@ -1,16 +1,18 @@
-import TabLayout from "./TabLayout";
+import { _POST } from "@/request/post_request";
+import { useState } from "react";
 
 function ArticleMainTab({
   IssueForSelect,
   activeTab,
   handleNextSection,
   setArticleId,
-  initialValues
+  initialValues,
+  editId
 }) {
-  const initialSchema = {
+  const [formData, setFormData] = useState({
     isInHome: initialValues ? initialValues?.isInHome : 0,
     isOpenaccess: initialValues ? initialValues?.isOpenaccess : 0,
-    isInPress: initialValues ? initialValues?.isInPress : 0,
+    isInPress: 0,
     issueNo: initialValues ? initialValues?.issueNo : "",
     url: initialValues ? initialValues?.url : "",
     articleType: initialValues ? initialValues?.articleType : "",
@@ -38,9 +40,62 @@ function ArticleMainTab({
     citation_vancouver: initialValues ? initialValues?.citation_vancouver : "",
     pdflink: initialValues ? initialValues?.pdflink : "",
     xmllink: initialValues ? initialValues?.xmllink : "",
+    pdfFile: "",
+    xmlFile: "",
+    isPDF: 0,
+    isXml: 0,
+  });
+
+  console.log(editId)
+
+  const handleChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+
+    if (type === "checkbox") {
+      setFormData({ ...formData, [name]: checked ? 1 : 0 });
+    } else if (type === "file") {
+      setFormData({ ...formData, [name]: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
-  function TabArticleMainUi({ handleChange, formData }) {
+  async function handleSaveSection(e) {
+    e.preventDefault();
+    try {
+      const submitData = new FormData();
+      Object.keys(formData).forEach((key) => {
+        if (key === "coverImage" && formData[key]) {
+          submitData.append(key, formData[key]);
+        } else if (key === "tags") {
+          submitData.append(key, JSON.stringify(formData[key]));
+        } else {
+          submitData.append(key, formData[key]);
+        }
+      });
+
+      const response = await _POST(
+        `articleMain/${editId ? `update?article_id=${editId}` : 'create'}`,
+        submitData,
+        `${editId ? 'PUT' : 'POST'}`,
+        true,
+        "core"
+      );
+      // console.log(response.article_id);
+      setArticleId && setArticleId(response.article_id);
+      console.log("Form data submitted:", formData);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  }
+
+  function handleSubmitAndContinue(params) {
+    handleNextSection();
+    console.log(formData);
+    // setArticleId && setArticleId;
+  }
+
+  if (activeTab === "article") {
     return (
       <form>
         <div className="space-y-6">
@@ -463,39 +518,60 @@ function ArticleMainTab({
           </div>
 
           {/* file section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="w-full">
               <label
-                htmlFor="pdflink"
+                htmlFor="pdfFile"
                 className="block text-sm font-medium text-gray-700"
               >
                 PDF:*
               </label>
               <input
                 type="file"
-                id="pdflink"
-                name="pdflink"
+                id="pdfFile"
+                name="pdfFile"
                 rows="3"
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
+
+              {/* Old file */}
+              <div className="flex items-center mt-3">
+                <span className="ml-2 text-xs text-gray-600">Old PDF:</span>
+                <a
+                  className="text-xs"
+                  href={`http://localhost:3100${formData.pdflink}`}
+                >
+                  {formData.pdflink && formData.pdflink}
+                </a>
+              </div>
             </div>
 
-            <div>
+            <div className="w-full">
               <label
-                htmlFor="xmllink"
+                htmlFor="xmlFile"
                 className="block text-sm font-medium text-gray-700"
               >
                 XML:*
               </label>
               <input
                 type="file"
-                id="xmllink"
-                name="xmllink"
+                id="xmlFile"
+                name="xmlFile"
                 rows="3"
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
               />
+              {/* Old file */}
+              <div className="flex items-center mt-3">
+                <span className="ml-2 text-xs text-gray-600">Old XML:</span>
+                <a
+                  className="text-xs"
+                  href={`http://localhost:3100${formData.xmllink}`}
+                >
+                  {formData.xmllink && formData.xmllink}
+                </a>
+              </div>
             </div>
           </div>
 
@@ -503,28 +579,28 @@ function ArticleMainTab({
           <div className="flex items-center gap-10">
             <div className="flex items-center space-x-3">
               <input
-                id="isInHome"
-                name="isInHome"
+                id="isXml"
+                name="isXml"
                 type="checkbox"
-                checked={formData.isInHome}
+                checked={formData.isXml}
                 onChange={handleChange}
                 className="h-4 w-4 text-teal-500 border-gray-300 rounded focus:ring-teal-500"
               />
-              <label htmlFor="isInHome" className="text-gray-700">
+              <label htmlFor="isXml" className="text-gray-700">
                 Generate XML
               </label>
             </div>
 
             <div className="flex items-center space-x-3">
               <input
-                id="isOpenAccess"
-                name="isOpenAccess"
+                id="isPDF"
+                name="isPDF"
                 type="checkbox"
-                checked={formData.isOpenAccess}
+                checked={formData.isPDF}
                 onChange={handleChange}
                 className="h-4 w-4 text-teal-500 border-gray-300 rounded focus:ring-teal-500"
               />
-              <label htmlFor="isOpenAccess" className="text-gray-700">
+              <label htmlFor="isPDF" className="text-gray-700">
                 Generate PDF
               </label>
             </div>
@@ -617,22 +693,26 @@ function ArticleMainTab({
             ></textarea>
           </div>
         </div>
+
+        <div className="mt-5">
+          <button
+            onClick={(e) => handleSaveSection(e)}
+            type="button"
+            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700"
+          >
+            Submit
+          </button>
+          <button
+            onClick={handleSubmitAndContinue}
+            type="submit"
+            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700"
+          >
+            Save And Continue
+          </button>
+        </div>
       </form>
     );
   }
-
-  return (
-    <>
-      <TabLayout
-        TabUI={TabArticleMainUi}
-        TabName={"article"}
-        InitialValue={initialSchema}
-        activeTab={activeTab}
-        GoToNext={handleNextSection}
-        setArticleId={setArticleId}
-      />
-    </>
-  );
 }
 
 export default ArticleMainTab;

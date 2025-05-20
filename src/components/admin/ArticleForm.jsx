@@ -5,20 +5,15 @@ import ArticleMainTab from "./tabs/ArticleMainTab";
 import ArticleSection from "./tabs/ArticleSection";
 import ArticleAuthorsTab from "./tabs/ArticleAuthorsTab";
 
-export default function ArticleForm({ issueList, ArticleMainTabData, ArticleSectionData, ArticleAuthorData }) {
+export default function ArticleForm({
+  issueList,
+  ArticleMainTabData,
+  ArticleSectionData,
+  ArticleAuthorData,
+  editID,
+}) {
   const [activeTab, setActiveTab] = useState("article");
   const [articleId, setarticleId] = useState(null);
-  const [formData, setFormData] = useState({
-    citation_apa: "",
-    citation_mla: "",
-    citation_chicago: "",
-    citation_harvard: "",
-    citation_vancouver: "",
-    // Add fields for other tabs as needed
-    authors: [],
-    sections: [],
-    citations: [],
-  });
 
   const [tabStatus, setTabStatus] = useState({
     article: "current",
@@ -26,14 +21,6 @@ export default function ArticleForm({ issueList, ArticleMainTabData, ArticleSect
     sections: "pending",
     authors: "pending",
   });
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
 
   const handleTabClick = (tab) => {
     // Only allow navigation to tabs that aren't disabled
@@ -128,6 +115,7 @@ export default function ArticleForm({ issueList, ArticleMainTabData, ArticleSect
         setArticleId={setarticleId}
         IssueForSelect={issueList}
         initialValues={ArticleMainTabData}
+        editId={editID}
       />
 
       {/* ARTICLE SECTIONS TAB */}
@@ -136,6 +124,7 @@ export default function ArticleForm({ issueList, ArticleMainTabData, ArticleSect
         handleNextSection={handleNextSection}
         articleId={articleId}
         initialValues={ArticleSectionData}
+        editId={editID}
       />
 
       {/* AUTHORS TAB */}
@@ -144,6 +133,7 @@ export default function ArticleForm({ issueList, ArticleMainTabData, ArticleSect
         handleNextSection={handleNextSection}
         articleId={articleId}
         initialValues={ArticleAuthorData}
+        editId={editID}
       />
     </div>
   );

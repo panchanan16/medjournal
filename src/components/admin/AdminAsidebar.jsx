@@ -276,45 +276,6 @@ function AdminAsidebar() {
                 </div>
               </Link>
 
-              {/* <!--- Special Issues Section ---> */}
-              <div>
-                <button
-                  onClick={() => toggleSection("specialIssues")}
-                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
-                    "specialIssues"
-                  )}`}
-                >
-                  <div className="flex">
-                    <BadgeAlert className="mr-3 h-5 w-5" />
-                    <span className="">Special Issues</span>
-                  </div>
-                  {openSections.specialIssues ? (
-                    <ChevronDown className="w-5 h-5" />
-                  ) : (
-                    <ChevronRight className="w-5 h-5" />
-                  )}
-                </button>
-                {openSections.specialIssues && (
-                  <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/admin/journal-info/about-us">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Current Special Issue
-                      </div>
-                    </Link>
-                    <Link href="/users/admins">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Upcoming Special Issue
-                      </div>
-                    </Link>
-                    <Link href="/users/admins">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Article
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div>
-
               {/* <!--- Archives Section ---> */}
               <div>
                 <button

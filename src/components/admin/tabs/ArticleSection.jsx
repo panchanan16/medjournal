@@ -14,19 +14,18 @@ function ArticleSection({
   handleNextSection,
   articleId,
   initialValues,
+  editId,
 }) {
-  console.log("Article Id section tab is: ", articleId);
-
   const [sections, setSections] = useState(
     initialValues
       ? initialValues
-      : [{ ariticle_id: articleId, Article_Heading: "", article_content: "" }]
+      : [{ad_id: "", ariticle_id: articleId || editId, Article_Heading: "", article_content: "" }]
   );
 
   const addSection = () => {
     setSections([
       ...sections,
-      { ariticle_id: articleId, Article_Heading: "", article_content: "" },
+      { ad_id: "", ariticle_id: articleId || editId, Article_Heading: "", article_content: "" },
     ]);
   };
 
@@ -40,18 +39,14 @@ function ArticleSection({
     setSections(updated);
   };
 
-  async function handleuser(params) {
-    const user = await _POST("api/300");
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     sections.length &&
-      sections.map((secItem, ind) => (secItem.ariticle_id = articleId));
+      sections.map((secItem, ind) => (secItem.ariticle_id = articleId || editId));
     const payload = { section: sections };
     try {
-      if (articleId) {
-        const response = await _POST(`articledetails/create`, payload, "POST");
+      if (articleId || editId) {
+        const response = await _POST(`articledetails/${editId ? `update?ariticle_id=${editId}` : 'create'}`, payload, `${editId ? 'PUT' : "POST"}`);
         console.log(response);
       } else {
         toast.error("Select or Add a Article first");

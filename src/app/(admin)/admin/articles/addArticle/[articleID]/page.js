@@ -18,7 +18,7 @@ export default async function ArticleEditPage({ params }) {
             <main>
                 <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                     <div className="bg-white shadow-sm rounded-lg">
-                        <ArticleForm issueList={issueList} ArticleMainTabData={mainData} ArticleSectionData={sectionData} ArticleAuthorData={authorData} />
+                        <ArticleForm issueList={issueList} ArticleMainTabData={mainData} ArticleSectionData={sectionData} ArticleAuthorData={authorData} editID={articleID ? articleID : null} />
                     </div>
                 </div>
             </main>

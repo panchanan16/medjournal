@@ -6,7 +6,7 @@ import { ChevronDown, FileText } from "lucide-react";
 import JournalHeader from "./JournalHeader";
 import { _GET } from "@/request/request";
 
-export default function Navbar({ policy }) {
+export default function Navbar({ policy, JournalHeaderData }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState({
     about: false,
@@ -23,7 +23,7 @@ export default function Navbar({ policy }) {
 
   return (
     <>
-      <JournalHeader isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <JournalHeader isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} Data={JournalHeaderData} />
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg border-t border-gray-200">
@@ -249,19 +249,7 @@ export default function Navbar({ policy }) {
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Supplement & Series
-                </Link>
-                <Link
-                  href="/editor-board"
-                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
-                >
-                  Advertising Policies
-                </Link>
-                <Link
-                  href="/editorial-policies"
-                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
-                >
-                  Testingmonials
-                </Link>
+                </Link>                
               </div>
             </li>
             <li className="group relative min-w-fit">
@@ -360,13 +348,7 @@ export default function Navbar({ policy }) {
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Upcoming Special Issues
-                </Link>
-                <Link
-                  href="/articless"
-                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
-                >
-                  Article
-                </Link>
+                </Link>                
               </div>
             </li>
             <li className="group relative min-w-fit z-30">
