@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/config/api.config';
 import { _GET } from '@/request/request';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -83,7 +84,7 @@ export default async function EditorialTeamPage() {
                                         objectFit="cover"
                                         className="transition-transform duration-300 hover:scale-105"
                                     /> */}
-                                                <img className="transition-transform duration-300 hover:scale-105 object-cover w-full h-full" src={`http://localhost:3100${editor.imgLink}`} alt={editor.name} />
+                                                <img className="transition-transform duration-300 hover:scale-105 object-cover w-full h-full" src={`${BASE_URL}${editor.imgLink}`} alt={editor.name} />
                                             </div>
                                             <div className="text-center">
                                                 <Link href={`/editor-board/${editor.editor_id}`}>

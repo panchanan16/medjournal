@@ -32,7 +32,7 @@ export default async function EditorProfile({ params }) {
                                             objectFit="cover"
                                             className="transition-transform duration-300 hover:scale-105"
                                         /> */}
-                                        <img className="transition-transform duration-300 hover:scale-105 object-cover w-full h-full" src={`http://localhost:3100${editorData.imgLink}`} alt={editorData.name} />
+                                        <img className="transition-transform duration-300 hover:scale-105 object-cover w-full h-full" src={`${{BASE_URL}}${editorData.imgLink}`} alt={editorData.name} />
                                     </div>
                                     <div className="p-4 border-t border-gray-200 bg-gray-50">
                                         <div className="mb-3">

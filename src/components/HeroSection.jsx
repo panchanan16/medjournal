@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/config/api.config";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -43,7 +44,7 @@ function HeroSection({ HeroData }) {
                 height="500"
                 width="600"
               /> */}
-               <img className="transition-transform relative duration-300 hover:scale-105 object-cover w-full h-full z-30" src={`http://localhost:3100${HeroData.thumbnail}`} alt={'Journal thumbnail'} />
+               <img className="transition-transform relative duration-300 hover:scale-105 object-cover w-full h-full z-30" src={`${BASE_URL}${HeroData.thumbnail}`} alt={'Journal thumbnail'} />
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-orange-100 rounded-br-3xl z-0"></div>
             </div>
           </div>

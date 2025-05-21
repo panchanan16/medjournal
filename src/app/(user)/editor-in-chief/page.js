@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/config/api.config';
 import { _GET } from '@/request/request';
 import Image from 'next/image';
 
@@ -9,7 +10,7 @@ export default async function EditorChiefPage() {
             {/* Main Content */}
             <main className="container mx-auto px-4 py-8">
                 {
-       
+
                     editorData?.map((chief, key) => (
                         <div className="bg-white rounded-lg shadow-md overflow-hidden" key={key}>
                             {/* Editor Header */}
@@ -32,6 +33,7 @@ export default async function EditorChiefPage() {
                                                     objectFit="cover"
                                                     className="transition-transform duration-300 hover:scale-105"
                                                 />
+                                                <img className="transition-transform duration-300 hover:scale-105 object-cover w-full h-full" src={`${BASE_URL}${chief.imgLink}`} alt={chief.name} />
                                             </div>
                                             <div className="p-4 border-t border-gray-200 bg-gray-50">
                                                 <div className="mb-3">
