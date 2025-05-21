@@ -136,6 +136,8 @@ const journalHtmlContent = {
 async function AboutUsPage() {
     const html = await _GET('about/readAll')
 
+    console.log(html)
+
     return (
         <main className="container mx-auto px-6 py-8">
             {/* Custom CSS to style the rendered HTML */}
