@@ -133,8 +133,7 @@ const journalHtmlContent = {
 
 
 async function AboutUsPage() {
-    const htmlRequest = await fetch('http://localhost:3100/api/v1/entity/about/readAll')
-    const html = await htmlRequest.json()
+    const html = await _GET('about/readAll')
 
     return (
         <main className="container mx-auto px-6 py-8">
