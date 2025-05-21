@@ -1,4 +1,5 @@
 import StyleSheet from "@/components/StyleSheet";
+import { _GET } from "@/request/request";
 
 const journalHtmlContent = {
     AboutUs: `
