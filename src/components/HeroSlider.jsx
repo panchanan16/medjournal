@@ -7,39 +7,13 @@ import { BASE_URL } from "@/config/api.config";
 
 function HeroSlider({ SliderImgs, HighlightInfo }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = [
-    {
-      id: 1,
-      title:
-        "Whole-genome sequencing of 20 cholangiocarcinoma cases reveals unique profiles in patients with cirrhosis and primary sclerosing cholangitis",
-      abstract:
-        "In 2025, many JGO authors make outstanding contributions to our journal. Their articles published with us have received very well feedback in the field and stimulate a lot of discussions and new insights among the peers.",
-      img: "https://cdn.amegroups.cn/static/image/569fd4cd225de10a00c398c9e0285c0c/569fd4cd225de10a00c398c9e0285c0c.png/w600",
-    },
-    {
-      id: 2,
-      title:
-        "An unusual paraesophageal and diaphragmatic SDHA-deficient gastrointestinal stromal tumor (GIST) metastases case report",
-      abstract:
-        "Recent developments in gastroenterology research have opened new pathways for treatment and diagnosis. Our contributors continue to push the boundaries of medical knowledge.",
-      img: "https://cdn.amegroups.cn/static/image/2c8c76cedc9f052f918fae9b48b8e007/2c8c76cedc9f052f918fae9b48b8e007.jpeg/w600",
-    },
-    {
-      id: 3,
-      title:
-        "Journal of Gastrointestinal Oncology 2023 CiteScore Released: 3.2",
-      abstract:
-        "Our journal continues to publish high-impact research that directly influences clinical practice and improves patient outcomes worldwide.",
-      img: "https://cdn.amegroups.cn/static/image/a4be23e9e82f80ab2b571133d0460319/2023-CiteScore-%20banner.jpg/w600",
-    },
-  ];
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % SliderImgs.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide((prev) => (prev - 1 + SliderImgs.length) % SliderImgs.length);
   };
 
   useEffect(() => {
