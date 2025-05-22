@@ -29,6 +29,7 @@ import {
   Mic2Icon,
   MicIcon,
   TvIcon,
+  PanelRightOpen,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -48,6 +49,7 @@ function AdminAsidebar() {
     siteSettings: false,
     announce: false,
     news: false,
+    slider: false,
 
     // Currently not in use 👇
     users: false,
@@ -272,6 +274,23 @@ function AdminAsidebar() {
                   <div className="flex">
                     <Siren className="mr-3 h-5 w-5" />
                     <span className="">Ethics & Policies</span>
+                  </div>
+                </div>
+              </Link>
+
+               {/* <!--- Ethics & Policies Section ---> */}
+              <Link href="/admin/slider">
+                <div
+                  onClick={() => toggleSection("slider")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("slider")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <PanelRightOpen className="mr-3 h-5 w-5" />
+                    <span className="">Slider</span>
                   </div>
                 </div>
               </Link>

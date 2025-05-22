@@ -88,24 +88,8 @@ function FullArticle({ articleFull }) {
                   className="text-red-700 hover:underline flex items-center gap-2"
                 >
                   <ClipboardCheckIcon className="h-4 w-4" />
-                  Reporting Checklist
-                </Link>
-                <span className="text-gray-500">
-                  {articleFull.metrics.reportingChecklist} views
-                </span>
-              </div>
-
-              <div className="flex justify-between items-center text-sm">
-                <Link
-                  href="#"
-                  className="text-red-700 hover:underline flex items-center gap-2"
-                >
-                  <DocumentSearchIcon className="h-4 w-4" />
-                  Peer Review File
-                </Link>
-                <span className="text-gray-500">
-                  {articleFull.metrics.peerReviewFile} views
-                </span>
+                  Cite this Article
+                </Link>               
               </div>
 
               <div className="flex justify-between items-center text-sm">
@@ -115,10 +99,7 @@ function FullArticle({ articleFull }) {
                 >
                   <ExclamationCircleIcon className="h-4 w-4" />
                   COI Form
-                </Link>
-                <span className="text-gray-500">
-                  {articleFull.metrics.coiForm} views
-                </span>
+                </Link>                
               </div>
             </div>
 

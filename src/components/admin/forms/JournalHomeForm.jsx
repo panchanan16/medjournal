@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { _POST } from "@/request/post_request";
 import dynamic from "next/dynamic";
+import { BASE_URL } from "@/config/api.config";
 const TextEditor = dynamic(() => import("@/components/admin/TextEditor"), {
   ssr: false,
 });
@@ -259,7 +260,7 @@ export default function JournalHomeForm({ initialValues }) {
             <span className="ml-2 text-xs text-gray-600">Old Thubnail: </span>
             <a
               className="text-xs text-red-400"
-              href={`http://localhost:3100${formData.thumbnail}`}
+              href={`${BASE_URL}${formData.thumbnail}`}
             >
               {formData.thumbnail && formData.thumbnail}
             </a>

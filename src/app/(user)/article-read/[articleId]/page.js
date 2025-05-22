@@ -5,8 +5,6 @@ import { _GET } from '@/request/request';
 export default async function ArticleReadPage({ params }) {
     const { articleId } = await params
     const response = await _GET(`articlefull/readOne/${articleId}`, 'core')
-    console.log(response)
-
     //     id: '97011',
     //     title: 'Development of a prognostic risk model for colorectal cancer and association of the prognostic model with cancer stem cell and immune cell infiltration',
     //     abstract: 'hfhoufhuorhfof',
