@@ -6,7 +6,7 @@ async function JournalHomePage() {
 
     return (
         <div className="max-w-[95%] mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-10">
-            <JournalHomeForm initialValues={journalData?.length ? journalData[0] : null} />
+            <JournalHomeForm initialValues={journalData && journalData.journal.length ? journalData.journal[0] : null} />
         </div>
     )
 }
