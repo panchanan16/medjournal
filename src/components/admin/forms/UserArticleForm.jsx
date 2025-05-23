@@ -40,10 +40,24 @@ function UserArticleForm({ initialValues }) {
     setIsSubmitting(true);
 
     try {
+      const submitData = new FormData();
+
+      submitData.append("manuscript_title", formData.manuscript_title);
+      submitData.append("abstract", formData.abstract);
+      submitData.append("keywords", formData.keywords);
+      submitData.append("submitted_on", formData.submitted_on);
+      submitData.append("user", formData.user);
+
+      if (formData.article_file) {
+        submitData.append("article_file", formData.article_file)
+      }
+
       await _POST(
-        `index/${editId ? `update?ind_id=${editId}` : "create"}`,
-        formData,
-        `${editId ? "PUT" : "POST"}`
+        `manuscript/${editId ? `update?ind_id=${editId}` : "createByUser"}`,
+        submitData,
+        `${editId ? "PUT" : "POST"}`,
+        true,
+        'core'
       );
       console.log("Form data submitted:", formData);
       for (const key in formData) {
@@ -64,17 +78,17 @@ function UserArticleForm({ initialValues }) {
         {/* Text Input - Image */}
         <div className="space-y-2">
           <label
-            htmlFor="index_name"
+            htmlFor="manuscript_title"
             className="block text-sm font-medium text-gray-700"
           >
             Title <span className="text-blue-600">*</span>
           </label>
           <input
             type="text"
-            id="index_name"
-            name="index_name"
+            id="manuscript_title"
+            name="manuscript_title"
             required
-            value={formData.index_name}
+            value={formData.manuscript_title}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter Image URL..."
@@ -83,17 +97,17 @@ function UserArticleForm({ initialValues }) {
         {/* Text Input - Abstract */}
         <div className="space-y-2">
           <label
-            htmlFor="link"
+            htmlFor="abstract"
             className="block text-sm font-medium text-gray-700"
           >
             Abstract <span className="text-blue-600">*</span>
           </label>
           <textarea
             type="text"
-            id="link"
-            name="link"
+            id="abstract"
+            name="abstract"
             required
-            value={formData.link}
+            value={formData.abstract}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter Volume Name..."
@@ -103,7 +117,7 @@ function UserArticleForm({ initialValues }) {
         {/* Text Input - keywords */}
         <div className="space-y-2">
           <label
-            htmlFor="imgUrl"
+            htmlFor="keywords"
             className="block text-sm font-medium text-gray-700"
           >
             Keywords<span className="text-blue-600">*</span>
@@ -123,17 +137,16 @@ function UserArticleForm({ initialValues }) {
         {/* file Input */}
         <div className="space-y-2">
           <label
-            htmlFor="imgUrl"
+            htmlFor="article_file"
             className="block text-sm font-medium text-gray-700"
           >
             Upload Article<span className="text-blue-600">*</span>
           </label>
           <input
             type="file"
-            id="imgUrl"
-            name="imgUrl"
+            id="article_file"
+            name="article_file"
             required
-            value={formData.imgUrl}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter Year in Number..."

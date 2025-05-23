@@ -150,15 +150,7 @@ async function AboutUsPage() {
                         dangerouslySetInnerHTML={{ __html: html[0].content }}
                     />
                 </section>
-            </div>
-
-            {/* Related Journals Section */}
-            <div className="mt-8 bg-white shadow-sm rounded-lg p-8">
-                <div
-                    className="html-content"
-                    dangerouslySetInnerHTML={{ __html: journalHtmlContent.relatedJournals }}
-                />
-            </div>
+            </div>           
         </main>
     )
 }

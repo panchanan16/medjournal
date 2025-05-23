@@ -26,13 +26,13 @@ export default async function EditorChiefPage() {
                                     <div className="md:w-1/3">
                                         <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
                                             <div className="relative w-full aspect-square">
-                                                <Image
+                                                {/* <Image
                                                     src={'/editor.jpeg'}
                                                     alt={chief.name}
                                                     layout="fill"
                                                     objectFit="cover"
                                                     className="transition-transform duration-300 hover:scale-105"
-                                                />
+                                                /> */}
                                                 <img className="transition-transform duration-300 hover:scale-105 object-cover w-full h-full" src={`${BASE_URL}${chief.imgLink}`} alt={chief.name} />
                                             </div>
                                             <div className="p-4 border-t border-gray-200 bg-gray-50">

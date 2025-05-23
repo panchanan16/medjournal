@@ -97,7 +97,7 @@ function IndexForm({ initialValues }) {
         </div>
 
         {/* Text Input - redirect */}
-        <div className="space-y-2">
+        {/* <div className="space-y-2">
           <label
             htmlFor="imgUrl"
             className="block text-sm font-medium text-gray-700"
@@ -114,7 +114,7 @@ function IndexForm({ initialValues }) {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             placeholder="Enter Year in Number..."
           />
-        </div>
+        </div> */}
 
         {/* Submit Button */}
         <div className="pt-4">

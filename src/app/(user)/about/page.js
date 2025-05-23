@@ -9,7 +9,7 @@ export default async function AimAndScope() {
             <div className="lg:w-3/4">
                 <div className="bg-white rounded-xl shadow-md overflow-hidden">
                     <div className="h-16 bg-gradient-to-r from-red-600 to-red-900" />
-                    <AboutText Title={'Aim & Scope'} Html={AimScope ? AimScope[0].aim_scope : ""} />
+                    <AboutText Title={'Aim & Scope'} Html={AimScope && AimScope.journal.length ? AimScope.journal[0] : ""} />
 
                 </div>
 

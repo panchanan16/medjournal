@@ -16,7 +16,7 @@ function Page() {
             </div>
           </div>
           {/* Main tinymce section */}
-          <EditorialBoardContent />
+          <EditorialBoardContent InitialValues={null} />
         </div>
       </div>
     </div>

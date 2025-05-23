@@ -239,7 +239,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                   Former Editorial Board
                 </Link>
                 <Link
-                  href="/editor-board"
+                  href="/peer_review_process"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Peer Review Process
@@ -265,25 +265,25 @@ export default function Navbar({ policy, JournalHeaderData }) {
                   Authors Instruction
                 </Link>
                 <Link
-                  href="/archives/2023"
+                  href="/onlinesubmission"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Online Submission
                 </Link>
                 <Link
-                  href="/archives/2023"
+                  href="/multimedia_process"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Submit Mutimedia Files
                 </Link>
                 <Link
-                  href="/archives/2023"
+                  href="/referstyle"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Refference Style
                 </Link>
                 <Link
-                  href="/archives/2023"
+                  href="/"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Interview With Outstanding Authors
@@ -359,14 +359,14 @@ export default function Navbar({ policy, JournalHeaderData }) {
                 Archives
               </Link>           
             </li>
-            <li className="group relative min-w-fit">
+            {/* <li className="group relative min-w-fit">
               <Link
                 href="/online-first"
                 className="px-4 py-3 text-sm inline-block font-medium hover:bg-red-800 transition"
               >
                 Online First
               </Link>
-            </li>
+            </li> */}
             <li className="group relative min-w-fit">
               <Link
                 href="/article-charges"
@@ -377,7 +377,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
             </li>
             <li className="group relative min-w-fit">
               <Link
-                href="/submit"
+                href="/auth/user"
                 className="bg-red-700 hover:bg-orange-700 px-4 py-3 inline-block font-medium text-sm transition"
               >
                 Submit Article

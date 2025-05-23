@@ -30,6 +30,10 @@ import {
   MicIcon,
   TvIcon,
   PanelRightOpen,
+  ScanEyeIcon,
+  ClapperboardIcon,
+  FileSymlinkIcon,
+  WifiHighIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -278,14 +282,12 @@ function AdminAsidebar() {
                 </div>
               </Link>
 
-               {/* <!--- Ethics & Policies Section ---> */}
+              {/* <!--- Ethics & Policies Section ---> */}
               <Link href="/admin/slider">
                 <div
                   onClick={() => toggleSection("slider")}
                   className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
-                    isSectionOpen("slider")
-                      ? "bg-red-700"
-                      : "hover:bg-red-700"
+                    isSectionOpen("slider") ? "bg-red-700" : "hover:bg-red-700"
                   }`}
                 >
                   <div className="flex">
@@ -294,50 +296,6 @@ function AdminAsidebar() {
                   </div>
                 </div>
               </Link>
-
-              {/* <!--- Archives Section ---> */}
-              <div>
-                <button
-                  onClick={() => toggleSection("archives")}
-                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white  hover:bg-red-700 group ${isSectionOpen(
-                    "archives"
-                  )}`}
-                >
-                  <div className="flex">
-                    <ArchiveRestore className="mr-3 h-5 w-5" />
-                    <span className="">Archives</span>
-                  </div>
-                  {openSections.archives ? (
-                    <ChevronDown className="w-5 h-5" />
-                  ) : (
-                    <ChevronRight className="w-5 h-5" />
-                  )}
-                </button>
-                {openSections.archives && (
-                  <div className="pl-10 space-y-1 mt-1">
-                    <Link href="/admin/journal-info/about-us">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Guidelines For Reviewers{" "}
-                      </div>
-                    </Link>
-                    <Link href="/users/admins">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Reviews
-                      </div>
-                    </Link>
-                    <Link href="/users/admins">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Reviewers
-                      </div>
-                    </Link>
-                    <Link href="/users/admins">
-                      <div className="group flex items-center px-5 py-2 text-sm font-medium rounded-md text-red-100 hover:text-white hover:bg-red-700">
-                        Article
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div>
 
               {/* <!--- Indexing Section ---> */}
               <Link href="/admin/indexing">
@@ -355,6 +313,73 @@ function AdminAsidebar() {
                   </div>
                 </div>
               </Link>
+
+              {/* <!--- perr riwiew  Section ---> */}
+              <Link href="/admin/peer">
+                <div
+                  onClick={() => toggleSection("peer")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("peer") ? "bg-red-700" : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <ScanEyeIcon className="mr-3 h-5 w-5" />
+                    <span className="">Peer Review</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* <!--- MultiMedia  Section ---> */}
+              <Link href="/admin/multimedia">
+                <div
+                  onClick={() => toggleSection("multimedia")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("multimedia")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <ClapperboardIcon className="mr-3 h-5 w-5" />
+                    <span className="">multimedia process</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* <!--- Reffer style  Section ---> */}
+              <Link href="/admin/referStyle">
+                <div
+                  onClick={() => toggleSection("referStyle")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("referStyle")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <FileSymlinkIcon className="mr-3 h-5 w-5" />
+                    <span className="">ReferStyle process</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* <!--- Online Subbmission  Section ---> */}
+              <Link href="/admin/onlinesubmit">
+                <div
+                  onClick={() => toggleSection("onlinesubmit")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("onlinesubmit")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <WifiHighIcon className="mr-3 h-5 w-5" />
+                    <span className="">online submit process</span>
+                  </div>
+                </div>
+              </Link>
+
               {/* <!--- Announce Section ---> */}
               <Link href="/admin/announce">
                 <div
@@ -377,9 +402,7 @@ function AdminAsidebar() {
                 <div
                   onClick={() => toggleSection("news")}
                   className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
-                    isSectionOpen("news")
-                      ? "bg-red-700"
-                      : "hover:bg-red-700"
+                    isSectionOpen("news") ? "bg-red-700" : "hover:bg-red-700"
                   }`}
                 >
                   <div className="flex">

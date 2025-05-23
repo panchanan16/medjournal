@@ -45,7 +45,6 @@ export default async function HomePage() {
               {/* Announcement */}
               <AnnouncementsSection AnnounceData={newsAnnouncement ? newsAnnouncement.announcements : []} />
 
-
               {/* NEWS */}
               <NewsSection NewsData={newsAnnouncement ? newsAnnouncement.news : []} />
 

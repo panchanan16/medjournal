@@ -14,12 +14,12 @@ export default function AddNewReviewer({ initialValues, ID }) {
   // Form state
   const [formData, setFormData] = useState({
     rev_id: ID ? ID : "",
-    month: initialValues ? initialValues?.postedOn : "",
-    year: initialValues ? initialValues?.content : "",
-    name: "",
-    country: "",
-    university: "",
-    biography: "",
+    month: initialValues ? initialValues?.month : "",
+    year: initialValues ? initialValues?.year : "",
+    name: initialValues ? initialValues?.name : "",
+    country: initialValues ? initialValues?.country : "",
+    university: initialValues ? initialValues?.university : "",
+    biography: initialValues ? initialValues?.biography : "",
   });
 
   // UI states
@@ -38,7 +38,7 @@ export default function AddNewReviewer({ initialValues, ID }) {
     }
   };
 
-  const { editId } = useParams();
+  const { editID } = useParams(); // man ID
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -51,9 +51,9 @@ export default function AddNewReviewer({ initialValues, ID }) {
       }
 
       await _POST(
-        `reviewer/${editId ? `update?pol_id=${editId}` : "create"}`,
+        `reviewer/${editID ? `update?r_id=${editID}` : "create"}`,
         formData,
-        `${editId ? "PUT" : "POST"}`
+        `${editID ? "PUT" : "POST"}`
       );
       console.log("Form data submitted:", formData);
       for (const key in formData) {

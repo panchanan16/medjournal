@@ -39,7 +39,7 @@ function ReviewerTable({ reviews }) {
                   />
                 </td>
                 <td className="px-4 py-4">
-                  <Link href={`reviewers/${rev.revlist_id}/create`}>
+                  <Link href={`reviewers/${rev.revlist_id}`}>
                     <div className="text-sm font-medium text-gray-800 hover:text-red-700 cursor-pointer">
                       {rev.title}
                     </div>

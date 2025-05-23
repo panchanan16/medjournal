@@ -77,7 +77,7 @@ function EditorialBoardContent({ InitialValues }) {
       }
 
       const end = `editorBoard/${
-        InitialValues.editor_id
+        InitialValues
           ? `update?editor_id=${InitialValues.editor_id}`
           : "create"
       }`;
@@ -86,7 +86,7 @@ function EditorialBoardContent({ InitialValues }) {
       const response = await _POST(
         end,
         submitData,
-        `${InitialValues.editor_id ? "PUT" : "POST"}`,
+        `${InitialValues ? "PUT" : "POST"}`,
         true,
         "core"
       );

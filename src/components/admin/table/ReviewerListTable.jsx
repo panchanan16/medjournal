@@ -27,17 +27,17 @@ function ReviewerListTable({ reviewList, nextpageId }) {
             {reviewList.map((pep, id) => (
               <tr
                 key={id}
-                className={`hover:bg-red-50 transition-colors ${
+                className={`transition-colors ${
                   selectedArticles.includes(pep.is_id) ? "bg-red-50" : ""
                 }`}
               >               
                 <td className="px-4 py-4 w-[30rem]">       
-                    <div className="text-sm font-medium text-gray-800 hover:text-red-700 cursor-pointer">
-                      {pep.month}
+                    <div className="text-sm font-medium text-gray-800 cursor-pointer">
+                      <span className="font-semibold">{pep.month}</span>
                       <ul>
                          {
                           pep.names?.map((item, key) => (
-                            <li key={key}><Link href={'#'}>{item.name}</Link></li>
+                            <li key={key} className="hover:text-red-700"><Link href={`${nextpageId}/edit/${item.r_id}`}>{item.name}</Link></li>
                           ))
                          }
                       </ul>

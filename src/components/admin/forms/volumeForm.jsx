@@ -3,14 +3,16 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { _POST } from "@/request/post_request";
+import { BASE_URL } from "@/config/api.config";
 
 export default function VolumeForm({ initialValues, editId }) {
   // Form state
   const [formData, setFormData] = useState({
     volume_id: initialValues ? initialValues.volume_id : "",
     volume_name: initialValues ? initialValues.volume_name : "",
-    volume_img: initialValues ? initialValues.volume_img : "",
+    volume_img_link: initialValues ? initialValues.volume_img : "",
     volume_year: initialValues ? initialValues.volume_year : "",
+    volume_img: "",
   });
 
   // UI states
@@ -34,8 +36,21 @@ export default function VolumeForm({ initialValues, editId }) {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const submitData = new FormData();
+    for (const key in formData) {
+      if (formData.hasOwnProperty(key)) {
+        submitData.append(key, formData[key]);
+      }
+    }
+
     try {
-      await _POST(`volume/${editId ? `update` : 'create'}`, formData, `${editId ? 'PUT' : 'POST'}`);
+      await _POST(
+        `volume/${editId ? `update?volume_id=${editId}` : "create"}`,
+        submitData,
+        `${editId ? "PUT" : "POST"}`,
+        true,
+        "core"
+      );
       console.log("Form data submitted:", formData);
       for (const key in formData) {
         formData[key] = "";
@@ -98,18 +113,31 @@ export default function VolumeForm({ initialValues, editId }) {
             htmlFor="volume_img"
             className="block text-sm font-medium text-gray-700"
           >
-            Image <span className="text-red-600">*</span>
+            Voume Cover Image <span className="text-red-600">*</span>
           </label>
           <input
-            type="text"
+            type="file"
             id="volume_img"
             name="volume_img"
             required
-            value={formData.volume_img}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             placeholder="Enter Image URL..."
           />
+
+          {initialValues && (
+            <div className="flex items-center mt-3">
+              <span className="ml-2 text-xs text-gray-600">
+                Old Volume Cover:{" "}
+              </span>
+              <a
+                className="text-xs text-red-400"
+                href={`${BASE_URL}${formData.volume_img_link}`}
+              >
+                {formData.volume_img_link && formData.volume_img_link}
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Submit Button */}

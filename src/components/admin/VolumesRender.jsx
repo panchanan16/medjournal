@@ -5,6 +5,7 @@ import FloatingSection from "../FloatingSection";
 import Link from "next/link";
 import Image from "next/image";
 import { transformVolumes } from "@/utils/util";
+import { BASE_URL } from "@/config/api.config";
 
 function VolumesRender({ AllVolumes }) {
   const [activeYear, setActiveYear] = useState("2025");
@@ -49,7 +50,7 @@ function VolumesRender({ AllVolumes }) {
                   <div className="aspect-w-4 aspect-h-3 bg-gray-200">
                     <div className="w-full h-[20rem] relative">
                       <Image
-                        src={journal.image}
+                        src={`${BASE_URL}${journal.image}`}
                         alt={`Cover for ${journal.title} Vol ${journal.volume}, No ${journal.issue}`}
                         layout="fill"
                         objectFit="fit"

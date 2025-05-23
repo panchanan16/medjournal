@@ -2,7 +2,7 @@ import VolumeForm from '@/components/admin/forms/volumeForm'
 
 function CreateVolumePage() {
   return (
-    <VolumeForm />
+    <VolumeForm initialValues={null} />
   )
 }
 

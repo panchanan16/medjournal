@@ -59,7 +59,7 @@ const Footer = ({ FooterData }) => {
               </li>
               <li>
                 <Link
-                  href="/about"
+                  href="/about-us"
                   className="text-gray-300 hover:text-white transition"
                 >
                   About Us
@@ -67,7 +67,7 @@ const Footer = ({ FooterData }) => {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/about/contact_us"
                   className="text-gray-300 hover:text-white transition"
                 >
                   Contact Us
@@ -75,15 +75,7 @@ const Footer = ({ FooterData }) => {
               </li>
               <li>
                 <Link
-                  href="/faq"
-                  className="text-gray-300 hover:text-white transition"
-                >
-                  Frequently Asked Questions
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/announcements"
+                  href="/news_announcement"
                   className="text-gray-300 hover:text-white transition"
                 >
                   Announcements
@@ -113,7 +105,7 @@ const Footer = ({ FooterData }) => {
               </li>
               <li>
                 <Link
-                  href="/for-authors"
+                  href="/author-instruction"
                   className="text-gray-300 hover:text-white transition"
                 >
                   For Authors
@@ -121,7 +113,7 @@ const Footer = ({ FooterData }) => {
               </li>
               <li>
                 <Link
-                  href="/for-editors"
+                  href="/editor-board"
                   className="text-gray-300 hover:text-white transition"
                 >
                   For Editors
@@ -129,7 +121,7 @@ const Footer = ({ FooterData }) => {
               </li>
               <li>
                 <Link
-                  href="/for-reviewers"
+                  href="/reviewer_guidelines"
                   className="text-gray-300 hover:text-white transition"
                 >
                   For Reviewers
@@ -143,7 +135,7 @@ const Footer = ({ FooterData }) => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/privacy"
+                  href="/about/privacy_policy"
                   className="text-gray-300 hover:text-white transition"
                 >
                   Privacy Policy
@@ -151,7 +143,7 @@ const Footer = ({ FooterData }) => {
               </li>
               <li>
                 <Link
-                  href="/terms"
+                  href="/about/terms_condition"
                   className="text-gray-300 hover:text-white transition"
                 >
                   Terms and Conditions
@@ -159,7 +151,7 @@ const Footer = ({ FooterData }) => {
               </li>
               <li>
                 <Link
-                  href="/copyright"
+                  href="/about/copyright"
                   className="text-gray-300 hover:text-white transition"
                 >
                   Copyright
@@ -167,7 +159,7 @@ const Footer = ({ FooterData }) => {
               </li>
               <li>
                 <Link
-                  href="/cookies"
+                  href="/about/cookie-preferense"
                   className="text-gray-300 hover:text-white transition"
                 >
                   Cookie Preference
