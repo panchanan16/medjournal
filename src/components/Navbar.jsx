@@ -233,7 +233,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                   Editorial Board
                 </Link>
                 <Link
-                  href="/editor-board"
+                  href="/former_board"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Former Editorial Board
