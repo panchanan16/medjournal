@@ -34,6 +34,8 @@ import {
   ClapperboardIcon,
   FileSymlinkIcon,
   WifiHighIcon,
+  Rows2Icon,
+  BookOpenCheckIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -54,7 +56,8 @@ function AdminAsidebar() {
     announce: false,
     news: false,
     slider: false,
-
+    submission: false,
+    
     // Currently not in use 👇
     users: false,
     products: false,
@@ -265,6 +268,23 @@ function AdminAsidebar() {
                 )}
               </div>
 
+               {/* <!--- Articel submisssion Section ---> */}
+              <Link href="/admin/article_submission">
+                <div
+                  onClick={() => toggleSection("submission")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("submission")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <BookOpenCheckIcon className="mr-3 h-5 w-5" />
+                    <span className="">Article Submission</span>
+                  </div>
+                </div>
+              </Link>
+
               {/* <!--- Ethics & Policies Section ---> */}
               <Link href="/admin/ethics-policies">
                 <div
@@ -376,6 +396,23 @@ function AdminAsidebar() {
                   <div className="flex">
                     <WifiHighIcon className="mr-3 h-5 w-5" />
                     <span className="">online submit process</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* <!--- Online Subbmission  Section ---> */}
+              <Link href="/admin/supplement">
+                <div
+                  onClick={() => toggleSection("supplement")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("supplement")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <Rows2Icon className="mr-3 h-5 w-5" />
+                    <span className="">Supplement & Series</span>
                   </div>
                 </div>
               </Link>

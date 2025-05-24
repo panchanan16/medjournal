@@ -120,7 +120,7 @@ function HeroSlider({ SliderImgs, HighlightInfo }) {
             <div className="p-4 border-t border-gray-100">
               <div className="flex items-center mb-2">
                 <div className="w-2 h-2 bg-red-600 rounded-full mr-2 flex-shrink-0"></div>
-                <span className="font-bold text-sm">ISSN (Online) : </span>
+                <span className="font-bold text-sm">ISSN (Offline) : </span>
                 <span>{HighlightInfo ? HighlightInfo[0]?.issn_print : "N/A"}</span>
               </div>
               <div className="flex items-center mb-2">

@@ -245,7 +245,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                   Peer Review Process
                 </Link>
                 <Link
-                  href="/editor-board"
+                  href="/supplement_series"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Supplement & Series
@@ -281,13 +281,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Refference Style
-                </Link>
-                <Link
-                  href="/"
-                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
-                >
-                  Interview With Outstanding Authors
-                </Link>
+                </Link>               
               </div>
             </li>
             <li className="group relative min-w-fit">
@@ -344,7 +338,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                   Current Special Issue
                 </Link>
                 <Link
-                  href="/special/1"
+                  href="/upcoming_special_issue"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Upcoming Special Issues

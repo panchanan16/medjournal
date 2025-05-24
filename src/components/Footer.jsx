@@ -86,23 +86,7 @@ const Footer = ({ FooterData }) => {
 
           {/* Navigation Links - Second column */}
           <div>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/payments"
-                  className="text-gray-300 hover:text-white transition"
-                >
-                  Online Payments
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/journal-insight"
-                  className="text-gray-300 hover:text-white transition"
-                >
-                  Journal Insight
-                </Link>
-              </li>
+            <ul className="space-y-2">              
               <li>
                 <Link
                   href="/author-instruction"

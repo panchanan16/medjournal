@@ -1,36 +1,15 @@
-"use client"
-
-import { useState } from 'react';
-import Head from 'next/head';
+import { _GET } from '@/request/request';
 import {
-    FileText,
-    Send,
-    ChevronDown,
-    Search,
     Calendar,
-    Clock,
-    Menu,
-    X,
-    Home,
-    Settings,
-    LogOut,
-    Bell,
-    User
 } from 'lucide-react';
 import Link from 'next/link';
 
-export default function userProfilePage() {
-    const articles = [
-        { mrn: 'MRN-0000003', title: 'The Impact of AI in Modern Healthcare', status: 'ACKNOWLEDGED', submitted: '20 May, 2025', payment: 'PENDING' },
-        { mrn: 'MRN-0000002', title: 'Advances in Telemedicine During Global Health Crises', status: 'ACKNOWLEDGED', submitted: '20 May, 2025', payment: 'PENDING' },
-        { mrn: 'MRN-0000001', title: 'Novel Approaches to Chronic Pain Management', status: 'UNDER REVIEW', submitted: '18 May, 2025', payment: 'PENDING' },
-        { mrn: 'MRN-0000000', title: 'Pediatric Vaccine Developments: A Five-Year Outlook', status: 'PUBLISHED', submitted: '10 May, 2025', payment: 'COMPLETED' },
-    ];
-
+export default async function userProfilePage() {
+    const submission = await _GET(`manuscript/readAll?user=1`, 'core')
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Header */}            
+            {/* Header */}
             {/* Main content */}
             <div className="flex">
                 {/* Content area */}
@@ -75,33 +54,31 @@ export default function userProfilePage() {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
-                                        {articles.map((article, index) => (
+                                        {submission && submission.length && submission.map((article, index) => (
                                             <tr key={index} className="hover:bg-gray-50 cursor-pointer">
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600">
-                                                    {article.mrn}
+                                                    {article.MRN_number}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {article.title}
+                                                    {article.manuscript_title}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                                                     <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                            ${article.status === 'ACKNOWLEDGED' ? 'bg-blue-100 text-blue-800' :
-                                                            article.status === 'UNDER REVIEW' ? 'bg-yellow-100 text-yellow-800' :
-                                                                'bg-green-100 text-green-800'}`}>
+                            ${article.status === 'Accepted' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }`}>
                                                         {article.status}
                                                     </span>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <div className="flex items-center">
                                                         <Calendar className="h-4 w-4 mr-1" />
-                                                        {article.submitted}
+                                                        {article.submitted_on}
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                                                     <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                            ${article.payment === 'PENDING' ? 'bg-gray-100 text-gray-800' :
+                            ${article.pay_status === 'Unpaid' ? 'bg-gray-100 text-gray-800' :
                                                             'bg-green-100 text-green-800'}`}>
-                                                        {article.payment}
+                                                        {article.pay_status}
                                                     </span>
                                                 </td>
                                             </tr>
@@ -111,7 +88,7 @@ export default function userProfilePage() {
                             </div>
 
                             {/* Pagination */}
-                            <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                            {/* <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                                 <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                                     <div>
                                         <p className="text-sm text-gray-700">
@@ -149,7 +126,7 @@ export default function userProfilePage() {
                                         </nav>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </main>
                 </div>

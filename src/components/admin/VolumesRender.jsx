@@ -51,7 +51,7 @@ function VolumesRender({ AllVolumes }) {
                     <div className="w-full h-[20rem] relative">
                       <Image
                         src={`${BASE_URL}${journal.image}`}
-                        alt={`Cover for ${journal.title} Vol ${journal.volume}, No ${journal.issue}`}
+                        alt={`Cover for Vol ${journal.title}, No ${journal.year}`}
                         layout="fill"
                         objectFit="fit"
                         className="transition-opacity duration-300 hover:opacity-90"
@@ -62,7 +62,7 @@ function VolumesRender({ AllVolumes }) {
 
                 <div className="p-5 border-t border-gray-100">
                   <h3 className="font-bold text-red-800 mb-1">
-                    {journal.title}
+                    {journal.title} ({journal.year})
                   </h3>
                   <p className="text-gray-700">{journal.title}</p>
                 </div>

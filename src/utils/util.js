@@ -100,7 +100,8 @@ export function transformVolumes(volumeArray) {
         id: idCounter++,
         volume: volume.volume_id,
         title: volume.volume_name,
-        image: volume.volume_img
+        image: volume.volume_img,
+        year: volume.volume_year
       };
     });
   }

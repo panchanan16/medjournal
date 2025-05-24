@@ -1,7 +1,13 @@
+"use client";
+
+import { BASE_URL } from "@/config/api.config";
 import { Share2 } from "lucide-react";
 import Link from "next/link";
+import CitationPopup from "./CitationPopup";
+import { useState } from "react";
 
 function FullArticle({ articleFull }) {
+  const [isCite, setIsCite] = useState(false);
   return (
     <main className="container mx-auto px-4 py-6 min-h-screen">
       <div className="flex flex-col lg:flex-row gap-8 min-h-screen">
@@ -16,7 +22,9 @@ function FullArticle({ articleFull }) {
             <strong>Authors:</strong>
             <ul className="list-none">
               {articleFull.authors.map((authr, index) => (
-                <li key={index}>{authr.name}</li>
+                <li key={index}>
+                  {authr.name} {`, ${authr.afflication}`}
+                </li>
               ))}
             </ul>
           </div>
@@ -58,7 +66,7 @@ function FullArticle({ articleFull }) {
             <div className="space-y-3">
               <div className="flex justify-between items-center text-sm">
                 <Link
-                  href="#"
+                  href={`${BASE_URL}${articleFull.pdflink}`}
                   className="text-red-700 hover:underline flex items-center gap-2"
                 >
                   <DocumentTextIcon className="h-4 w-4" />
@@ -83,13 +91,10 @@ function FullArticle({ articleFull }) {
               </div>
 
               <div className="flex justify-between items-center text-sm">
-                <Link
-                  href="#"
-                  className="text-red-700 hover:underline flex items-center gap-2"
-                >
+                <span onClick={()=> setIsCite(true)} className="text-red-700 hover:underline cursor-default flex items-center gap-2">
                   <ClipboardCheckIcon className="h-4 w-4" />
                   Cite this Article
-                </Link>               
+                </span>
               </div>
 
               <div className="flex justify-between items-center text-sm">
@@ -99,7 +104,7 @@ function FullArticle({ articleFull }) {
                 >
                   <ExclamationCircleIcon className="h-4 w-4" />
                   COI Form
-                </Link>                
+                </Link>
               </div>
             </div>
 
@@ -138,6 +143,7 @@ function FullArticle({ articleFull }) {
           </div>
         </aside>
       </div>
+      <CitationPopup isOpen={isCite} closetab={setIsCite} />
     </main>
   );
 }

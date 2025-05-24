@@ -2,8 +2,8 @@ import { _GET } from "@/request/request";
 import Link from "next/link";
 
 export default async function SeriesDetail({ params }) {
-    const { slug } = await params
-    const specialIssueMain = await _GET(`specialissuefull/readOne?sp_issue_id=${slug}`, 'core')
+    const { curId } = await params
+    const specialIssueMain = await _GET(`specialissuefull/readOne?sp_issue_id=${curId}`, 'core')
 
     if (!specialIssueMain) {
         return (
@@ -40,7 +40,7 @@ export default async function SeriesDetail({ params }) {
 
                     <div className="p-3 md:p-6">
                         <div className="mb-6 bg-red-50 p-4 rounded-lg border border-red-100">
-                            <h2 className="text-lg font-semibold text-red-800 mb-2">Guest Editors</h2>                            
+                            <h2 className="text-lg font-semibold text-red-800 mb-2">Guest Editors</h2>                          
                             {specialIssueMain?.authors?.map((editor, index) => (
                                 <div key={index} className="last:mb-0 mt-5">
                                     <span className="font-semibold">{editor.name}</span>
