@@ -36,6 +36,7 @@ import {
   WifiHighIcon,
   Rows2Icon,
   BookOpenCheckIcon,
+  FilePlusIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -57,7 +58,8 @@ function AdminAsidebar() {
     news: false,
     slider: false,
     submission: false,
-    
+    feature_blog: false,
+
     // Currently not in use 👇
     users: false,
     products: false,
@@ -97,7 +99,7 @@ function AdminAsidebar() {
       <div className="flex flex-col w-64">
         <div className="flex flex-col h-0 flex-1 bg-red-800 shadow-lg">
           <div className="flex items-center h-16 flex-shrink-0 px-4 bg-red-900">
-            <h1 className="text-xl font-bold text-white">MedJournal</h1>
+            <h1 className="text-sm font-bold text-white">Admin Panel</h1>
           </div>
           <div className="flex-1 flex flex-col overflow-y-auto">
             <nav className="flex-1 px-2 py-4 space-y-1">
@@ -268,7 +270,7 @@ function AdminAsidebar() {
                 )}
               </div>
 
-               {/* <!--- Articel submisssion Section ---> */}
+              {/* <!--- Articel submisssion Section ---> */}
               <Link href="/admin/article_submission">
                 <div
                   onClick={() => toggleSection("submission")}
@@ -479,6 +481,23 @@ function AdminAsidebar() {
                   <div className="flex">
                     <NewspaperIcon className="mr-3 h-5 w-5" />
                     <span className="">Articles</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Feature blog section */}
+              <Link href="/admin/feature_blog">
+                <div
+                  onClick={() => toggleSection("feature_blog")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("feature_blog")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <FilePlusIcon className="mr-3 h-5 w-5" />
+                    <span className="">Feature Blog</span>
                   </div>
                 </div>
               </Link>

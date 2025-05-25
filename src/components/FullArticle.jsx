@@ -119,15 +119,15 @@ function FullArticle({ articleFull }) {
                 </span>
               </div>
 
-              {/* <div className="flex justify-between items-center text-sm">
+              <div className="flex justify-between items-center text-sm">
                 <Link
-                  href="#"
+                  href={`${BASE_URL}${articleFull.COIformlink}`}
                   className="text-red-700 hover:underline flex items-center gap-2"
                 >
                   <ExclamationCircleIcon className="h-4 w-4" />
                   COI Form
                 </Link>
-              </div> */}
+              </div>
             </div>
 
             <div className="mt-4 pt-4 border-t">

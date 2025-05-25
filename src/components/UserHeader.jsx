@@ -22,9 +22,9 @@ function UserHeader() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
-              <h1 className="text-2xl font-bold text-red-700">
-                Medical<span className="text-gray-800">Letter</span>
-              </h1>
+              <h2 className="text-2xl font-bold text-red-700">
+                European Journal of Clinical Pharmacy
+              </h2>
             </div>
           </div>
 

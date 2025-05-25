@@ -10,7 +10,9 @@ export default function CreateArticleSubmissionForm({ initialValues, editId }) {
     status: initialValues ? initialValues.status : "Pending",
     pay_status: initialValues ? initialValues.pay_status : "Unpaid",
     user: initialValues ? initialValues.user : 1,
-    MRN_number: initialValues ? initialValues.MRN_number : "MRN-0000045",
+    user_name: initialValues ? initialValues.user_name : "",
+    user_number: initialValues ? initialValues.user_number : "",
+    MRN_number: initialValues ? initialValues.MRN_number : "",
     email: initialValues ? initialValues.email : "",
     manuscript_title: initialValues ? initialValues.manuscript_title : "",
     abstract: initialValues ? initialValues.abstract : "",
@@ -141,6 +143,44 @@ export default function CreateArticleSubmissionForm({ initialValues, editId }) {
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             placeholder="Enter the email..."
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label
+            htmlFor="user_name"
+            className="block text-sm font-medium text-gray-700"
+          >
+            User Name<span className="text-red-600">*</span>
+          </label>
+          <input
+            type="text"
+            id="user_name"
+            name="user_name"
+            required
+            value={formData.user_name}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+            placeholder="Enter the User Name..."
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label
+            htmlFor="user_number"
+            className="block text-sm font-medium text-gray-700"
+          >
+            User Number<span className="text-red-600">*</span>
+          </label>
+          <input
+            type="text"
+            id="user_number"
+            name="user_number"
+            required
+            value={formData.user_number}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+            placeholder="Enter the User number..."
           />
         </div>
 

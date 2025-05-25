@@ -1,5 +1,6 @@
 import AboutText from '@/components/AboutText';
 import { _GET } from '@/request/request';
+import Link from 'next/link';
 
 export default async function AimAndScope() {
     const AimScope = await _GET('journal/readAll', 'core')
@@ -24,9 +25,9 @@ export default async function AimAndScope() {
                             <a href="#" className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors">
                                 Submit Manuscript
                             </a>
-                            <a href="#" className="px-6 py-2 border border-red-600 text-red-600 rounded-md hover:bg-red-50 transition-colors">
+                            <Link href="/about/contact_us" className="px-6 py-2 border border-red-600 text-red-600 rounded-md hover:bg-red-50 transition-colors">
                                 Contact Editorial Team
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,7 @@ function ArticleAuthorsTab({
   initialValues,
   editId
 }) {
+  const [isLoading, setIsloading] = useState(false)
   const [authors, setAuthors] = useState(
     initialValues
       ? initialValues
@@ -92,6 +93,19 @@ function ArticleAuthorsTab({
       console.error("Error posting article:", error);
     }
   };
+
+
+  async function generateCitation(e) {
+    e.preventDefault()
+    setIsloading(true);
+    if (articleId || editId) {
+      const response = await _POST(`citation/update?ariticle_id=${articleId || editId}`, {data: "empty"}, 'PUT', null, 'core')
+      setIsloading(false);
+    } else {
+      alert("Article Must be Created First!")
+    }
+    
+  }
 
   if (activeTab == "authors") {
     return (
@@ -209,9 +223,10 @@ function ArticleAuthorsTab({
             </button>
             <button
               type="button"
+              onClick={(e)=> generateCitation(e)}
               className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700"
             >
-              Generate Citation
+             {isLoading ? "Wait for a while.." : "Generate Citation"} 
             </button>
           </div>
         </form>

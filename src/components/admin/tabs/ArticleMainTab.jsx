@@ -1,5 +1,6 @@
 "use client";
 
+import { BASE_URL } from "@/config/api.config";
 import { _POST } from "@/request/post_request";
 import { useState } from "react";
 import slugify from "slugify";
@@ -15,9 +16,18 @@ function ArticleMainTab({
   const [formData, setFormData] = useState({
     isInHome: initialValues ? initialValues?.isInHome : 0,
     isOpenaccess: initialValues ? initialValues?.isOpenaccess : 0,
-    isInPress: initialValues && initialValues.isInPress !== null ? initialValues?.isInPress : 0,
-    isMostRead: initialValues  && initialValues.isMostRead !== null ? initialValues?.isMostRead : 0,
-    isNihFunded: initialValues  && initialValues.isNihFunded !== null ? initialValues?.isNihFunded : 0,
+    isInPress:
+      initialValues && initialValues.isInPress !== null
+        ? initialValues?.isInPress
+        : 0,
+    isMostRead:
+      initialValues && initialValues.isMostRead !== null
+        ? initialValues?.isMostRead
+        : 0,
+    isNihFunded:
+      initialValues && initialValues.isNihFunded !== null
+        ? initialValues?.isNihFunded
+        : 0,
     issueNo: initialValues ? initialValues?.issueNo : "",
     url: initialValues ? initialValues?.url : "",
     articleType: initialValues ? initialValues?.articleType : "",
@@ -45,8 +55,10 @@ function ArticleMainTab({
     citation_vancouver: initialValues ? initialValues?.citation_vancouver : "",
     pdflink: initialValues ? initialValues?.pdflink : "",
     xmllink: initialValues ? initialValues?.xmllink : "",
+    COIformlink: initialValues ? initialValues?.COIformlink : "",
     pdfFile: "",
     xmlFile: "",
+    coiFile: "",
     isPDF: 0,
     isXml: 0,
   });
@@ -234,7 +246,6 @@ function ArticleMainTab({
               </select>
             </div>
           </div>
-
 
           {/* Title section */}
 
@@ -622,6 +633,33 @@ function ArticleMainTab({
                   href={`http://localhost:3100${formData.xmllink}`}
                 >
                   {formData.xmllink && formData.xmllink}
+                </a>
+              </div>
+            </div>
+
+            <div className="w-full">
+              <label
+                htmlFor="coiFile"
+                className="block text-sm font-medium text-gray-700"
+              >
+                COI form:*
+              </label>
+              <input
+                type="file"
+                id="coiFile"
+                name="coiFile"
+                rows="3"
+                onChange={handleChange}
+                className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+              />
+              {/* Old file */}
+              <div className="flex items-center mt-3">
+                <span className="ml-2 text-xs text-gray-600">Old COI:</span>
+                <a
+                  className="text-xs"
+                  href={`${BASE_URL}${formData.COIformlink}`}
+                >
+                  {formData.COIformlink && formData.COIformlink}
                 </a>
               </div>
             </div>

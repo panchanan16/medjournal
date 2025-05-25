@@ -9,6 +9,9 @@ function UserArticleForm({ initialValues }) {
   const [formData, setFormData] = useState({
     manuscript_title: "",
     user: 1,
+    user_name: "",
+    user_number: "",
+    email: "",
     abstract: "",
     keywords: "",
     article_file_link: "",
@@ -47,9 +50,12 @@ function UserArticleForm({ initialValues }) {
       submitData.append("keywords", formData.keywords);
       submitData.append("submitted_on", formData.submitted_on);
       submitData.append("user", formData.user);
+      submitData.append("user_name", formData.user_name);
+      submitData.append("user_number", formData.user_number);
+      submitData.append("email", formData.email);
 
       if (formData.article_file) {
-        submitData.append("article_file", formData.article_file)
+        submitData.append("article_file", formData.article_file);
       }
 
       await _POST(
@@ -57,7 +63,7 @@ function UserArticleForm({ initialValues }) {
         submitData,
         `${editId ? "PUT" : "POST"}`,
         true,
-        'core'
+        "core"
       );
       console.log("Form data submitted:", formData);
       for (const key in formData) {
@@ -72,10 +78,12 @@ function UserArticleForm({ initialValues }) {
 
   return (
     <div className="max-w-4xl mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-blue-700 mb-6">Add a New Index</h1>
+      <h1 className="text-2xl font-bold text-blue-700 mb-6">
+        Add a New Article
+      </h1>
 
       <div className="space-y-6">
-        {/* Text Input - Image */}
+        {/* Text Input - title */}
         <div className="space-y-2">
           <label
             htmlFor="manuscript_title"
@@ -91,7 +99,7 @@ function UserArticleForm({ initialValues }) {
             value={formData.manuscript_title}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter Image URL..."
+            placeholder="Enter the Title..."
           />
         </div>
         {/* Text Input - Abstract */}
@@ -110,7 +118,7 @@ function UserArticleForm({ initialValues }) {
             value={formData.abstract}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter Volume Name..."
+            placeholder="Enter the abstract..."
           ></textarea>
         </div>
 
@@ -130,7 +138,7 @@ function UserArticleForm({ initialValues }) {
             value={formData.link}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter Volume Name..."
+            placeholder="Enter keywords with ; separated..."
           ></textarea>
         </div>
 
@@ -153,6 +161,63 @@ function UserArticleForm({ initialValues }) {
           />
         </div>
 
+        <div className="space-y-2">
+          <label
+            htmlFor="user_name"
+            className="block text-sm font-medium text-gray-700"
+          >
+            User Name <span className="text-blue-600">*</span>
+          </label>
+          <input
+            type="text"
+            id="user_name"
+            name="user_name"
+            required
+            value={formData.user_name}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter the Name..."
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label
+            htmlFor="user_number"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Phone Number <span className="text-blue-600">*</span>
+          </label>
+          <input
+            type="text"
+            id="user_number"
+            name="user_number"
+            required
+            value={formData.user_number}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter the Number..."
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Email <span className="text-blue-600">*</span>
+          </label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            required
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter the Email..."
+          />
+        </div>
+
         {/* Submit Button */}
         <div className="pt-4">
           <button
@@ -166,7 +231,7 @@ function UserArticleForm({ initialValues }) {
                 Submitting...
               </span>
             ) : (
-              "Create Index"
+              "Submit Article"
             )}
           </button>
         </div>

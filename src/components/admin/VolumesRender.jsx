@@ -62,9 +62,9 @@ function VolumesRender({ AllVolumes }) {
 
                 <div className="p-5 border-t border-gray-100">
                   <h3 className="font-bold text-red-800 mb-1">
-                    {journal.title} ({journal.year})
+                    Volume {journal.title} ({journal.year})
                   </h3>
-                  <p className="text-gray-700">{journal.title}</p>
+                  {/* <p className="text-gray-700">{journal.title}</p> */}
                 </div>
               </div>
             </Link>

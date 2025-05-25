@@ -22,6 +22,7 @@ export default async function HomePage() {
   const newsAnnouncement = await _GET(`newsAnnouncement/readAll`, 'core')
   const sliders = await _GET(`slider/readAll`, 'core')
   const journal = await _GET('journal/readAll', 'core')
+  const blogs = await _GET('blog/readAll?limit=10', 'core')
 
   return (
     <>
@@ -43,7 +44,7 @@ export default async function HomePage() {
               {/* Journal Highlight */}
               <JournalInfo Info={journal && journal?.journal.length ? journal.journal : null} IndexInfo={journal && journal?.index.length ? journal.index : null} />
 
-              <BlogsSection />
+              <BlogsSection Blogs={blogs ? blogs : null} />
 
               {/* Announcement */}
               <AnnouncementsSection AnnounceData={newsAnnouncement ? newsAnnouncement.announcements : []} />
