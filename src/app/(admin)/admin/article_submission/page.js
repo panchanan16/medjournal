@@ -1,4 +1,3 @@
-import AllArticles from '@/components/admin/AllArticles';
 import AllSubmission from '@/components/admin/AllSubmission';
 import { _GET } from '@/request/request';
 

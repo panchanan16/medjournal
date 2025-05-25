@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 export default async function userProfilePage() {
     const submission = await _GET(`manuscript/readAll?user=1`, 'core')
+    console.log(submission)
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -30,7 +31,7 @@ export default async function userProfilePage() {
                             </div>
 
                             {/* Articles table */}
-                            <UserSubmissionTable submission={submission} />
+                            <UserSubmissionTable submission={submission ? submission : null} />
 
                             {/* Pagination */}
                             {/* <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">

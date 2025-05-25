@@ -18,13 +18,13 @@ function UserSubmissionTable({ submission }) {
             >
               Title
             </th>
-             <th
+            <th
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               User Name
             </th>
-             <th
+            <th
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
@@ -52,7 +52,6 @@ function UserSubmissionTable({ submission }) {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {submission &&
-            submission.length &&
             submission.map((article, index) => (
               <tr key={index} className="hover:bg-gray-50 cursor-pointer">
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600">
@@ -61,7 +60,7 @@ function UserSubmissionTable({ submission }) {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {article.manuscript_title}
                 </td>
-                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {article.user_name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -82,7 +81,7 @@ function UserSubmissionTable({ submission }) {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <div className="flex items-center">
                     <Calendar className="h-4 w-4 mr-1" />
-                    {new Date(article.submitted_on).toLocaleDateString('en-US')}
+                    {new Date(article.submitted_on).toLocaleDateString("en-US")}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">

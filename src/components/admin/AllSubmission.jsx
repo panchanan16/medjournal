@@ -61,7 +61,7 @@ function AllSubmission({ articles }) {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {articles.map((article, id) => (
+            {articles && articles.map((article, id) => (
               <tr
                 key={id}
                 className={`hover:bg-red-50 max-w-[5rem]  transition-colors ${
