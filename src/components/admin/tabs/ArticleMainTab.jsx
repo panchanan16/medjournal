@@ -1,5 +1,8 @@
+"use client";
+
 import { _POST } from "@/request/post_request";
 import { useState } from "react";
+import slugify from "slugify";
 
 function ArticleMainTab({
   IssueForSelect,
@@ -7,12 +10,14 @@ function ArticleMainTab({
   handleNextSection,
   setArticleId,
   initialValues,
-  editId
+  editId,
 }) {
   const [formData, setFormData] = useState({
     isInHome: initialValues ? initialValues?.isInHome : 0,
     isOpenaccess: initialValues ? initialValues?.isOpenaccess : 0,
-    isInPress: 0,
+    isInPress: initialValues && initialValues.isInPress !== null ? initialValues?.isInPress : 0,
+    isMostRead: initialValues  && initialValues.isMostRead !== null ? initialValues?.isMostRead : 0,
+    isNihFunded: initialValues  && initialValues.isNihFunded !== null ? initialValues?.isNihFunded : 0,
     issueNo: initialValues ? initialValues?.issueNo : "",
     url: initialValues ? initialValues?.url : "",
     articleType: initialValues ? initialValues?.articleType : "",
@@ -46,8 +51,6 @@ function ArticleMainTab({
     isXml: 0,
   });
 
-  console.log(editId)
-
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
 
@@ -75,9 +78,9 @@ function ArticleMainTab({
       });
 
       const response = await _POST(
-        `articleMain/${editId ? `update?article_id=${editId}` : 'create'}`,
+        `articleMain/${editId ? `update?article_id=${editId}` : "create"}`,
         submitData,
-        `${editId ? 'PUT' : 'POST'}`,
+        `${editId ? "PUT" : "POST"}`,
         true,
         "core"
       );
@@ -93,6 +96,16 @@ function ArticleMainTab({
     handleNextSection();
     console.log(formData);
     // setArticleId && setArticleId;
+  }
+
+  function generateUrl(e) {
+    e.preventDefault();
+    if (formData.title) {
+      const slug = slugify(formData.title, { lower: true, strict: true });
+      setFormData({ ...formData, ["url"]: slug });
+    } else {
+      alert("Title Must be Add First");
+    }
   }
 
   if (activeTab === "article") {
@@ -139,6 +152,34 @@ function ArticleMainTab({
               />
               <label htmlFor="isInPress" className="text-gray-700">
                 Is in press
+              </label>
+            </div>
+
+            <div className="flex items-center space-x-3">
+              <input
+                id="isMostRead"
+                name="isMostRead"
+                type="checkbox"
+                checked={formData.isMostRead}
+                onChange={handleChange}
+                className="h-4 w-4 text-gray-300 border-gray-300 rounded focus:ring-teal-500"
+              />
+              <label htmlFor="isMostRead" className="text-gray-700">
+                Is Most Read
+              </label>
+            </div>
+
+            <div className="flex items-center space-x-3">
+              <input
+                id="isNihFunded"
+                name="isNihFunded"
+                type="checkbox"
+                checked={formData.isNihFunded}
+                onChange={handleChange}
+                className="h-4 w-4 text-gray-300 border-gray-300 rounded focus:ring-teal-500"
+              />
+              <label htmlFor="isNihFunded" className="text-gray-700">
+                Is NIH Funded
               </label>
             </div>
           </div>
@@ -194,22 +235,8 @@ function ArticleMainTab({
             </div>
           </div>
 
-          <div>
-            <label
-              htmlFor="url"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Url:
-            </label>
-            <textarea
-              id="url"
-              name="url"
-              rows="3"
-              value={formData.url}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-            ></textarea>
-          </div>
+
+          {/* Title section */}
 
           <div>
             <label
@@ -226,6 +253,31 @@ function ArticleMainTab({
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
             ></textarea>
+          </div>
+
+          {/* URL generate */}
+          <div>
+            <label
+              htmlFor="url"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Url:
+            </label>
+            <textarea
+              id="url"
+              name="url"
+              rows="3"
+              value={formData.url}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+            ></textarea>
+            <button
+              onClick={(e) => generateUrl(e)}
+              type="button"
+              className="mt-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700"
+            >
+              Generate URL
+            </button>
           </div>
 
           <div>

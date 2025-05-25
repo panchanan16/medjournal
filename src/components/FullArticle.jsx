@@ -8,6 +8,12 @@ import { useState } from "react";
 
 function FullArticle({ articleFull }) {
   const [isCite, setIsCite] = useState(false);
+  const articleUrl = typeof window !== "undefined" ? window.location.href : "";
+  const encodedUrl = encodeURIComponent(articleUrl);
+  const encodedTitle = encodeURIComponent(articleFull.title);
+  const openShareWindow = (shareUrl) => {
+    window.open(shareUrl, "_blank", "noopener,noreferrer");
+  };
   return (
     <main className="container mx-auto px-4 py-6 min-h-screen">
       <div className="flex flex-col lg:flex-row gap-8 min-h-screen">
@@ -91,13 +97,29 @@ function FullArticle({ articleFull }) {
               </div>
 
               <div className="flex justify-between items-center text-sm">
-                <span onClick={()=> setIsCite(true)} className="text-red-700 hover:underline cursor-default flex items-center gap-2">
+                <Link
+                  href={`${BASE_URL}${articleFull.xmllink}`}
+                  className="text-red-700 hover:underline flex items-center gap-2"
+                >
+                  <DocumentTextIcon className="h-4 w-4" />
+                  Download XML
+                </Link>
+                <span className="text-gray-500">
+                  {articleFull.metrics.downloads} views
+                </span>
+              </div>
+
+              <div className="flex justify-between items-center text-sm">
+                <span
+                  onClick={() => setIsCite(true)}
+                  className="text-red-700 hover:underline cursor-default flex items-center gap-2"
+                >
                   <ClipboardCheckIcon className="h-4 w-4" />
                   Cite this Article
                 </span>
               </div>
 
-              <div className="flex justify-between items-center text-sm">
+              {/* <div className="flex justify-between items-center text-sm">
                 <Link
                   href="#"
                   className="text-red-700 hover:underline flex items-center gap-2"
@@ -105,7 +127,7 @@ function FullArticle({ articleFull }) {
                   <ExclamationCircleIcon className="h-4 w-4" />
                   COI Form
                 </Link>
-              </div>
+              </div> */}
             </div>
 
             <div className="mt-4 pt-4 border-t">
@@ -125,20 +147,37 @@ function FullArticle({ articleFull }) {
               Share
             </h3>
             <div className="space-y-2">
-              <Link
-                href="#"
+              <span
+                onClick={() =>
+                  openShareWindow(
+                    `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`
+                  )
+                }
                 className="text-red-700 hover:underline flex items-center gap-2"
               >
                 <Share2 className="h-4 w-4" />
                 Share on Facebook
-              </Link>
-              <Link
-                href="#"
+              </span>
+              <span
+                onClick={() =>
+                  openShareWindow(
+                    `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`
+                  )
+                }
                 className="text-red-700 hover:underline flex items-center gap-2"
               >
                 <Share2 className="h-4 w-4" />
-                Share on Twitter
-              </Link>
+                Share on LinkedIn
+              </span>
+              <span
+                onClick={()=> openShareWindow(
+                  `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`
+                )}
+                className="text-red-700 hover:underline flex items-center gap-2"
+              >
+                <Share2 className="h-4 w-4" />
+                Share on twitter
+              </span>
             </div>
           </div>
         </aside>

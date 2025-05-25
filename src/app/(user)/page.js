@@ -14,6 +14,7 @@ import HomeArticleTabs from '@/components/HomeArticleTabs'
 import JournalMetrics from '@/components/JournalMetrics'
 import NewsSection, { AnnouncementsSection } from '@/components/NewsAnnouncement'
 import JournalInfo from '@/components/JournalInfo';
+import BlogsSection from '@/components/BlogSection';
 
 
 export default async function HomePage() {
@@ -41,6 +42,8 @@ export default async function HomePage() {
             <div className="space-y-8">
               {/* Journal Highlight */}
               <JournalInfo Info={journal && journal?.journal.length ? journal.journal : null} IndexInfo={journal && journal?.index.length ? journal.index : null} />
+
+              <BlogsSection />
 
               {/* Announcement */}
               <AnnouncementsSection AnnounceData={newsAnnouncement ? newsAnnouncement.announcements : []} />

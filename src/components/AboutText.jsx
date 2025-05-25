@@ -11,10 +11,6 @@ function AboutText({ Html, Title }) {
 
       <div className="space-y-8 html-content">
         <section>
-          <h2 className="text-2xl font-semibold text-red-800 mb-4">
-            {Title} of MedLetter
-          </h2>
-
           <div
             className="mb-6"
             dangerouslySetInnerHTML={{ __html: Html }}

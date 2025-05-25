@@ -43,7 +43,7 @@ function HomeArticleTabs({ ArticleLatest }) {
                     {article.articleType}
                   </span>
                 </div>
-                <Link href={`/article-read/${article.ariticle_id}`}>
+                <Link href={`/article-read/${article.ariticle_id}/${article.url}`}>
                   <h3 className="text-xl font-bold text-gray-900 mb-4 leading-tight hover:text-red-600 cursor-pointer transition-colors">
                     {article.title}
                   </h3>
