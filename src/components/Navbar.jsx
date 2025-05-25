@@ -23,7 +23,11 @@ export default function Navbar({ policy, JournalHeaderData }) {
 
   return (
     <>
-      <JournalHeader isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} Data={JournalHeaderData} />
+      <JournalHeader
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        Data={JournalHeaderData}
+      />
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg border-t border-gray-200">
@@ -249,7 +253,13 @@ export default function Navbar({ policy, JournalHeaderData }) {
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Supplement & Series
-                </Link>                
+                </Link>
+                <Link
+                  href="/testimonials"
+                  className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
+                >
+                  Testimonials
+                </Link>
               </div>
             </li>
             <li className="group relative min-w-fit">
@@ -281,7 +291,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Refference Style
-                </Link>               
+                </Link>
               </div>
             </li>
             <li className="group relative min-w-fit">
@@ -316,7 +326,9 @@ export default function Navbar({ policy, JournalHeaderData }) {
                     <Link
                       key={ind}
                       href={
-                        pol.pageUrl ? `/policy/${pol.pageUrl}` : pol.redirectLink
+                        pol.pageUrl
+                          ? `/policy/${pol.pageUrl}`
+                          : pol.redirectLink
                       }
                       className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                     >
@@ -342,16 +354,16 @@ export default function Navbar({ policy, JournalHeaderData }) {
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Upcoming Special Issues
-                </Link>                
+                </Link>
               </div>
             </li>
             <li className="group relative min-w-fit z-30">
-               <Link
+              <Link
                 href="/archives"
                 className="px-4 py-3 text-sm inline-block font-medium hover:bg-red-800 transition"
               >
                 Archives
-              </Link>           
+              </Link>
             </li>
             {/* <li className="group relative min-w-fit">
               <Link

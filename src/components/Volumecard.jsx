@@ -4,15 +4,19 @@ const ArticleCard = ({ article, links }) => {
   return (
     <div className="mb-8 pb-6 border-b border-gray-200 last:border-b-0 last:pb-0">
       <h3 className="text-lg font-semibold mb-2 hover:text-red-700">
-        <Link href={`/article-read/${article.ariticle_id}`}>{article.title}</Link>
+        <Link href={`/article-read/${article.ariticle_id}/${article.url}`}>
+          {article.title}
+        </Link>
       </h3>
-      <p className="text-sm text-gray-600 mb-3">{article.authors}</p>
 
-      <div className="flex flex-wrap gap-2 mb-3">
-        <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
-          {article.pageInfo}
-        </span>
-      </div>
+      {article.published_date && (
+        <div className="flex flex-wrap gap-2 mb-3">
+          <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+            Posted on:{" "}
+            {new Date(article.published_date).toLocaleDateString("en-US")}
+          </span>
+        </div>
+      )}
 
       <div className="flex flex-wrap gap-2">
         {links.map((link, index) => {
