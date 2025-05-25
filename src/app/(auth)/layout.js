@@ -19,6 +19,8 @@ export const metadata = {
   description: "European Journal of Clinical Pharamacy",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
