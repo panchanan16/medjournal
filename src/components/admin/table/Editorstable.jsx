@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { _DELETE } from "@/request/request";
 import { Trash2Icon } from "lucide-react";
@@ -7,17 +7,15 @@ import { useState } from "react";
 
 function Editorstable({ Editors }) {
   const [selectedArticles, setSelectedArticles] = useState([1]);
-    const [EditorsList, setEditorsList] = useState(Editors || []);
-
+  const [EditorsList, setEditorsList] = useState(Editors || []);
 
   async function deleteItem(e, ID, setItems, items, key) {
-    e.stopPropagation()
-    e.preventDefault()
-    const response = await _DELETE(`editorBoard/remove?editor_id=${ID}`)
+    e.stopPropagation();
+    e.preventDefault();
+    const response = await _DELETE(`editorBoard/remove?editor_id=${ID}`);
     if (response) {
-      setItems(items.filter((el)=> el[key] !== ID))
+      setItems(items.filter((el) => el[key] !== ID));
     }
-
   }
 
   return (
@@ -45,17 +43,27 @@ function Editorstable({ Editors }) {
                   selectedArticles.includes(index.editor_id) ? "bg-red-50" : ""
                 }`}
               >
-                <td className="px-4 py-4 whitespace-nowrap">                 
-                </td>
+                <td className="px-4 py-4 whitespace-nowrap"></td>
                 <td className="px-4 py-4 flex justify-between">
                   <Link href={`editorial-team/create/${index.editor_id}`}>
                     <div className="text-sm font-medium text-gray-800 hover:text-red-700 cursor-pointer">
                       {index.name} {`(${index.editor_type})`}
                     </div>
                   </Link>
-                  <span onClick={(e)=> deleteItem(e, index.editor_id, setEditorsList, EditorsList, 'editor_id')}><Trash2Icon className="text-red-600 cursor-pointer" /></span>
+                  <span
+                    onClick={(e) =>
+                      deleteItem(
+                        e,
+                        index.editor_id,
+                        setEditorsList,
+                        EditorsList,
+                        "editor_id"
+                      )
+                    }
+                  >
+                    <Trash2Icon className="text-red-600 cursor-pointer" />
+                  </span>
                 </td>
-                
               </tr>
             ))}
           </tbody>
@@ -70,7 +78,7 @@ function Editorstable({ Editors }) {
               Create New team Member
             </button>
           </Link>
-        </div>       
+        </div>
       </div>
     </>
   );

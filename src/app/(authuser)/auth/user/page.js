@@ -13,7 +13,7 @@ export default async function userProfilePage() {
             <div className="flex">
                 {/* Content area */}
                 <div className="flex-1">
-                    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                         <div className="bg-white shadow rounded-lg">
                             <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
                                 <div className="flex flex-col md:flex-row md:justify-between md:items-center">

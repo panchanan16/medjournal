@@ -1,4 +1,5 @@
 import { Calendar } from "lucide-react";
+import Link from "next/link";
 
 function UserSubmissionTable({ submission }) {
   return (
@@ -11,6 +12,12 @@ function UserSubmissionTable({ submission }) {
               className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               MRN
+            </th>
+             <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Submission Type
             </th>
             <th
               scope="col"
@@ -55,9 +62,12 @@ function UserSubmissionTable({ submission }) {
             submission.map((article, index) => (
               <tr key={index} className="hover:bg-gray-50 cursor-pointer">
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600">
-                  {article.MRN_number}
+                  <Link href={`user/user_article/${article.manu_id}`}>{article.MRN_number}</Link>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {article.manu_type}
+                </td>
+                <td className="px-6 py-4 max-w-xl break-words text-sm text-gray-900">
                   {article.manuscript_title}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

@@ -7,6 +7,7 @@ import { useState } from "react";
 
 function UserArticleForm({ initialValues }) {
   const [formData, setFormData] = useState({
+    manu_type: "Normal Process",
     manuscript_title: "",
     user: 1,
     user_name: "",
@@ -45,6 +46,7 @@ function UserArticleForm({ initialValues }) {
     try {
       const submitData = new FormData();
 
+      submitData.append("manu_type", formData.manu_type);
       submitData.append("manuscript_title", formData.manuscript_title);
       submitData.append("abstract", formData.abstract);
       submitData.append("keywords", formData.keywords);
@@ -77,12 +79,31 @@ function UserArticleForm({ initialValues }) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
+    <div className="flex-1 mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-bold text-blue-700 mb-6">
         Add a New Article
       </h1>
 
       <div className="space-y-6">
+        {/* Select Input - manu_type */}
+        <div className="space-y-2">
+          <label
+            htmlFor="manu_type"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Select Submission Type <span className="text-blue-600">*</span>
+          </label>
+          <select
+            id="manu_type"
+            name="manu_type"
+            defaultValue={formData.manu_type}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="Fast Process">Fast Process</option>
+            <option value="Normal Process">Normal Process</option>
+          </select>
+        </div>
         {/* Text Input - title */}
         <div className="space-y-2">
           <label

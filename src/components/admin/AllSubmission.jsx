@@ -38,7 +38,7 @@ function AllSubmission({ articles }) {
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
               >
-                User Number
+                Submission Type
               </th>
               <th
                 scope="col"
@@ -87,7 +87,7 @@ function AllSubmission({ articles }) {
                   {article.user_name}
                 </td>
                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
-                  {article.user_number}
+                  {article.manu_type}
                 </td>
                 <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
                   {new Date(article.submitted_on).toLocaleDateString('en-US')}

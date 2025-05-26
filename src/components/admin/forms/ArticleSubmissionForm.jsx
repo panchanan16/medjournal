@@ -7,6 +7,7 @@ import { BASE_URL } from "@/config/api.config";
 
 export default function CreateArticleSubmissionForm({ initialValues, editId }) {
   const [formData, setFormData] = useState({
+    manu_type: initialValues ? initialValues.manu_type : "Normal Process",
     status: initialValues ? initialValues.status : "Pending",
     pay_status: initialValues ? initialValues.pay_status : "Unpaid",
     user: initialValues ? initialValues.user : 1,
@@ -23,8 +24,8 @@ export default function CreateArticleSubmissionForm({ initialValues, editId }) {
       : "",
     invoice_link: initialValues ? initialValues.invoice : "",
     additional_file_link: initialValues ? initialValues.additional_file : "",
-    editorial_comment: initialValues ? initialValues.editorial_comment : "",
-    published_link: initialValues ? initialValues.published_link : "",
+    editorial_comment: initialValues && initialValues.editorial_comment ? initialValues.editorial_comment : "",
+    published_link: initialValues && initialValues.published_link ? initialValues.published_link : "",
     isReminder: 0,
     submitted_on: initialValues ? initialValues.submitted_on : new Date(),
     updated_on: initialValues ? initialValues.updated_on : new Date(),
@@ -87,6 +88,24 @@ export default function CreateArticleSubmissionForm({ initialValues, editId }) {
 
       {/* NEW */}
       <div className="space-y-4">
+        <div className="space-y-2">
+          <label
+            htmlFor="manu_type"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Select Submission Type <span className="text-blue-600">*</span>
+          </label>
+          <select
+            id="manu_type"
+            name="manu_type"
+            defaultValue={formData.manu_type}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="Fast Process">Fast Process</option>
+            <option value="Normal Process">Normal Process</option>
+          </select>
+        </div>
         <div className="space-y-2">
           <label
             htmlFor="journal_name"
