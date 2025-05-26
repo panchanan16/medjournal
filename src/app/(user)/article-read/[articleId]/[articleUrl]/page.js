@@ -9,7 +9,7 @@ export default async function ArticleReadPage({ params }) {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Main Content */}
-            <FullArticle articleFull={response ? response : {}} />            
+            <FullArticle articleFull={response ? response : {}} artId={articleId} />            
             <StyleSheet />
         </div>
     );

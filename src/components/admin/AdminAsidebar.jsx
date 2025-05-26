@@ -37,6 +37,8 @@ import {
   Rows2Icon,
   BookOpenCheckIcon,
   FilePlusIcon,
+  MagnetIcon,
+  MessageSquareDiffIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -447,6 +449,22 @@ function AdminAsidebar() {
                   <div className="flex">
                     <TvIcon className="mr-3 h-5 w-5" />
                     <span className="">News</span>
+                  </div>
+                </div>
+              </Link>
+
+              
+              {/* <!--- Testimonial Section ---> */}
+              <Link href="/admin/testimonials">
+                <div
+                  onClick={() => toggleSection("testimonials")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("testimonials") ? "bg-red-700" : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <MessageSquareDiffIcon className="mr-3 h-5 w-5" />
+                    <span className="">Testimonials</span>
                   </div>
                 </div>
               </Link>

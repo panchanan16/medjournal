@@ -1,17 +1,14 @@
-// const x = {
-//     test_id: initialValues ? initialValues?.test_id : "",
-//     user_name: initialValues ? initialValues?.user_name : "",
-//     designation: initialValues ? initialValues?.designation : "",
-//     university: initialValues ? initialValues?.university : "",
-//     user_img: initialValues ? initialValues?.user_img : "",
-//     user_comment: initialValues ? initialValues?.user_comment : "",
-//     posted_on: initialValues ? initialValues?.posted_on : ""
-// }
+import TestimonialTable from "@/components/admin/table/TestimonialTable"
+import { _GET } from "@/request/request";
 
 
-function TestimonialPage() {
+async function TestimonialPage() {
+  const tetis = await _GET(`testimonial/readAll`, 'core');
+
   return (
-    <div>page</div>
+    <div className="max-w-[95%] mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-10">
+      <TestimonialTable TestimonialList={tetis ? tetis : []} />
+    </div>
   )
 }
 

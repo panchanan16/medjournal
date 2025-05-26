@@ -4,9 +4,10 @@ import { BASE_URL } from "@/config/api.config";
 import { Share2 } from "lucide-react";
 import Link from "next/link";
 import CitationPopup from "./CitationPopup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { _GET } from "@/request/request";
 
-function FullArticle({ articleFull }) {
+function FullArticle({ articleFull, artId }) {
   const [isCite, setIsCite] = useState(false);
   const articleUrl = typeof window !== "undefined" ? window.location.href : "";
   const encodedUrl = encodeURIComponent(articleUrl);
@@ -14,6 +15,16 @@ function FullArticle({ articleFull }) {
   const openShareWindow = (shareUrl) => {
     window.open(shareUrl, "_blank", "noopener,noreferrer");
   };
+
+  useEffect(() => {
+    async function IncreaseViews() {
+      const incResponse = await _GET(`articlefull/increase/?article_id=${artId}&type=Views`, 'core');
+      return incResponse;
+    }
+    console.log("Running 1 times")
+    IncreaseViews();
+  }, []);
+
   return (
     <main className="container mx-auto px-4 py-6 min-h-screen">
       <div className="flex flex-col lg:flex-row gap-8 min-h-screen">
@@ -170,9 +181,11 @@ function FullArticle({ articleFull }) {
                 Share on LinkedIn
               </span>
               <span
-                onClick={()=> openShareWindow(
-                  `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`
-                )}
+                onClick={() =>
+                  openShareWindow(
+                    `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`
+                  )
+                }
                 className="text-red-700 hover:underline flex items-center gap-2"
               >
                 <Share2 className="h-4 w-4" />
