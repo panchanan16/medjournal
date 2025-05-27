@@ -8,10 +8,6 @@ import {
   ChevronRight,
   FileText,
   Home,
-  Newspaper,
-  PackageOpen,
-  Settings,
-  ShoppingBag,
   Siren,
   Users,
   Notebook,
@@ -39,6 +35,7 @@ import {
   FilePlusIcon,
   MagnetIcon,
   MessageSquareDiffIcon,
+  User2Icon,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -61,6 +58,7 @@ function AdminAsidebar() {
     slider: false,
     submission: false,
     feature_blog: false,
+    authentication: false,
 
     // Currently not in use 👇
     users: false,
@@ -453,13 +451,14 @@ function AdminAsidebar() {
                 </div>
               </Link>
 
-              
               {/* <!--- Testimonial Section ---> */}
               <Link href="/admin/testimonials">
                 <div
                   onClick={() => toggleSection("testimonials")}
                   className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
-                    isSectionOpen("testimonials") ? "bg-red-700" : "hover:bg-red-700"
+                    isSectionOpen("testimonials")
+                      ? "bg-red-700"
+                      : "hover:bg-red-700"
                   }`}
                 >
                   <div className="flex">
@@ -563,6 +562,21 @@ function AdminAsidebar() {
                   <div className="flex">
                     <MessageCircleWarningIcon className="mr-3 h-5 w-5" />
                     <span className="">Issues</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* <!--- Issues Section ---> */}
+              <Link href="/admin/authentication">
+                <div
+                  onClick={() => toggleSection("authentication")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("authentication") ? "bg-red-700" : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <User2Icon className="mr-3 h-5 w-5" />
+                    <span className="">Authentication</span>
                   </div>
                 </div>
               </Link>

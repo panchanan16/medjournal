@@ -1,6 +1,23 @@
-import { Bell, LogOut, MessageSquare, Search } from "lucide-react";
+"use client";
+
+import { useAuth } from "@/context/AuthContext";
+import { ChevronDown, Search } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 function Adminheader() {
+  const { user, logout } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
   return (
     <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
       <button className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden">
@@ -36,13 +53,41 @@ function Adminheader() {
             </div>
           </div>
         </div>
+        <div className="hidden md:flex items-center mr-5">
+          <Link href={`/auth/user`}>
+            <button className="px-3 cursor-pointer py-2 rounded-md text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100">
+              User Dashboard
+            </button>
+          </Link>
+        </div>
+        <div className="hidden md:flex items-center space-x-4">
+          <Link href={`/`}>
+            <button className="px-3 cursor-pointer py-2 rounded-md text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100">
+              Visit Website
+            </button>
+          </Link>
+        </div>
         <div className="ml-4 flex items-center md:ml-6">
-          <button className="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
-            <Bell className="h-6 w-6" />
-          </button>
-          <button className="ml-3 p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
-            <LogOut className="h-6 w-6" />
-          </button>
+          <div className="relative">
+            <button
+              onClick={toggleDropdown}
+              className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              <span className="mr-1">{user && user.email}</span>
+              <ChevronDown size={16} />
+            </button>
+
+            {dropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                <div
+                  className="block px-4 py-2 text-red-700 text-sm hover:bg-gray-100 cursor-pointer"
+                  onClick={() => logout()}
+                >
+                  Sign out
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Profile dropdown */}
           <div className="ml-3 relative">

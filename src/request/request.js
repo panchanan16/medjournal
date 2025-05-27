@@ -13,13 +13,18 @@ export async function _GET(endpoint, baseUrl = 'en') {
 }
 
 
-export async function _DELETE(endpoint, baseUrl = 'en') {
+export async function _DELETE(endpoint, baseUrl = 'en', headerToken) {
   console.log(`${baseUrl == 'en' ? entityHead : entityCore}/${endpoint}`)
-  const request = await fetch(`${baseUrl == 'en' ? entityHead : entityCore}/${endpoint}`, {
-    method: 'DELETE',
-    headers: {
+  let reqHead = { 'Content-Type': 'application/json' }
+  if (headerToken) {
+    reqHead = {
+      'Authorization': `Bearer ${headerToken}`,
       'Content-Type': 'application/json'
     }
+  }
+  const request = await fetch(`${baseUrl == 'en' ? entityHead : entityCore}/${endpoint}`, {
+    method: 'DELETE',
+    headers: reqHead
   });
   const response = await request.json();
 
@@ -27,8 +32,8 @@ export async function _DELETE(endpoint, baseUrl = 'en') {
     toast.success(response.message)
     return true
   } else {
-     toast.error(response.message || "Something went wrong while deleting!")
-     return false
+    toast.error(response.message || "Something went wrong while deleting!")
+    return false
   }
 }
 

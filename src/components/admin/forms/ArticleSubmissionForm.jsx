@@ -5,12 +5,12 @@ import { Loader2 } from "lucide-react";
 import { _POST } from "@/request/post_request";
 import { BASE_URL } from "@/config/api.config";
 
-export default function CreateArticleSubmissionForm({ initialValues, editId }) {
+export default function CreateArticleSubmissionForm({ initialValues, users }) {
   const [formData, setFormData] = useState({
     manu_type: initialValues ? initialValues.manu_type : "Normal Process",
     status: initialValues ? initialValues.status : "Pending",
     pay_status: initialValues ? initialValues.pay_status : "Unpaid",
-    user: initialValues ? initialValues.user : 1,
+    user: initialValues ? initialValues.user : "",
     user_name: initialValues ? initialValues.user_name : "",
     user_number: initialValues ? initialValues.user_number : "",
     MRN_number: initialValues ? initialValues.MRN_number : "",
@@ -24,8 +24,14 @@ export default function CreateArticleSubmissionForm({ initialValues, editId }) {
       : "",
     invoice_link: initialValues ? initialValues.invoice : "",
     additional_file_link: initialValues ? initialValues.additional_file : "",
-    editorial_comment: initialValues && initialValues.editorial_comment ? initialValues.editorial_comment : "",
-    published_link: initialValues && initialValues.published_link ? initialValues.published_link : "",
+    editorial_comment:
+      initialValues && initialValues.editorial_comment
+        ? initialValues.editorial_comment
+        : "",
+    published_link:
+      initialValues && initialValues.published_link
+        ? initialValues.published_link
+        : "",
     isReminder: 0,
     submitted_on: initialValues ? initialValues.submitted_on : new Date(),
     updated_on: initialValues ? initialValues.updated_on : new Date(),
@@ -104,6 +110,27 @@ export default function CreateArticleSubmissionForm({ initialValues, editId }) {
           >
             <option value="Fast Process">Fast Process</option>
             <option value="Normal Process">Normal Process</option>
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <label
+            htmlFor="user"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Select A User <span className="text-blue-600">*</span>
+          </label>
+          <select
+            id="user"
+            name="user"
+            defaultValue={formData.user}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="" disabled>Select user from here</option>
+            {users.map((usr, ind) => (              
+              <option value={usr.auth_id} key={ind}>{usr.first_name} {usr.last_name} ({usr.user_role})</option>
+            ))}
           </select>
         </div>
         <div className="space-y-2">

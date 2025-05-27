@@ -2,16 +2,19 @@
 
 import { useState } from 'react';
 import { Mail, Lock, Eye, EyeOff, BookOpen, AlertCircle } from 'lucide-react';
+import { _POST } from '@/request/post_request';
+import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 
 export default function JournalLogin() {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,40 +33,64 @@ export default function JournalLogin() {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    
+
     if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
+    } else if (formData.password.length < 3) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
+
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validateForm();
-    
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    
+
     setIsLoading(true);
     setErrors({});
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      console.log('Login submitted:', formData);
-      // Handle successful login here
-    }, 2000);
+
+    try {
+      const response = await _POST(`auth/login`, formData, 'POST', null, 'core')
+      console.log(response)
+      if (response) {
+        Cookies.set('token', response.token, {
+          expires: 7, 
+          // secure: true, 
+          // sameSite: 'strict' 
+        })
+        Cookies.set('role', response.user.user_role, {
+          expires: 7, 
+          // secure: true, 
+          // sameSite: 'strict' 
+        })
+        Cookies.set('user', response.user.auth_id)
+        localStorage.setItem('user', JSON.stringify(response.user))
+        setIsLoading(false)
+        if (response.user.user_role === 'admin') {
+          router.replace('/admin')
+        } else {
+          router.replace('/auth/user')
+        }
+      }
+
+
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
   };
 
   return (
@@ -96,11 +123,10 @@ export default function JournalLogin() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-200 ${
-                    errors.email 
-                      ? 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-200' 
-                      : 'border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200'
-                  }`}
+                  className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-200 ${errors.email
+                    ? 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-200'
+                    : 'border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200'
+                    }`}
                   placeholder="Enter your email"
                 />
               </div>
@@ -127,11 +153,10 @@ export default function JournalLogin() {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className={`w-full pl-10 pr-12 py-3 border-2 rounded-lg focus:outline-none transition-all duration-200 ${
-                    errors.password 
-                      ? 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-200' 
-                      : 'border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200'
-                  }`}
+                  className={`w-full pl-10 pr-12 py-3 border-2 rounded-lg focus:outline-none transition-all duration-200 ${errors.password
+                    ? 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-200'
+                    : 'border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200'
+                    }`}
                   placeholder="Enter your password"
                 />
                 <button
@@ -151,16 +176,7 @@ export default function JournalLogin() {
             </div>
 
             {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="h-4 w-4 text-red-600 border-2 border-gray-300 rounded focus:ring-red-500 focus:ring-2"
-                />
-                <span className="ml-2 text-sm text-gray-600">Remember me</span>
-              </label>
+            <div className="flex items-center justify-between">             
               <button
                 type="button"
                 className="text-sm text-red-600 hover:text-red-700 font-medium transition-colors"
@@ -171,9 +187,10 @@ export default function JournalLogin() {
 
             {/* Submit Button */}
             <button
-              type="submit"
+              type="button"
+              onClick={handleSubmit}
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-4 rounded-lg font-semibold text-lg shadow-lg hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full bg-gradient-to-r from-red-600 to-red-800 text-white py-3 px-4 rounded-lg font-semibold text-sm shadow-lg hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center gap-3">
@@ -204,10 +221,6 @@ export default function JournalLogin() {
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="text-center mt-8 text-sm text-gray-500">
-          <p>&copy; 2025 Journal Portal. All rights reserved.</p>
-        </div>
       </div>
     </div>
   );

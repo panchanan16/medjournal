@@ -1,10 +1,12 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
 function UserHeader() {
+  const { user, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -36,31 +38,19 @@ function UserHeader() {
             </Link>
 
             <div className="relative">
-              <button onClick={toggleDropdown} className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">
-                <span className="mr-1">admin@medletter.in</span>
+              <button
+                onClick={toggleDropdown}
+                className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
+              >
+                <span className="mr-1">{user && user.email}</span>
                 <ChevronDown size={16} />
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 ring-1 ring-black ring-opacity-5">
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Profile
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Settings
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                  <div className="block px-4 py-2 text-blue-700 text-sm hover:bg-gray-100 cursor-pointer" onClick={()=> logout()}>
                     Sign out
-                  </a>
+                  </div>
                 </div>
               )}
             </div>

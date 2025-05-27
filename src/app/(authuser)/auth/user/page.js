@@ -1,10 +1,19 @@
 import UserSubmissionTable from '@/components/UserSubmissionTable';
 import { _GET } from '@/request/request';
 import Link from 'next/link';
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation';
 
 export default async function userProfilePage() {
-    const submission = await _GET(`manuscript/readAll?user=1`, 'core')
-    console.log(submission)
+    const cookieStore = await cookies()
+    const user = cookieStore.get('user')
+
+    if (!user) {
+       return  redirect('/login')
+    }
+
+    const submission = await _GET(`manuscript/readAllByUser?user=${user.value}`, 'core')
+
 
     return (
         <div className="min-h-screen bg-gray-50">

@@ -2,9 +2,11 @@ import CreateArticleSubmissionForm from "@/components/admin/forms/ArticleSubmiss
 import { _GET } from "@/request/request"
 
 
-async function CreateArticleSubmissionPage() { 
+async function CreateArticleSubmissionPage() {
+    const users = await _GET(`auth/readAll`, 'core')
+
     return (
-        <CreateArticleSubmissionForm initialValues={null} />
+        <CreateArticleSubmissionForm initialValues={null} users={users ? users : []} />
     )
 }
 

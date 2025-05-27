@@ -41,6 +41,7 @@ import "./globals.css";
 import AdminAsidebar from "@/components/admin/AdminAsidebar";
 import Adminheader from "@/components/admin/Adminheader";
 import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -65,19 +66,21 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <main className="bg-gray-50 min-h-screen">
-          <div className="flex h-screen overflow-auto">
-            {/* <!--- Side navbar ---> */}
-            <AdminAsidebar />
-            <div className="flex-1">
-              {/* <!--- Header with search bar  ---> */}
-              <Adminheader />
-              {/* <!--- Main content  ---> */}
-              {children}
+        <AuthProvider>
+          <main className="bg-gray-50 min-h-screen">
+            <div className="flex h-screen overflow-auto">
+              {/* <!--- Side navbar ---> */}
+              <AdminAsidebar />
+              <div className="flex-1">
+                {/* <!--- Header with search bar  ---> */}
+                <Adminheader />
+                {/* <!--- Main content  ---> */}
+                {children}
+              </div>
             </div>
-          </div>
-        </main>
-        <Toaster />
+          </main>
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   );

@@ -5,11 +5,12 @@ import { Loader2 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
-function UserArticleForm({ initialValues }) {
+function UserArticleForm({ initialValues, userId }) {
+  console.log(userId)
   const [formData, setFormData] = useState({
     manu_type: "Normal Process",
     manuscript_title: "",
-    user: 1,
+    user: userId && userId.value,
     user_name: "",
     user_number: "",
     email: "",
@@ -153,10 +154,10 @@ function UserArticleForm({ initialValues }) {
           </label>
           <textarea
             type="text"
-            id="link"
-            name="link"
+            id="keywords"
+            name="keywords"
             required
-            value={formData.link}
+            value={formData.keywords}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter keywords with ; separated..."

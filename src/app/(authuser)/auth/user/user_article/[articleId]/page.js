@@ -1,7 +1,15 @@
 import { _GET } from '@/request/request';
 import { Download, ExternalLink, Eye, FileText, Calendar, Tag, User, Globe, CheckCircle, CreditCard } from 'lucide-react';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export default async function UserArticleDetailsPage({ params }) {
+    const cookieStore = await cookies()
+    const user = cookieStore.get('user')
+
+    if (!user) {
+        return redirect('/login')
+    }
     const { articleId } = await params
     const manuscript = await _GET(`manuscript/readOne?manu_id=${articleId}`, 'core')
 
