@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { _GET } from "@/request/request";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,9 +36,11 @@ export default async function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar policy={response} JournalHeaderData={header ? header : ""} />
-        {children}
-        <Footer FooterData={header ? header : {}} />
+        <AuthProvider>
+          <Navbar policy={response} JournalHeaderData={header ? header : ""} />
+          {children}
+          <Footer FooterData={header ? header : {}} />
+        </AuthProvider>
       </body>
     </html>
   );
