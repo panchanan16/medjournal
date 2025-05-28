@@ -89,9 +89,7 @@ export default function JournalHomeForm({ initialValues }) {
         "core"
       );
       console.log("Form data submitted:", formData);
-      //   for (let [key, value] of submitData.entries()) {
-      //     console.log(`${key}:`, value);
-      //   }
+    
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {

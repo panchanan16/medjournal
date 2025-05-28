@@ -5,6 +5,7 @@ import { Mail, Lock, Eye, EyeOff, BookOpen, AlertCircle } from 'lucide-react';
 import { _POST } from '@/request/post_request';
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
+import Link from 'next/link';
 
 export default function JournalLogin() {
   const [formData, setFormData] = useState({
@@ -66,12 +67,12 @@ export default function JournalLogin() {
       console.log(response)
       if (response) {
         Cookies.set('token', response.token, {
-          expires: 7, 
+          expires: 7,
           // secure: true, 
           // sameSite: 'strict' 
         })
         Cookies.set('role', response.user.user_role, {
-          expires: 7, 
+          expires: 7,
           // secure: true, 
           // sameSite: 'strict' 
         })
@@ -176,7 +177,7 @@ export default function JournalLogin() {
             </div>
 
             {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">             
+            <div className="flex items-center justify-between">
               <button
                 type="button"
                 className="text-sm text-red-600 hover:text-red-700 font-medium transition-colors"
@@ -214,9 +215,11 @@ export default function JournalLogin() {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Don't have an account?{' '}
-              <button className="text-red-600 hover:text-red-700 font-semibold transition-colors">
-                Sign up here
-              </button>
+              <Link href={`/signup`}>
+                <button className="text-red-600 hover:text-red-700 font-semibold transition-colors">
+                  Sign up here
+                </button>
+              </Link>
             </p>
           </div>
         </div>

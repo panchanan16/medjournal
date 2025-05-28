@@ -1,6 +1,7 @@
 "use client";
 
 import { BASE_URL } from "@/config/api.config";
+import { ExternalLink, Tag, FileText } from "lucide-react";
 import { Share2 } from "lucide-react";
 import Link from "next/link";
 import CitationPopup from "./CitationPopup";
@@ -18,10 +19,13 @@ function FullArticle({ articleFull, artId }) {
 
   useEffect(() => {
     async function IncreaseViews() {
-      const incResponse = await _GET(`articlefull/increase/?article_id=${artId}&type=Views`, 'core');
+      const incResponse = await _GET(
+        `articlefull/increase/?article_id=${artId}&type=Views`,
+        "core"
+      );
       return incResponse;
     }
-    console.log("Running 1 times")
+    console.log("Running 1 times");
     IncreaseViews();
   }, []);
 
@@ -44,6 +48,131 @@ function FullArticle({ articleFull, artId }) {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Abstract Section */}
+          <div className="bg-white">
+            {/* Abstract Section */}
+            <div className="mb-8">
+              <div className="border-b-2 border-red-600 pb-2 mb-6">
+                <h2 className="text-xl text-red-600 font-bold flex items-center gap-2">
+                  <FileText className="w-5 h-5" />
+                  Abstract:
+                </h2>
+              </div>
+
+              <div className="text-gray-700 leading-relaxed space-y-4">
+                <p className="text-justify">
+                  {articleFull.abstract}
+                </p>
+              </div>
+            </div>
+
+            {/* Keywords Section */}
+            <div className="mb-8">
+              <div className="border-b-2 border-red-600 pb-2 mb-4">
+                <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+                  <Tag className="w-4 h-4" />
+                  Keywords:
+                </h3>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {articleFull.keywords.split(';').map((keyword, index) => (
+                  <span
+                    key={index}
+                    className="inline-block bg-red-100 hover:bg-red-200 transition-colors duration-200 px-3 py-1 rounded-full text-sm text-red-700 border border-red-300"
+                  >
+                    {keyword}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* DOI and Citation Information */}
+            <div className="mb-8">
+              <div className="border-b-2 border-red-600 pb-2 mb-4">
+                <h3 className="text-lg font-bold text-gray-800">
+                  Article Information:
+                </h3>
+              </div>
+
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-3">
+                {/* DOI */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <span className="font-semibold text-gray-700 text-sm uppercase tracking-wide min-w-fit">
+                    DOI:
+                  </span>
+                  <a
+                    href={articleFull.DOIlink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-red-600 hover:text-red-800 hover:underline transition-colors duration-200 flex items-center gap-1 text-sm break-all"
+                  >
+                    {articleFull.DOIlink}
+                    <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                  </a>
+                </div>
+
+                {/* Publication Date */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <span className="font-semibold text-gray-700 text-sm uppercase tracking-wide min-w-fit">
+                    Published:
+                  </span>
+                  <span className="text-gray-600 text-sm">{new Date(articleFull.published).toLocaleDateString('en-US')}</span>
+                </div>
+
+                {/* Article Type */}
+                {/* <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <span className="font-semibold text-gray-700 text-sm uppercase tracking-wide min-w-fit">
+                    Article Type:
+                  </span>
+                  <span className="text-gray-600 text-sm">
+                    Original Research Article
+                  </span>
+                </div> */}
+
+                {/* Received/Accepted Dates */}
+                {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-200">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1">
+                    <span className="font-semibold text-gray-700 text-xs uppercase tracking-wide">
+                      Received:
+                    </span>
+                    <span className="text-gray-600 text-xs">
+                      March 10, 2023
+                    </span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1">
+                    <span className="font-semibold text-gray-700 text-xs uppercase tracking-wide">
+                      Accepted:
+                    </span>
+                    <span className="text-gray-600 text-xs">
+                      April 28, 2023
+                    </span>
+                  </div>
+                </div> */}
+              </div>
+            </div>
+
+            {/* Citation Box */}
+            {/* <div className="mb-8">
+              <div className="border-b-2 border-red-600 pb-2 mb-4">
+                <h3 className="text-lg font-bold text-gray-800">
+                  How to Cite:
+                </h3>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  <strong>APA Style:</strong> Deka, P. K. (2023). Comprehensive
+                  Analysis of Cancer Epidemiology and Care at IGMC Shimla: A
+                  Five-Year Review of Trends, Treatment Modalities, and
+                  Geographic Disparities in Himachal Pradesh (2018-2022).
+                  <em>Medletter</em>, <em>15</em>(3), 145-162.
+                  https://doi.org/10.1234/medletter.2023.cancer.analysis
+                </p>
+              </div>
+            </div> */}
           </div>
 
           {/* Article Tabs */}

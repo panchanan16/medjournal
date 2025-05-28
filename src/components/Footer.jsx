@@ -89,7 +89,7 @@ const Footer = ({ FooterData }) => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/author-instruction"
+                  href="/online_payments"
                   className="text-gray-300 hover:text-white transition"
                 >
                   Online Payments
