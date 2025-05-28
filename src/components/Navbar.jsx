@@ -13,6 +13,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
     archives: false,
     author: false,
     special: false,
+    ethics: false
   });
 
   const toggleDropdown = (menu) => {
@@ -44,7 +45,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                 className="flex items-center justify-between w-full text-red-800 font-medium hover:text-red-600 transition"
                 onClick={() => toggleDropdown("about")}
               >
-                <span>About</span>
+                <span>Journal Info</span>
                 <ChevronDown
                   size={18}
                   className={`transition-transform ${
@@ -58,19 +59,43 @@ export default function Navbar({ policy, JournalHeaderData }) {
                     href="/about-us"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
-                    Journal Information
+                    About Us
                   </Link>
                   <Link
-                    href="/editorial-policies"
+                    href="/indexing"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
-                    Editorial Board
+                    Indexing
                   </Link>
                   <Link
-                    href="/volume"
+                    href="/editor-in-chief"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
-                    Volumes
+                    Editor in chief
+                  </Link>
+                  <Link
+                    href="/former_board"
+                    className="text-gray-700 hover:text-red-600 transition"
+                  >
+                    Former Editorial board
+                  </Link>
+                  <Link
+                    href="/peer_review_process"
+                    className="text-gray-700 hover:text-red-600 transition"
+                  >
+                    Peer Review Process
+                  </Link>
+                  <Link
+                    href="/supplement_series"
+                    className="text-gray-700 hover:text-red-600 transition"
+                  >
+                    Supplement & Series
+                  </Link>
+                  <Link
+                    href="/testimonials"
+                    className="text-gray-700 hover:text-red-600 transition"
+                  >
+                    Testimonials
                   </Link>
                 </div>
               )}
@@ -82,7 +107,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                 className="flex items-center justify-between w-full text-red-800 font-medium hover:text-red-600 transition"
                 onClick={() => toggleDropdown("archives")}
               >
-                <span>Archives</span>
+                <span>For Authors</span>
                 <ChevronDown
                   size={18}
                   className={`transition-transform ${
@@ -113,7 +138,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                 className="flex items-center justify-between w-full text-red-800 font-medium hover:text-red-600 transition"
                 onClick={() => toggleDropdown("author")}
               >
-                <span>Author Information</span>
+                <span>For Reviewers</span>
                 <ChevronDown
                   size={18}
                   className={`transition-transform ${
@@ -122,6 +147,37 @@ export default function Navbar({ policy, JournalHeaderData }) {
                 />
               </button>
               {dropdownOpen.author && (
+                <div className="pl-4 pt-2 flex flex-col space-y-2">
+                  <Link
+                    href="/authors/guidelines"
+                    className="text-gray-700 hover:text-red-600 transition"
+                  >
+                    Submission Guidelines
+                  </Link>
+                  <Link
+                    href="/authors/review"
+                    className="text-gray-700 hover:text-red-600 transition"
+                  >
+                    Review Process
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <div>
+              <button
+                className="flex items-center justify-between w-full text-red-800 font-medium hover:text-red-600 transition"
+                onClick={() => toggleDropdown("ethics")}
+              >
+                <span>Ethics & Policies</span>
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform ${
+                    dropdownOpen.ethics ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              {dropdownOpen.ethics && (
                 <div className="pl-4 pt-2 flex flex-col space-y-2">
                   <Link
                     href="/authors/guidelines"
@@ -171,7 +227,21 @@ export default function Navbar({ policy, JournalHeaderData }) {
             </div>
 
             <Link
-              href="/submit"
+              href="/archives"
+              className="text-red-800 font-medium hover:text-red-600 transition"
+            >
+              Archieves
+            </Link>
+
+            <Link
+              href="/article-charges"
+              className="text-red-800 font-medium hover:text-red-600 transition"
+            >
+              Article Processing Charges
+            </Link>
+
+            <Link
+              href="/submit_article"
               className="text-red-800 font-medium hover:text-red-600 transition"
             >
               Submit Article

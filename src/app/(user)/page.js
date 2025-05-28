@@ -18,7 +18,7 @@ import BlogsSection from '@/components/BlogSection';
 
 
 export default async function HomePage() {
-  const ArticleLatest = await _GET('article/readAll')
+  const ArticleLatest = await _GET('articleMain/readAll?isInHome=1', 'core')
   const newsAnnouncement = await _GET(`newsAnnouncement/readAll`, 'core')
   const sliders = await _GET(`slider/readAll`, 'core')
   const journal = await _GET('journal/readAll', 'core')
@@ -37,7 +37,7 @@ export default async function HomePage() {
           <div className="grid lg:grid-cols-3 gap-12">
 
             {/* Articles Section */}
-            <HomeArticleTabs ArticleLatest={ArticleLatest ? ArticleLatest.articleList : []} />
+            <HomeArticleTabs ArticleLatest={ArticleLatest ? ArticleLatest : []} />
 
             {/* Enhanced Sidebar */}
             <div className="space-y-8">

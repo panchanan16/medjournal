@@ -16,7 +16,7 @@ export default function AboutLayout({ children }) {
                         <div className="bg-white rounded-xl shadow-md overflow-hidden sticky top-8">
                             <div className="bg-red-800 text-white py-4 px-6">
                                 {/* <h2 className="text-lg font-bold">European Journal of Clinical Pharmacy</h2> */}
-                                <h2 className="text-lg font-bold">International Medicine Journal</h2>                                
+                                <h2 className="text-lg font-bold">Quick links</h2>                                
                             </div>
 
                             <nav className="py-4">

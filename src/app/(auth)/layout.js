@@ -18,9 +18,14 @@ const geistMono = Geist_Mono({
 //   description: "European Journal of Clinical Pharamacy",
 // }
 
+// export const metadata = {
+//   title: "International Medicine Journal",
+//   description: "An International Peer reviewed Journal",
+// };
+
 export const metadata = {
-  title: "International Medicine Journal",
-  description: "An International Peer reviewed Journal",
+  title: process.env.NEXT_PUBLIC_META_TITLE,
+  description: process.env.NEXT_PUBLIC_META_DESCRIPTION,
 };
 
 export default function RootLayout({ children }) {

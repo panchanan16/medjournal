@@ -28,7 +28,7 @@ function UserHeader() {
                 European Journal of Clinical Pharmacy
               </h2> */}
               <h2 className="text-2xl font-bold text-red-700">
-                International Medicine Journal
+                {process.env.NEXT_PUBLIC_APP_NAME}
               </h2>
             </div>
           </div>

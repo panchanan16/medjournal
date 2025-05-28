@@ -17,6 +17,14 @@ function FullArticle({ articleFull, artId }) {
     window.open(shareUrl, "_blank", "noopener,noreferrer");
   };
 
+  async function IncreaseDownloads() {
+    const incResponse = await _GET(
+      `articlefull/increase/?article_id=${artId}&type=downloads`,
+      "core"
+    );
+    return incResponse;
+  }
+
   useEffect(() => {
     async function IncreaseViews() {
       const incResponse = await _GET(
@@ -25,7 +33,6 @@ function FullArticle({ articleFull, artId }) {
       );
       return incResponse;
     }
-    console.log("Running 1 times");
     IncreaseViews();
   }, []);
 
@@ -62,9 +69,7 @@ function FullArticle({ articleFull, artId }) {
               </div>
 
               <div className="text-gray-700 leading-relaxed space-y-4">
-                <p className="text-justify">
-                  {articleFull.abstract}
-                </p>
+                <p className="text-justify">{articleFull.abstract}</p>
               </div>
             </div>
 
@@ -78,7 +83,7 @@ function FullArticle({ articleFull, artId }) {
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {articleFull.keywords.split(';').map((keyword, index) => (
+                {articleFull.keywords.split(";").map((keyword, index) => (
                   <span
                     key={index}
                     className="inline-block bg-red-100 hover:bg-red-200 transition-colors duration-200 px-3 py-1 rounded-full text-sm text-red-700 border border-red-300"
@@ -119,7 +124,11 @@ function FullArticle({ articleFull, artId }) {
                   <span className="font-semibold text-gray-700 text-sm uppercase tracking-wide min-w-fit">
                     Published:
                   </span>
-                  <span className="text-gray-600 text-sm">{new Date(articleFull.published).toLocaleDateString('en-US')}</span>
+                  <span className="text-gray-600 text-sm">
+                    {new Date(articleFull.published).toLocaleDateString(
+                      "en-US"
+                    )}
+                  </span>
                 </div>
 
                 {/* Article Type */}
@@ -212,6 +221,7 @@ function FullArticle({ articleFull, artId }) {
             <div className="space-y-3">
               <div className="flex justify-between items-center text-sm">
                 <Link
+                  onClick={IncreaseDownloads}
                   href={`${BASE_URL}${articleFull.pdflink}`}
                   className="text-red-700 hover:underline flex items-center gap-2"
                 >
@@ -219,7 +229,7 @@ function FullArticle({ articleFull, artId }) {
                   PDF
                 </Link>
                 <span className="text-gray-500">
-                  {articleFull.metrics.views} views
+                  {articleFull.metrics.downloads} downloads
                 </span>
               </div>
 
@@ -232,7 +242,7 @@ function FullArticle({ articleFull, artId }) {
                   Full Text
                 </Link>
                 <span className="text-gray-500">
-                  {articleFull.metrics.downloads} views
+                  {articleFull.metrics.views} views
                 </span>
               </div>
 
@@ -244,9 +254,6 @@ function FullArticle({ articleFull, artId }) {
                   <DocumentTextIcon className="h-4 w-4" />
                   Download XML
                 </Link>
-                <span className="text-gray-500">
-                  {articleFull.metrics.downloads} views
-                </span>
               </div>
 
               <div className="flex justify-between items-center text-sm">

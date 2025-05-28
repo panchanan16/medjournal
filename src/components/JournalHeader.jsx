@@ -29,7 +29,7 @@ const JournalHeader = ({ isMenuOpen, setIsMenuOpen, Data }) => {
             {/* <Link href="/faqs" className="text-sm hover:text-red-100 transition">FAQs</Link> */}
           </div>
           {!user && (
-            <div className="flex items-center space-x-2">
+            <div className="hidden sm:flex items-center space-x-2">
               <Link href={"/login"}>
                 <button className="px-3 py-1 text-xs bg-white text-red-600 font-semibold border border-red-600 rounded-lg hover:bg-red-100 transition duration-200">
                   Login

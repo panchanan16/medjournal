@@ -1,11 +1,28 @@
 "use client";
 
 import { BASE_URL } from "@/config/api.config";
+import { _GET } from "@/request/request";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function HomeArticleTabs({ ArticleLatest }) {
   const [activeTab, setActiveTab] = useState("current");
+  const [otherTabData, setOtherTabData] = useState(ArticleLatest);
+
+  useEffect(() => {
+    async function tabSwitch() {
+      if (activeTab == "funded") {
+        const data = await _GET(`articleMain/readAll?isNihFunded=1`, "core");
+        setOtherTabData(data);
+      } else if (activeTab == "popular") {
+        const data = await _GET(`articleMain/readAll?isMostRead=1`, "core");
+        setOtherTabData(data);
+      } else {
+        setOtherTabData(ArticleLatest);
+      }
+    }
+    tabSwitch();
+  }, [activeTab]);
 
   return (
     <div className="lg:col-span-2">
@@ -35,15 +52,20 @@ function HomeArticleTabs({ ArticleLatest }) {
       {/* Featured Article */}
       <article className="bg-white rounded-lg shadow-lg border border-gray-100 p-5 mb-8 hover:shadow-xl transition-shadow duration-300">
         <div className="flex flex-col lg:items-start space-y-6 lg:space-y-0 lg:space-x-6">
-          {ArticleLatest.length &&
-            ArticleLatest.map((article, key) => (
-              <div className="flex-1 w-full border-b-2 border-gray-200 mb-3" key={key}>
+          {otherTabData.length &&
+            otherTabData.map((article, key) => (
+              <div
+                className="flex-1 w-full border-b-2 border-gray-200 mb-3"
+                key={key}
+              >
                 <div className="flex items-center space-x-3 mb-4">
                   <span className="bg-green-100 text-green-700 font-semibold text-xs px-3 py-1.5 rounded-full">
                     {article.articleType}
                   </span>
                 </div>
-                <Link href={`/article-read/${article.ariticle_id}/${article.url}`}>
+                <Link
+                  href={`/article-read/${article.ariticle_id}/${article.url}`}
+                >
                   <h3 className="text-xl font-bold text-gray-900 mb-4 leading-tight hover:text-red-600 cursor-pointer transition-colors">
                     {article.title}
                   </h3>
@@ -57,14 +79,17 @@ function HomeArticleTabs({ ArticleLatest }) {
                       PDF Pages
                     </span>
                   </Link>
-                  <Link href={`/article-read/${article.ariticle_id}`}>
+                  <Link href={`/article-read/${article.ariticle_id}/${article.url}`}>
                     <span className="bg-purple-50 text-purple-700 text-xs px-3 py-1.5 rounded-full border border-purple-200">
                       Full Text
                     </span>
                   </Link>
                   {article.published_date && (
                     <span className="bg-orange-50 text-orange-700 text-xs px-3 py-1.5 rounded-full border border-orange-200">
-                      Published On : {new Date(article.published_date).toLocaleDateString('en-US')}
+                      Published On :{" "}
+                      {new Date(article.published_date).toLocaleDateString(
+                        "en-US"
+                      )}
                     </span>
                   )}
                 </div>

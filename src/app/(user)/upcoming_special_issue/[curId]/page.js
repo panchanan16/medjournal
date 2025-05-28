@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/config/api.config";
 import { _GET } from "@/request/request";
 import Link from "next/link";
 
@@ -40,7 +41,7 @@ export default async function SeriesDetail({ params }) {
 
                     <div className="p-3 md:p-6">
                         <div className="mb-6 bg-red-50 p-4 rounded-lg border border-red-100">
-                            <h2 className="text-lg font-semibold text-red-800 mb-2">Guest Editors</h2>                          
+                            <h2 className="text-lg font-semibold text-red-800 mb-2">Guest Editors</h2>
                             {specialIssueMain?.authors?.map((editor, index) => (
                                 <div key={index} className="last:mb-0 mt-5">
                                     <span className="font-semibold">{editor.name}</span>
@@ -56,30 +57,36 @@ export default async function SeriesDetail({ params }) {
                             <div className="space-y-4">
                                 {specialIssueMain?.articles?.map((article, index) => (
                                     <div key={index} className="p-4 border border-gray-200 rounded-lg hover:bg-red-50 transition-colors">
-                                        <h3 className="font-medium text-red-700">{article.title}</h3>
-                                        {/* <p className="text-gray-600 text-sm mt-1">{article.authors}</p> */}
+                                        <Link href={`/article-read/${article.ariticle_id}/${article.url}`}>
+                                            <h3 className="font-medium text-red-700">{article.title}</h3>
+                                        </Link>
                                         <div className="mt-2 flex justify-between items-center">
                                             <div className="flex gap-2">
-                                                <a
-                                                    href="#"
+                                                <span
+                                                    className={`text-xs px-3 py-1 rounded transition bg-yellow-100 text-yellow-700 hover:bg-yellow-200`}
+                                                >
+                                                    {article.articleType}
+                                                </span>
+                                                <Link
+                                                    href={`/article-read/${article.ariticle_id}/${article.url}`}
                                                     className={`text-xs px-3 py-1 rounded transition ${3 === "Open Access"
                                                         ? "bg-green-100 text-green-700 hover:bg-green-200"
                                                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                                                         }`}
                                                 >
                                                     {`Full text`}
-                                                </a>
-                                                <a
-                                                    href="#"
+                                                </Link>
+                                                <Link
+                                                    href={`${BASE_URL}${article.pdflink}`}
                                                     className={`text-xs px-3 py-1 rounded transition ${3 === "Open Access"
                                                         ? "bg-green-100 text-green-700 hover:bg-green-200"
                                                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                                                         }`}
                                                 >
                                                     {`Get PDF`}
-                                                </a>
+                                                </Link>
                                             </div>
-                                            <Link href={`/article-read/${article.ariticle_id}`} className="text-red-600 hover:text-red-800 text-sm font-medium inline-flex items-center">
+                                            <Link href={`/article-read/${article.ariticle_id}/${article.url}`} className="text-red-600 hover:text-red-800 text-sm font-medium inline-flex items-center">
                                                 Read article
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
