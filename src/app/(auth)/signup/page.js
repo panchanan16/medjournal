@@ -163,10 +163,10 @@ export default function SignupForm() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-red-50 to-red-100 py-8 px-4">
             <div className="max-w-2xl mx-auto">
-                <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <div className="bg-white rounded-lg shadow-2xl overflow-hidden">
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-red-600 to-red-700 px-8 py-6">
-                        <h1 className="text-3xl font-bold text-white text-center">
+                    <div className="bg-gradient-to-r from-red-600 to-red-700 px-5 py-3">
+                        <h1 className="text-xl font-bold text-white text-center">
                             Join Our Journal
                         </h1>
                         <p className="text-red-100 text-center mt-2">
@@ -175,7 +175,7 @@ export default function SignupForm() {
                     </div>
 
                     {/* Form */}
-                    <div className="p-8 space-y-6">
+                    <div className="p-6 space-y-6">
                         {/* Profile Image Upload */}
                         <div className="flex justify-center">
                             <div className="relative">
@@ -363,9 +363,9 @@ export default function SignupForm() {
                             type="button"
                             onClick={(e) => handleSubmit(e)}
                             disabled={isSubmitting}
-                            className={`w-full py-4 px-6 rounded-lg font-semibold text-white transition-all duration-200 ${isSubmitting
+                            className={`w-full py-3 px-5 rounded-lg font-semibold text-white transition-all duration-200 ${isSubmitting
                                 ? 'bg-red-400 cursor-not-allowed'
-                                : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 transform hover:scale-[1.02] shadow-lg hover:shadow-xl'
+                                : 'bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-800 transform hover:scale-[1.02] shadow-lg hover:shadow-xl'
                                 }`}
                         >
                             {isSubmitting ? (

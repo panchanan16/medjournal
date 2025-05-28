@@ -13,10 +13,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// export const metadata = {
+//   title: "EJCP-2385-409X",
+//   description: "European Journal of Clinical Pharamacy",
+// }
+
 export const metadata = {
-  title: "EJCP-2385-409X",
-  description: "European Journal of Clinical Pharamacy",
-}
+  title: "International Medicine Journal",
+  description: "An International Peer reviewed Journal",
+};
 
 export default function RootLayout({ children }) {
   return (

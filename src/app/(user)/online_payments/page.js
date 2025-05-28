@@ -19,23 +19,23 @@ export default function PaymentUI() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+          <h1 className="text-xl sm:text-2xl lg:text-2xl font-bold text-gray-800 mb-2">
             Choose Your Payment Method
           </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 text-sm max-w-2xl mx-auto">
             Secure and convenient payment options for authors worldwide
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Foreign Authors Section */}
-          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
+          <div className="bg-white rounded-lg shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
             <div className="bg-gradient-to-r from-red-600 to-red-700 p-6 sm:p-8">
               <div className="flex items-center gap-3 mb-4">
                 <Globe className="w-8 h-8 text-white" />
-                <h2 className="text-2xl sm:text-3xl font-bold text-white">Foreign Authors</h2>
+                <h2 className="text-xl font-bold text-white">Foreign Authors</h2>
               </div>
-              <p className="text-red-100 text-lg">
+              <p className="text-red-100 text-sm">
                 Pay online in USD (PayPal, Credit Card, Debit Card)
               </p>
             </div>
@@ -137,13 +137,13 @@ export default function PaymentUI() {
           </div>
 
           {/* Indian Authors Section */}
-          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
+          <div className="bg-white rounded-lg shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
             <div className="bg-gradient-to-r from-red-600 to-red-700 p-6 sm:p-8">
               <div className="flex items-center gap-3 mb-4">
                 <MapPin className="w-8 h-8 text-white" />
-                <h2 className="text-2xl sm:text-3xl font-bold text-white">Indian Authors</h2>
+                <h2 className="text-xl font-bold text-white">Indian Authors</h2>
               </div>
-              <p className="text-red-100 text-lg">
+              <p className="text-red-100 text-sm">
                 Pay online in INR using PayUmoney
               </p>
             </div>

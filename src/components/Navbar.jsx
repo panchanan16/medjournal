@@ -383,7 +383,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
             </li>
             <li className="group relative min-w-fit">
               <Link
-                href="/auth/user"
+                href="/submit_article"
                 className="bg-red-700 hover:bg-orange-700 px-4 py-3 inline-block font-medium text-sm transition"
               >
                 Submit Article
