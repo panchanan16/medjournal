@@ -217,7 +217,7 @@ function ArticleMainTab({
                   {IssueForSelect?.length &&
                     IssueForSelect?.map((isu, key) => (
                       <option key={key} value={isu.is_id}>
-                        {isu.issue_name} {`(${isu.volume_name})`}
+                        Issue {isu.issue_name} Vol {`(${isu.volume_name})`}
                       </option>
                     ))}
                 </select>

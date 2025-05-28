@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/config/api.config";
 import Link from "next/link";
 
 const ArticleCard = ({ article, links }) => {
@@ -9,53 +10,29 @@ const ArticleCard = ({ article, links }) => {
         </Link>
       </h3>
 
-      {article.published_date && (
+      <div className="flex flex-wrap gap-2">
+        {article.published_date && (
+          <div className="flex flex-wrap gap-2 mb-3">
+            <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+              Posted on:{" "}
+              {new Date(article.published_date).toLocaleDateString("en-US")}
+            </span>
+          </div>
+        )}
+
         <div className="flex flex-wrap gap-2 mb-3">
-          <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
-            Posted on:{" "}
-            {new Date(article.published_date).toLocaleDateString("en-US")}
+          <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">
+            {article.articleType}
           </span>
         </div>
-      )}
 
-      <div className="flex flex-wrap gap-2">
-        {links.map((link, index) => {
-          const isButton = link === "Get Permission";
-          return isButton ? (
-            <button
-              key={index}
-              className="bg-red-700 text-white text-xs px-3 py-1 rounded hover:bg-red-800 transition flex items-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-3 w-3 mr-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                />
-              </svg>
-              {link}
-            </button>
-          ) : (
-            <a
-              key={index}
-              href="#"
-              className={`text-xs px-3 py-1 rounded transition ${
-                link === "Open Access"
-                  ? "bg-green-100 text-green-700 hover:bg-green-200"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
-            >
-              {link}
-            </a>
-          );
-        })}
+        <div className="flex flex-wrap gap-2 mb-3">
+          <Link href={`${BASE_URL}${article.pdflink}`}>
+            <span className="bg-red-100 text-red-800 cursor-default font-semibold text-xs px-2 py-1 rounded">
+              PDF
+            </span>
+          </Link>
+        </div>
       </div>
     </div>
   );

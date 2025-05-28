@@ -1,11 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Trash2Icon } from "lucide-react";
 import Link from "next/link";
+import { _DELETE } from "@/request/request";
 
 function AllArticles({ articles }) {
   const [selectedArticles, setSelectedArticles] = useState([1]);
+  const [articleList, setArticleList] = useState(articles || []);
+
+  async function deleteItem(e, ID, setItems, items, key) {
+    e.stopPropagation();
+    e.preventDefault();
+    const response = await _DELETE(`article/remove?ariticle_id=${ID}`);
+    if (response) {
+      setItems(items.filter((el) => el[key] !== ID));
+    }
+  }
 
   return (
     <>
@@ -44,12 +55,12 @@ function AllArticles({ articles }) {
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
               >
-                Status
+                Action
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {articles.map((article, id) => (
+            {articleList.map((article, id) => (
               <tr
                 key={id}
                 className={`hover:bg-red-50 transition-colors ${
@@ -57,11 +68,7 @@ function AllArticles({ articles }) {
                 }`}
               >
                 <td className="px-4 py-4 whitespace-nowrap">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
-                    // checked={selectedArticles.includes(article.id)}
-                  />
+                  {id + 1}
                 </td>
                 <td className="px-4 py-4">
                   <Link href={`articles/addArticle/${article.ariticle_id}`}>
@@ -87,9 +94,9 @@ function AllArticles({ articles }) {
                       In Press
                     </span>
                   ) : (
-                    <button className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 hover:bg-red-200">
-                      <X size={14} className="mr-1" />
-                      Dismiss
+                    <button onClick={(e)=> deleteItem(e, article.ariticle_id, setArticleList, articleList, 'ariticle_id') } className="inline-flex items-center cursor-pointer px-2 py-1 rounded text-xs font-medium bg-red-100 text-red-800 hover:bg-red-200">
+                      <Trash2Icon size={14} className="mr-1" />
+                      Delete
                     </button>
                   )}
                 </td>
@@ -107,8 +114,7 @@ function AllArticles({ articles }) {
               Add A Article
             </button>
           </Link>
-        </div>
-        <div className="text-sm text-gray-700">1 article selected</div>
+        </div>     
       </div>
     </>
   );

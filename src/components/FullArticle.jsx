@@ -55,7 +55,7 @@ function FullArticle({ articleFull, artId }) {
             {/* Abstract Section */}
             <div className="mb-8">
               <div className="border-b-2 border-red-600 pb-2 mb-6">
-                <h2 className="text-xl text-red-600 font-bold flex items-center gap-2">
+                <h2 className="text-xl text-gray-800 font-bold flex items-center gap-2">
                   <FileText className="w-5 h-5" />
                   Abstract:
                 </h2>

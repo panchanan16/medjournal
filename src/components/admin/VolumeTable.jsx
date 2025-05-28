@@ -41,7 +41,7 @@ function VolumeTable({ volumes }) {
                 <td className="px-4 py-4">
                   <Link href={`volume/create/${vol.volume_id}`}>
                     <div className="text-sm font-medium text-gray-800 hover:text-red-700 cursor-pointer">
-                      {vol.volume_name}
+                      Volume {vol.volume_name}
                     </div>
                   </Link>
                 </td>             

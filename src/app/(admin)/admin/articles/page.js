@@ -2,9 +2,7 @@ import AllArticles from '@/components/admin/AllArticles';
 import { _GET } from '@/request/request';
 
 export default async function ArticlesPreview() {
-  // Sample data for preview (simplified version)
   const articles = await _GET(`article/readAll`)
-  console.log(articles)
 
   
   return (

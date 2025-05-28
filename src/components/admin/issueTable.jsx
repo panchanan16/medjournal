@@ -1,10 +1,22 @@
-'use client'
+"use client";
 
+import { _DELETE } from "@/request/request";
+import { Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
 function IssueTable({ issues }) {
   const [selectedArticles, setSelectedArticles] = useState([1]);
+  const [issueList, setIssueList] = useState(issues || []);
+
+  async function deleteItem(e, ID, setItems, items, key) {
+    e.stopPropagation();
+    e.preventDefault();
+    const response = await _DELETE(`issue/remove?id=${ID}`);
+    if (response) {
+      setItems(items.filter((el) => el[key] !== ID));
+    }
+  }
 
   return (
     <>
@@ -20,31 +32,38 @@ function IssueTable({ issues }) {
                 className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
               >
                 Issues Name
-              </th>                      
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {issues.map((issue, id) => (
+            {issueList.map((issue, id) => (
               <tr
                 key={id}
                 className={`hover:bg-red-50 transition-colors ${
                   selectedArticles.includes(issue.is_id) ? "bg-red-50" : ""
                 }`}
               >
-                <td className="px-4 py-4 whitespace-nowrap">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
-                    // checked={selectedArticles.includes(article.id)}
-                  />
-                </td>
-                <td className="px-4 py-4">
+                <td className="px-4 py-4 whitespace-nowrap">{id + 1}</td>
+                <td className="px-4 py-4 flex justify-between">
                   <Link href={`articles/addArticle/${issue.is_id}`}>
                     <div className="text-sm font-medium text-gray-800 hover:text-red-700 cursor-pointer">
-                      {issue.issue_name}
+                      Issue {issue.issue_name} (Vol {issue.volume_name})
                     </div>
                   </Link>
-                </td>             
+                  <span
+                    onClick={(e) =>
+                      deleteItem(
+                        e,
+                        issue.is_id,
+                        setIssueList,
+                        issueList,
+                        "is_id"
+                      )
+                    }
+                  >
+                    <Trash2Icon className="text-red-600 cursor-pointer" />
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -54,22 +73,12 @@ function IssueTable({ issues }) {
       {/* Action Bar */}
       <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t border-gray-200">
         <div className="flex space-x-2">
-          <select className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md">
-            <option>Action...</option>
-            <option>Download Selected</option>
-            <option>Mark as Read</option>
-          </select>
-          <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            Go
-          </button>
-
           <Link href={`issues/create`}>
             <button className="min-w-max inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
               Create New Issue
             </button>
           </Link>
         </div>
-        <div className="text-sm text-gray-700">1 article selected</div>
       </div>
     </>
   );
