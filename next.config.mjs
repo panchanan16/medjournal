@@ -17,6 +17,11 @@ const nextConfig = {
         hostname: 'app.farmclin.es',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'app.theinternationalmedicine.com',
+        pathname: '/**',
+      },
     ],
   },
 };
