@@ -12,7 +12,7 @@ function AuthUserTable({ Users }) {
   async function deleteItem(e, ID, setItems, items, key) {
     e.stopPropagation();
     e.preventDefault();
-    const response = await _DELETE(`auth/remove?auth_id=1`, 'core');
+    const response = await _DELETE(`auth/remove?auth_id=${ID}`, 'core');
     if (response) {
       setItems(items.filter((el) => el[key] !== ID));
     }

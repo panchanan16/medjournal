@@ -101,7 +101,7 @@ function AdminAsidebar() {
           <div className="flex items-center h-16 flex-shrink-0 px-4 bg-red-900">
             <h1 className="text-sm font-bold text-white">Admin Panel</h1>
           </div>
-          <div className="flex-1 flex flex-col overflow-y-auto">
+          <div className="flex-1 flex flex-col overflow-y-auto scrollbar">
             <nav className="flex-1 px-2 py-4 space-y-1">
               {/* Dashboard Section */}
 

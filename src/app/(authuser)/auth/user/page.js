@@ -3,13 +3,14 @@ import { _GET } from '@/request/request';
 import Link from 'next/link';
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation';
+import RedirectUnAuthUser from '@/components/authuser/RedirectUnAuthUser';
 
 export default async function userProfilePage() {
     const cookieStore = await cookies()
     const user = cookieStore.get('user')
 
     if (!user) {
-       return  redirect('/login')
+        return redirect('/login')
     }
 
     const submission = await _GET(`manuscript/readAllByUser?user=${user.value}`, 'core')
@@ -17,7 +18,8 @@ export default async function userProfilePage() {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Header */}
+            {/* Authentcation */}
+            <RedirectUnAuthUser />
             {/* Main content */}
             <div className="flex">
                 {/* Content area */}

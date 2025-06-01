@@ -36,3 +36,28 @@ body {
 .tox-tinymce-aux textarea {
   display: none !important;
 }
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin; /* Firefox */
+  }
+
+  .scrollbar-thumb-rounded {
+    scrollbar-color: #a3a3a3 transparent;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #f7a5a5;
+    border-radius: 9999px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+

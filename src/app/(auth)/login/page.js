@@ -79,11 +79,16 @@ export default function JournalLogin() {
         Cookies.set('user', response.user.auth_id)
         localStorage.setItem('user', JSON.stringify(response.user))
         setIsLoading(false)
-        if (response.user.user_role === 'admin') {
-          router.replace('/admin')
+        if (response.user.isEmailVerified) {
+          if (response.user.user_role === 'admin') {
+            router.replace('/admin')
+          } else {
+            router.replace('/auth/user')
+          }
         } else {
-          router.replace('/auth/user')
+          router.replace('/auth/emailverify')
         }
+
       }
 
 
