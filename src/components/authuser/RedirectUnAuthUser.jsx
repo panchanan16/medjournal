@@ -11,13 +11,13 @@ function RedirectUnAuthUser() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user && !token) {
+    if (!token && !user) {
       return router.replace("/login");
-    } else if (user && !user.isEmailVerified) {
+    } else if (user && user.isEmailVerified == 0) {
       return router.replace("/auth/emailverify");
     }
-  }, []);
-  
+  }, [user]);
+
   return <></>;
 }
 
