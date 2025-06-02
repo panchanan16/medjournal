@@ -1,3 +1,4 @@
+import RedirectUnAuthUser from '@/components/authuser/RedirectUnAuthUser';
 import { _GET } from '@/request/request';
 import { Download, ExternalLink, Eye, FileText, Calendar, Tag, User, Globe, CheckCircle, CreditCard } from 'lucide-react';
 import { cookies } from 'next/headers';
@@ -15,6 +16,7 @@ export default async function UserArticleDetailsPage({ params }) {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+            <RedirectUnAuthUser />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Main Content */}

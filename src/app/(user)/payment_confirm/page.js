@@ -33,7 +33,7 @@ const PaymentConfirmation = () => {
                             amount: paymentIntent.amount,
                             currency: 'usd',
                             created: new Date(paymentIntent.created * 1000).toDateString(),
-                        });;
+                        });
                         break;
                     case 'processing':
                         setPaymentStatus('processing');
@@ -66,8 +66,18 @@ const PaymentConfirmation = () => {
 
     useEffect(() => {
         const paymentIntentId = searchParams.get('payment_intent_client_secret');
+        const razorpayId = searchParams.get('payment_ref');
+        const razor_amount = searchParams.get('amount');
         if (paymentIntentId) {
             confirmPayment(paymentIntentId);
+        } else {
+            setPaymentStatus('success');
+            setPaymentDetails({
+                id: razorpayId,
+                amount: razor_amount,
+                currency: '₹',
+                created: null,
+            });
         }
     }, []);
 
@@ -148,15 +158,19 @@ const PaymentConfirmation = () => {
                                 <div className="flex justify-between">
                                     <span className="text-gray-600">Amount:</span>
                                     <span className="font-semibold text-gray-900">
-                                        ${(paymentDetails.amount / 100).toFixed(2)} {paymentDetails.currency.toUpperCase()}
+                                        {paymentDetails.currency.toUpperCase() == 'USD' ? '$' : paymentDetails.currency.toUpperCase()} {(paymentDetails.amount / 100).toFixed(2)} 
                                     </span>
                                 </div>
-                                <div className="flex justify-between">
-                                    <span className="text-gray-600">Date:</span>
-                                    <span className="text-gray-900">
-                                        {new Date(paymentDetails.created).toLocaleDateString('en-US')}
-                                    </span>
-                                </div>
+                                {
+                                    paymentDetails.created && (
+                                        <div className="flex justify-between">
+                                            <span className="text-gray-600">Date:</span>
+                                            <span className="text-gray-900">
+                                                {new Date(paymentDetails.created).toLocaleDateString('en-US')}
+                                            </span>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     )}

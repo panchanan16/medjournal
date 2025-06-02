@@ -5,10 +5,11 @@ import { Mail, RefreshCw, CheckCircle, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie'
+import { entityCore } from '@/config/api.config';
 
 
 export default function EmailVerificationPage() {
-    const { user } = useAuth()
+    const { user, updateUser } = useAuth()
     const [isResending, setIsResending] = useState(false);
     const [resendSuccess, setResendSuccess] = useState(false);
     const router = useRouter()
@@ -23,16 +24,23 @@ export default function EmailVerificationPage() {
         }, 2000);
     };
 
-    console.log(user)
-
     useEffect(() => {
-        const token = Cookies.get('token')
-        if (!token) {
-            return router.replace('/login')
-        } else if (token && user && user.isEmailVerified) {
-            return router.replace('/auth/user')
+        async function verifyUserEmailToken() {
+            const token = Cookies.get('token')
+            if (!token) {
+                return router.replace('/login')
+            } else {
+                const getUser = await fetch(`${entityCore}/auth/verifyToken`, {method: 'GET', headers: {authorization: `Bearer ${token}` }})
+                const user = await getUser.json()
+
+                if (user && user.status && user.data.isEmailVerified == 1) {
+                    updateUser(user.data)
+                    return router.replace('/auth/user')
+                }
+            }
         }
-    }, [user])
+        verifyUserEmailToken()
+    }, [])
 
 
 
@@ -107,7 +115,7 @@ export default function EmailVerificationPage() {
                         ) : (
                             <>
                                 <Mail className="w-4 h-4" />
-                                <span>Resend Verification Email</span>
+                                <span>Refresh Now</span>
                             </>
                         )}
                     </button>

@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import { _DELETE } from '@/request/request'
 import { _POST } from '@/request/post_request'
+import { entityCore } from '@/config/api.config'
 
 const AuthContext = createContext()
 
@@ -15,37 +16,22 @@ export function AuthProvider({ children }) {
 
     // Load user data on app start
     useEffect(() => {
-        const savedUser = localStorage.getItem('user')
-        const token = Cookies.get('token')
-        if (savedUser && token) {
-            setUser(JSON.parse(savedUser))
+        async function loadUser() {
+            const token = Cookies.get('token')
+            const getUser = await fetch(`${entityCore}/auth/verifyToken`, { method: 'GET', headers: { authorization: `Bearer ${token}` } })
+            const user = await getUser.json()
+            setLoading(false)
+            if (user && user.status && user.data && user.data.isActive == 1) {
+                updateUser(user.data)
+                return;
+            } else {
+                return route.replace('/login')
+            }
         }
-        setLoading(false)
+
+        loadUser()
+
     }, [])
-
-    //   const login = async (email, password) => {
-    //     try {
-    //       const response = await fetch('/api/auth/login', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({ email, password })
-    //       })
-
-    //       const data = await response.json()
-
-    //       if (response.ok) {
-    //         // Store token and user data
-    //         localStorage.setItem('token', data.token)
-    //         localStorage.setItem('user', JSON.stringify(data.user))
-
-    //         setUser(data.user)
-    //         return { success: true }
-    //       }
-    //       return { success: false, error: data.message }
-    //     } catch (error) {
-    //       return { success: false, error: 'Network error' }
-    //     }
-    //   }
 
     const logout = async () => {
         try {
@@ -65,9 +51,9 @@ export function AuthProvider({ children }) {
     }
 
     const updateUser = (userData) => {
-        const updatedUser = { ...user, ...userData }
-        setUser(updatedUser)
-        localStorage.setItem('user', JSON.stringify(updatedUser))
+        setUser(userData)
+        localStorage.removeItem('user')
+        localStorage.setItem('user', JSON.stringify(userData))
     }
 
     return (

@@ -1,5 +1,5 @@
 import UserArticleForm from '@/components/admin/forms/UserArticleForm'
-import { FastProcess, NormalProcess } from '@/components/ProcessSubmission'
+import RedirectUnAuthUser from '@/components/authuser/RedirectUnAuthUser';
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation';
 
@@ -12,11 +12,8 @@ async function CreateUserArticlePAge() {
     }
 
     return (
-        <section className="mx-10">
-            {/* <div className="max-w-[28rem] mt-5">
-                <FastProcess />
-                <NormalProcess />
-            </div> */}
+        <section className="mx-10">            
+            <RedirectUnAuthUser />
             <UserArticleForm initialValues={null} userId={user} />
         </section>
     )
