@@ -24,9 +24,7 @@ export function AuthProvider({ children }) {
             if (user && user.status && user.data && user.data.isActive == 1) {
                 updateUser(user.data)
                 return;
-            } else {
-                return route.replace('/login')
-            }
+            } 
         }
 
         loadUser()
