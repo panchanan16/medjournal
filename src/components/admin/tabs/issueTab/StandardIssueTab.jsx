@@ -1,15 +1,20 @@
+"use client";
+
 import { _POST } from "@/request/post_request";
 import React, { useState } from "react";
 
-function StandardIssueTab({ VolumeList, activeTab, setIssueId }) {
-  const InitialValue = {
-    isPress: 1,
-    volume_id: "",
-    issue_name: "",
-    issue_month: "",
-  };
-
-  const [formData, setFormData] = useState(InitialValue);
+function StandardIssueTab({
+  VolumeList,
+  activeTab,
+  setIssueId,
+  initialValues,
+}) {
+  const [formData, setFormData] = useState({
+    isPress: 0,
+    volume_id: initialValues ? initialValues.volume_id : "",
+    issue_name: initialValues ? initialValues.issue_name : "",
+    issue_month: initialValues ? initialValues.issue_month : "",
+  });
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -27,11 +32,8 @@ function StandardIssueTab({ VolumeList, activeTab, setIssueId }) {
     e.preventDefault();
     const payload = formData;
     try {
-      const response = await _POST(`issue/create`, payload, "POST");
-    //   console.log(response);
-    //   console.log("Saved:", payload);
-      setIssueId(response?.is_id
-)
+      const response = await _POST(`issue/${initialValues ? `update?is_id=${initialValues.is_id}`: 'create'}`, payload, `${initialValues ? 'PUT': 'POST'}`);
+      setIssueId(response?.is_id);
     } catch (error) {
       console.error("Error posting article:", error);
     }

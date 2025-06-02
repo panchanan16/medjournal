@@ -2,22 +2,26 @@ import { _POST } from "@/request/post_request";
 import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
+import FileUploadForTextEditor from "../../FileUploadForTextEditor";
 const TextEditor = dynamic(() => import("@/components/admin/TextEditor"), {
   ssr: false,
 });
 
-function SpecialIssueTab({ activeTab, IssueId }) {
+function SpecialIssueTab({ activeTab, IssueId, initialValues }) {
   console.log("Article Id section tab is: ", IssueId);
   const editorRef = useRef("");
+  console.log(initialValues, "from special Issue");
   const [speciaIssue, setSpecialIssue] = useState({
-    issueId: "",
-    isSpecial: 1,
-    isPublished: 1,
-    publish_date: "",
-    submission_deadline: "",
-    issueCoverImgUrl: "http://ss.com/img=1",
-    special_issue_title: "",
-    special_issue_about: "",
+    issueId: initialValues ? initialValues.issueId : "",
+    isSpecial: initialValues ? initialValues.isSpecial : 1,
+    isPublished: initialValues ? initialValues.isPublished : 1,
+    publish_date: initialValues ? initialValues.publish_date : "",
+    submission_deadline: initialValues ? initialValues.submission_deadline : "",
+    issueCoverImgUrl: initialValues
+      ? initialValues.issueCoverImgUrl
+      : "http://ss.com/img=1",
+    special_issue_title: initialValues ? initialValues.special_issue_title : "",
+    special_issue_about: initialValues ? initialValues.special_issue_about : "",
   });
 
   const handleChange = (e) => {
@@ -39,11 +43,17 @@ function SpecialIssueTab({ activeTab, IssueId }) {
       if (editorRef.current) {
         speciaIssue.special_issue_about = editorRef.current.getContent();
       }
-      if (IssueId) {
-        payload.issueId = IssueId
-        const response = await _POST(`specialissue/create`, payload, "POST");
-        console.log(response);
-        console.log(payload);
+      if (IssueId || initialValues) {
+        payload.issueId = IssueId || initialValues.issueId;
+        const response = await _POST(
+          `specialissue/${
+            initialValues
+              ? `update?sp_issue_id=${initialValues.sp_issue_id}`
+              : "create"
+          }`,
+          payload,
+          `${initialValues ? "PUT" : "POST"}`
+        );
       } else {
         console.log(payload);
         toast.error("Select or Add a Article first");
@@ -76,7 +86,7 @@ function SpecialIssueTab({ activeTab, IssueId }) {
                   In Special
                 </label>
               </div>
-               <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-3">
                 <input
                   id="isPublished"
                   name="isPublished"
@@ -168,6 +178,7 @@ function SpecialIssueTab({ activeTab, IssueId }) {
             Submit
           </button>
         </form>
+        <FileUploadForTextEditor />
       </div>
     );
   }

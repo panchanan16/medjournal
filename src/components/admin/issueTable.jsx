@@ -45,7 +45,7 @@ function IssueTable({ issues }) {
               >
                 <td className="px-4 py-4 whitespace-nowrap">{id + 1}</td>
                 <td className="px-4 py-4 flex justify-between">
-                  <Link href={`articles/addArticle/${issue.is_id}`}>
+                  <Link href={`issues/create/${issue.is_id}`}>
                     <div className="text-sm font-medium text-gray-800 hover:text-red-700 cursor-pointer">
                       Issue {issue.issue_name} (Vol {issue.volume_name})
                     </div>

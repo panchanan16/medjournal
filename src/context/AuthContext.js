@@ -25,6 +25,8 @@ export function AuthProvider({ children }) {
                 updateUser(user.data)
                 return;
             } 
+
+            return;
         }
 
         loadUser()

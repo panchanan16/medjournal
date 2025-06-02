@@ -5,20 +5,9 @@ import StandardIssueTab from "../tabs/issueTab/StandardIssueTab";
 import SpecialIssueTab from "../tabs/issueTab/SpecialIssueTab";
 import SpeciaEditors from "../tabs/issueTab/SpeciaEditors";
 
-export default function IssueForm({ SelectVolumes }) {
+export default function IssueForm({ SelectVolumes, StandardIssueData, SpecialIssueData }) {
   const [activeTab, setActiveTab] = useState("Issues");
   const [issueId, setIssueId] = useState(null);
-  const [formData, setFormData] = useState({
-    citation_apa: "",
-    citation_mla: "",
-    citation_chicago: "",
-    citation_harvard: "",
-    citation_vancouver: "",
-    // Add fields for other tabs as needed
-    authors: [],
-    sections: [],
-    citations: [],
-  });
 
   const [tabStatus, setTabStatus] = useState({
     Issues: "current",
@@ -26,14 +15,6 @@ export default function IssueForm({ SelectVolumes }) {
     Special_Issues: "pending",
     Special_Authors: "pending",
   });
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
 
   const handleTabClick = (tab) => {
     // Only allow navigation to tabs that aren't disabled
@@ -110,10 +91,10 @@ export default function IssueForm({ SelectVolumes }) {
         </nav>
       </div>
       {/* ARTICLE TAB */}
-      <StandardIssueTab VolumeList={SelectVolumes} activeTab={activeTab} setIssueId={setIssueId} />
+      <StandardIssueTab VolumeList={SelectVolumes} activeTab={activeTab} initialValues={StandardIssueData} setIssueId={setIssueId} />
 
       {/* ARTICLE SECTIONS TAB */}
-      <SpecialIssueTab activeTab={activeTab} IssueId={issueId} />
+      <SpecialIssueTab activeTab={activeTab} IssueId={issueId} initialValues={SpecialIssueData} />
 
       {/* AUTHORS TAB */}
       <SpeciaEditors activeTab={activeTab} IssueId={issueId} />
