@@ -178,7 +178,6 @@ function SpecialIssueTab({ activeTab, IssueId, initialValues }) {
             Submit
           </button>
         </form>
-        <FileUploadForTextEditor />
       </div>
     );
   }

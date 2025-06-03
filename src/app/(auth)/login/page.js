@@ -76,7 +76,11 @@ export default function JournalLogin() {
           // secure: true, 
           // sameSite: 'strict' 
         })
-        Cookies.set('user', response.user.auth_id)
+        Cookies.set('user', response.user.auth_id, {
+          expires: 1,
+          // secure: true, 
+          // sameSite: 'strict' 
+        })
         localStorage.setItem('user', JSON.stringify(response.user))
         setIsLoading(false)
         if (response.user.isEmailVerified) {

@@ -1,3 +1,4 @@
+import { BASE_URL, entityCore } from "@/config/api.config";
 import { Editor } from "@tinymce/tinymce-react";
 
 function TextEditor({ editorRef, initialContent }) {
@@ -12,25 +13,27 @@ function TextEditor({ editorRef, initialContent }) {
         height: 500,
         menubar: true,
         images_upload_url: "postAcceptor.php",
-        images_upload_handler: function (blobInfo, success, failure) {
-          const formData = new FormData();
-          formData.append("file", blobInfo.blob(), blobInfo.filename());
+        images_upload_handler: function (blobInfo, progress) {
+          return new Promise((resolve, reject) => {
+            const formData = new FormData();
+            formData.append("otherfile", blobInfo.blob());
 
-          fetch("/file-upload", {
-            method: "POST",
-            body: formData,
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.location) {
-                success(data.location); 
-              } else {
-                failure("Upload failed: No location returned.");
-              }
+            fetch(`${entityCore}/texteditor/fileupload`, {
+              method: "POST",
+              body: formData,
             })
-            .catch((error) => {
-              failure("HTTP Error: " + error.message);
-            });
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.location) {
+                  resolve(`${BASE_URL}${data.location}`);
+                } else {
+                  reject("Upload failed: No location returned.");
+                }
+              })
+              .catch((error) => {
+                reject("HTTP Error: " + error.message);
+              });
+          });
         },
         plugins: [
           "advlist",

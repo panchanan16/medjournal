@@ -9,19 +9,12 @@ import {
 } from 'lucide-react';
 
 async function AdminDashboard() {
-  const dashboardData = {
-    totalPublished: 1247,
-    totalSubmitted: 892,
-    totalAccepted: 634,
-    totalRejected: 158,
-    totalInProgress: 100,
-  };
-
+  
   const summary = await _GET(`articlefull/summary`, 'core')
   const { submission, published } = summary
 
 
-  const StatCard = ({ icon: Icon, title, value, change, color }) => (
+  const StatCard = ({ icon: Icon, title, value, color }) => (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
       <div className="flex items-center justify-between">
         <div>
@@ -73,7 +66,7 @@ async function AdminDashboard() {
            <StatCard
             icon={TimerOffIcon}
             title="Pending"
-            value={submission && submission?.total_progress ? submission.total_progress : "0"}
+            value={submission && submission?.total_pending ? submission.total_pending : "0"}
             color="bg-orange-600"
           />
         </div>

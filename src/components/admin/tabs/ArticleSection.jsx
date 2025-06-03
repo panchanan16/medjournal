@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import toast from "react-hot-toast";
 import { _POST } from "@/request/post_request";
+import { BASE_URL, entityCore } from "@/config/api.config";
 
 // const Editor = dynamic(() => import("@tinymce/tinymce-react"), {
 //   ssr: false,
@@ -121,6 +122,29 @@ function ArticleSection({
                   value={section.article_content}
                   init={{
                     // selector: "textarea",
+                    images_upload_url: "postAcceptor.php",
+                    images_upload_handler: function (blobInfo, progress) {
+                      return new Promise((resolve, reject) => {
+                        const formData = new FormData();
+                        formData.append("otherfile", blobInfo.blob());
+
+                        fetch(`${entityCore}/texteditor/fileupload`, {
+                          method: "POST",
+                          body: formData,
+                        })
+                          .then((response) => response.json())
+                          .then((data) => {
+                            if (data.location) {
+                              resolve(`${BASE_URL}${data.location}`);
+                            } else {
+                              reject("Upload failed: No location returned.");
+                            }
+                          })
+                          .catch((error) => {
+                            reject("HTTP Error: " + error.message);
+                          });
+                      });
+                    },
                     license_key: "gpl",
                     height: 500,
                     menubar: true,
