@@ -36,6 +36,7 @@ import {
   MagnetIcon,
   MessageSquareDiffIcon,
   User2Icon,
+  LayoutDashboardIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -103,8 +104,22 @@ function AdminAsidebar() {
           </div>
           <div className="flex-1 flex flex-col overflow-y-auto scrollbar">
             <nav className="flex-1 px-2 py-4 space-y-1">
-              {/* Dashboard Section */}
+               {/* <!--- Dashboard Section ---> */}
+              <Link href="/admin">
+                <div
+                  onClick={() => toggleSection("dashboard")}
+                  className={`w-full flex items-center justify-between px-5 py-2 text-sm font-medium rounded-md text-white group ${
+                    isSectionOpen("dashboard") ? "bg-red-700" : "hover:bg-red-700"
+                  }`}
+                >
+                  <div className="flex">
+                    <LayoutDashboardIcon className="mr-3 h-5 w-5" />
+                    <span className="">Dashboard</span>
+                  </div>
+                </div>
+              </Link>
 
+              {/* Home Section */}
               <Link href="/admin/journal-home">
                 <div
                   onClick={() => toggleSection("Issues")}

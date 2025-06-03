@@ -69,7 +69,7 @@ function AllSubmission({ articles }) {
                 }`}
               >
                 <td className="px-4 py-4 whitespace-nowrap">
-                  
+                  {id + 1}
                 </td>
                 <td className="px-4 py-4">
                   <Link href={`article_submission/${article.manu_id}`}>

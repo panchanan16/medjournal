@@ -67,12 +67,12 @@ export default function JournalLogin() {
       console.log(response)
       if (response) {
         Cookies.set('token', response.token, {
-          expires: 7,
+          expires: 1,
           // secure: true, 
           // sameSite: 'strict' 
         })
         Cookies.set('role', response.user.user_role, {
-          expires: 7,
+          expires: 1,
           // secure: true, 
           // sameSite: 'strict' 
         })

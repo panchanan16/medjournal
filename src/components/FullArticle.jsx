@@ -83,7 +83,7 @@ function FullArticle({ articleFull, artId }) {
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {articleFull.keywords.split(";").map((keyword, index) => (
+                {articleFull.keywords.split(",").map((keyword, index) => (
                   <span
                     key={index}
                     className="inline-block bg-red-100 hover:bg-red-200 transition-colors duration-200 px-3 py-1 rounded-full text-sm text-red-700 border border-red-300"
@@ -126,29 +126,34 @@ function FullArticle({ articleFull, artId }) {
                   </span>
                   <span className="text-gray-600 text-sm">
                     {new Date(articleFull.published).toLocaleDateString(
-                      "en-US"
+                      "en-US",
+                      { year: "numeric", month: "long", day: "numeric" }
                     )}
                   </span>
                 </div>
 
                 {/* Article Type */}
-                {/* <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                   <span className="font-semibold text-gray-700 text-sm uppercase tracking-wide min-w-fit">
                     Article Type:
                   </span>
                   <span className="text-gray-600 text-sm">
-                    Original Research Article
+                    {articleFull.type}
                   </span>
-                </div> */}
+                </div>
 
                 {/* Received/Accepted Dates */}
-                {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-200">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-200">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1">
                     <span className="font-semibold text-gray-700 text-xs uppercase tracking-wide">
                       Received:
                     </span>
                     <span className="text-gray-600 text-xs">
-                      March 10, 2023
+                      {articleFull.recieved &&
+                        new Date(articleFull.recieved).toLocaleDateString(
+                          "en-US",
+                          { year: "numeric", month: "long", day: "numeric" }
+                        )}
                     </span>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1">
@@ -156,10 +161,14 @@ function FullArticle({ articleFull, artId }) {
                       Accepted:
                     </span>
                     <span className="text-gray-600 text-xs">
-                      April 28, 2023
+                      {articleFull.accepted &&
+                        new Date(articleFull.accepted).toLocaleDateString(
+                          "en-US",
+                          { year: "numeric", month: "long", day: "numeric" }
+                        )}
                     </span>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
 
@@ -185,14 +194,10 @@ function FullArticle({ articleFull, artId }) {
           </div>
 
           {/* Article Tabs */}
-          <div className="mb-6 border-b">
-            <div className="flex flex-wrap">
-              <button
-                className={`px-4 py-2 font-medium text-red-700 border-b-2 border-red-700`}
-              >
-                Article
-              </button>
-            </div>
+          <div className="border-b-2 border-red-600 pb-2 mb-4">           
+              <h3 className="text-lg font-bold text-gray-800">
+                  Article :
+                </h3>
           </div>
 
           {/* Article Content */}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FileText, Menu, X } from "lucide-react";
+import { FileText, Menu, UserCheckIcon, X } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const JournalHeader = ({ isMenuOpen, setIsMenuOpen, Data }) => {
@@ -28,7 +28,7 @@ const JournalHeader = ({ isMenuOpen, setIsMenuOpen, Data }) => {
             </a>
             {/* <Link href="/faqs" className="text-sm hover:text-red-100 transition">FAQs</Link> */}
           </div>
-          {!user && (
+          {!user ? (
             <div className="hidden sm:flex items-center space-x-2">
               <Link href={"/login"}>
                 <button className="px-3 py-1 text-xs bg-white text-red-600 font-semibold border border-red-600 rounded-lg hover:bg-red-100 transition duration-200">
@@ -41,6 +41,13 @@ const JournalHeader = ({ isMenuOpen, setIsMenuOpen, Data }) => {
                 </button>
               </Link>
             </div>
+          ) : (
+            <Link href={'/auth/user'}>
+              <span className="text-sm flex items-center gap-1 ml-3">
+                <UserCheckIcon className="w-5 h-5" />{" "}
+                {user.first_name + " " + user.last_name}
+              </span>
+            </Link>
           )}
         </div>
         <button

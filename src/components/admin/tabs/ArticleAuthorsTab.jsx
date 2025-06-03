@@ -1,6 +1,7 @@
 "use client";
 
 import { _POST } from "@/request/post_request";
+import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -9,9 +10,9 @@ function ArticleAuthorsTab({
   handleNextSection,
   articleId,
   initialValues,
-  editId
+  editId,
 }) {
-  const [isLoading, setIsloading] = useState(false)
+  const [isLoading, setIsloading] = useState(false);
   const [authors, setAuthors] = useState(
     initialValues
       ? initialValues
@@ -65,7 +66,11 @@ function ArticleAuthorsTab({
     const payload = authors;
     if (articleId || editId) {
       try {
-        const response = await _POST(`articleauthor/${editId ? `update?article_id=${editId}` : 'create'}`, payload, `${editId ? 'PUT': 'POST'}`);
+        const response = await _POST(
+          `articleauthor/${editId ? `update?article_id=${editId}` : "create"}`,
+          payload,
+          `${editId ? "PUT" : "POST"}`
+        );
         console.log("Saved:", response);
         console.log("Saved:", payload);
       } catch (error) {
@@ -94,17 +99,21 @@ function ArticleAuthorsTab({
     }
   };
 
-
   async function generateCitation(e) {
-    e.preventDefault()
+    e.preventDefault();
     setIsloading(true);
     if (articleId || editId) {
-      const response = await _POST(`citation/update?ariticle_id=${articleId || editId}`, {data: "empty"}, 'PUT', null, 'core')
+      const response = await _POST(
+        `citation/update?ariticle_id=${articleId || editId}`,
+        { data: "empty" },
+        "PUT",
+        null,
+        "core"
+      );
       setIsloading(false);
     } else {
-      alert("Article Must be Created First!")
+      alert("Article Must be Created First!");
     }
-    
   }
 
   if (activeTab == "authors") {
@@ -124,7 +133,9 @@ function ArticleAuthorsTab({
                 <input
                   type="text"
                   placeholder="Prefix (e.g., Dr.)"
-                  value={author.authors_prefix == null ? "" : author.authors_prefix}
+                  value={
+                    author.authors_prefix == null ? "" : author.authors_prefix
+                  }
                   onChange={(e) =>
                     handleChange(index, "authors_prefix", e.target.value)
                   }
@@ -142,7 +153,11 @@ function ArticleAuthorsTab({
                 <input
                   type="text"
                   placeholder="Middle Name"
-                  value={author.authors_middlename == null ? "" : author.authors_middlename}
+                  value={
+                    author.authors_middlename == null
+                      ? ""
+                      : author.authors_middlename
+                  }
                   onChange={(e) =>
                     handleChange(index, "authors_middlename", e.target.value)
                   }
@@ -151,7 +166,11 @@ function ArticleAuthorsTab({
                 <input
                   type="text"
                   placeholder="Last Name"
-                  value={author.authors_lastname == null ?  "" : author.authors_lastname}
+                  value={
+                    author.authors_lastname == null
+                      ? ""
+                      : author.authors_lastname
+                  }
                   onChange={(e) =>
                     handleChange(index, "authors_lastname", e.target.value)
                   }
@@ -223,11 +242,19 @@ function ArticleAuthorsTab({
             </button>
             <button
               type="button"
-              onClick={(e)=> generateCitation(e)}
+              onClick={(e) => generateCitation(e)}
               className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700"
             >
-             {isLoading ? "Wait for a while.." : "Generate Citation"} 
+              {isLoading ? "Wait for a while.." : "Generate Citation"}
             </button>
+            <Link href={'/admin/articles'}>
+              <button
+                type="button"                
+                className="bg-red-700 text-white px-6 py-2 rounded hover:bg-red-800"
+              >
+                Go to Articles
+              </button>
+            </Link>
           </div>
         </form>
       </div>

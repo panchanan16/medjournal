@@ -19,13 +19,25 @@ function ArticleSection({
   const [sections, setSections] = useState(
     initialValues
       ? initialValues
-      : [{ad_id: "", ariticle_id: articleId || editId, Article_Heading: "", article_content: "" }]
+      : [
+          {
+            ad_id: "",
+            ariticle_id: articleId || editId,
+            Article_Heading: "",
+            article_content: "",
+          },
+        ]
   );
 
   const addSection = () => {
     setSections([
       ...sections,
-      { ad_id: "", ariticle_id: articleId || editId, Article_Heading: "", article_content: "" },
+      {
+        ad_id: "",
+        ariticle_id: articleId || editId,
+        Article_Heading: "",
+        article_content: "",
+      },
     ]);
   };
 
@@ -42,36 +54,35 @@ function ArticleSection({
   const handleSubmit = async (e) => {
     e.preventDefault();
     sections.length &&
-      sections.map((secItem, ind) => (secItem.ariticle_id = articleId || editId));
+      sections.map(
+        (secItem, ind) => (secItem.ariticle_id = articleId || editId)
+      );
     const payload = { section: sections };
     try {
       if (articleId || editId) {
-        const response = await _POST(`articledetails/${editId ? `update?ariticle_id=${editId}` : 'create'}`, payload, `${editId ? 'PUT' : "POST"}`);
+        const response = await _POST(
+          `articledetails/${
+            editId ? `update?ariticle_id=${editId}` : "create"
+          }`,
+          payload,
+          `${editId ? "PUT" : "POST"}`
+        );
         console.log(response);
+        return response;
       } else {
         toast.error("Select or Add a Article first");
       }
-
-      // const data = await response.json();
-      console.log("Saved:", payload);
     } catch (error) {
       console.error("Error posting article:", error);
     }
   };
 
   const handleSubmitAndContinue = async (e) => {
-    e.preventDefault();
-    const payload = { sections };
     try {
-      // const response = await fetch("/api/articles", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(payload),
-      // });
-
-      // const data = await response.json();
-      console.log("Saved:", payload);
-      handleNextSection();
+      const isSubmit = await handleSubmit(e);
+      if (isSubmit) {
+        handleNextSection();
+      }
     } catch (error) {
       console.error("Error posting article:", error);
     }
@@ -169,7 +180,7 @@ function ArticleSection({
             Submit
           </button>
           <button
-            onClick={handleSubmitAndContinue}
+            onClick={(e) => handleSubmitAndContinue(e)}
             type="submit"
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700"
           >

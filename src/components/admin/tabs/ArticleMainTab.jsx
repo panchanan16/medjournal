@@ -98,16 +98,17 @@ function ArticleMainTab({
       );
       // console.log(response.article_id);
       setArticleId && setArticleId(response.article_id);
-      console.log("Form data submitted:", formData);
+      return response;
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   }
 
-  function handleSubmitAndContinue(params) {
-    handleNextSection();
-    console.log(formData);
-    // setArticleId && setArticleId;
+  async function handleSubmitAndContinue(ev) {
+    const isSubmit = await handleSaveSection(ev);
+    if (isSubmit) {
+      return handleNextSection();
+    }
   }
 
   function generateUrl(e) {
@@ -603,7 +604,7 @@ function ArticleMainTab({
                 <span className="ml-2 text-xs text-gray-600">Old PDF:</span>
                 <a
                   className="text-xs"
-                  href={`http://localhost:3100${formData.pdflink}`}
+                  href={`${BASE_URL}${formData.pdflink}`}
                 >
                   {formData.pdflink && formData.pdflink}
                 </a>
@@ -630,7 +631,7 @@ function ArticleMainTab({
                 <span className="ml-2 text-xs text-gray-600">Old XML:</span>
                 <a
                   className="text-xs"
-                  href={`http://localhost:3100${formData.xmllink}`}
+                  href={`${BASE_URL}${formData.xmllink}`}
                 >
                   {formData.xmllink && formData.xmllink}
                 </a>
@@ -793,7 +794,7 @@ function ArticleMainTab({
             Submit
           </button>
           <button
-            onClick={handleSubmitAndContinue}
+            onClick={(e) => handleSubmitAndContinue(e)}
             type="submit"
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700"
           >

@@ -8,16 +8,17 @@ import { useEffect, useState } from "react";
 function CitationPopup({ isOpen, closetab }) {
   const params = useParams();
   const slug = params.articleId;
-  const [citation, setcitation] = useState(null)
-
-  console.log('rending')
+  const [citation, setcitation] = useState(null);
 
   useEffect(() => {
     async function getCitationData() {
-      const response = await _GET(`citation/readOne?ariticle_id=${slug}`, 'core');
-      setcitation(response)
+      const response = await _GET(
+        `citation/readOne?ariticle_id=${slug}`,
+        "core"
+      );
+      setcitation(response);
     }
-    getCitationData()
+    getCitationData();
   }, [slug]);
 
   return (
@@ -42,33 +43,48 @@ function CitationPopup({ isOpen, closetab }) {
           <ul className="p-2">
             <li className="border-b-gray-500 py-3">
               <h4 className="text-red-600 font-semibold">APA</h4>
-              <p className="text-sm">
-                {citation && citation.citation_apa}
-              </p>
+              <p
+                className="text-sm"
+                dangerouslySetInnerHTML={{
+                  __html: citation && citation.citation_apa,
+                }}
+              ></p>
             </li>
             <li className="border-b-gray-500 py-3">
               <h4 className="text-red-600 font-semibold">MLA</h4>
-              <p className="text-sm">
-                {citation && citation.citation_mla}
-              </p>
+              <p
+                className="text-sm"
+                dangerouslySetInnerHTML={{
+                  __html: citation && citation.citation_mla,
+                }}
+              ></p>
             </li>
             <li className="border-b-gray-500 py-3">
               <h4 className="text-red-600 font-semibold">Chicago</h4>
-              <p className="text-sm">
-                {citation && citation.citation_chicago}
-              </p>
+              <p
+                className="text-sm"
+                dangerouslySetInnerHTML={{
+                  __html: citation && citation.citation_chicago,
+                }}
+              ></p>
             </li>
             <li className="border-b-gray-500 py-3">
               <h4 className="text-red-600 font-semibold">Harvard</h4>
-              <p className="text-sm">
-                {citation && citation.citation_harvard}
-              </p>
+              <p
+                className="text-sm"
+                dangerouslySetInnerHTML={{
+                  __html: citation && citation.citation_harvard,
+                }}
+              ></p>
             </li>
             <li className="border-b-gray-500 py-3">
               <h4 className="text-red-600 font-semibold">Vancouver</h4>
-              <p className="text-sm">
-                {citation && citation.citation_vancouver}
-              </p>
+              <p
+                className="text-sm"
+                dangerouslySetInnerHTML={{
+                  __html: citation && citation.citation_vancouver,
+                }}
+              ></p>
             </li>
           </ul>
         </div>

@@ -11,6 +11,27 @@ function TextEditor({ editorRef, initialContent }) {
         license_key: "gpl",
         height: 500,
         menubar: true,
+        images_upload_url: "postAcceptor.php",
+        images_upload_handler: function (blobInfo, success, failure) {
+          const formData = new FormData();
+          formData.append("file", blobInfo.blob(), blobInfo.filename());
+
+          fetch("/file-upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.location) {
+                success(data.location); 
+              } else {
+                failure("Upload failed: No location returned.");
+              }
+            })
+            .catch((error) => {
+              failure("HTTP Error: " + error.message);
+            });
+        },
         plugins: [
           "advlist",
           "autolink",
