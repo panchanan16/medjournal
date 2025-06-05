@@ -32,7 +32,6 @@ function VolumeByArticle({ AllArticles }) {
     const articles = groupArticlesByType(
       AllArticles ? AllArticles.articles : []
     );
-    console.log(articles);
     setArticleSet(articles);
     setFilterArticle(articles)
   }, []);

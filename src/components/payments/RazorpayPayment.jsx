@@ -3,7 +3,7 @@
 import { entityCore } from "@/config/api.config";
 import { useAuth } from "@/context/AuthContext";
 import { _POST } from "@/request/post_request";
-import { DollarSign, LoaderCircleIcon, MapPin, Shield } from "lucide-react";
+import { DollarSign, IndianRupeeIcon, LoaderCircleIcon, MapPin, Shield } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -53,8 +53,8 @@ function RazorpayPayment() {
           key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
           amount: paymentOrder.order.amount.toString(),
           currency: paymentOrder.order.currency,
-          name: "Your Company",
-          description: "Test Transaction",
+          name: process.env.NEXT_PUBLIC_APP_NAME,
+          description: "Transaction for Authors",
           order_id: paymentOrder.order.id,
           handler: async function (response) {
             const data = {
@@ -78,9 +78,8 @@ function RazorpayPayment() {
             }
           },
           prefill: {
-            name: "Your Name",
-            email: "your.email@example.com",
-            contact: "9999999999",
+            name: user.first_name + " " + user.last_name,
+            email: user.email,
           },
           theme: { color: "#61dafb" },
         };
@@ -110,7 +109,7 @@ function RazorpayPayment() {
       <div className="p-3 sm:p-5">
         <div className="mb-8">
           <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-            <DollarSign className="w-5 h-5 text-red-600" />
+            <IndianRupeeIcon className="w-5 h-5 text-red-600" />
             Processing Fees
           </h3>
 

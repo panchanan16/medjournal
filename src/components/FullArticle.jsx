@@ -41,7 +41,7 @@ function FullArticle({ articleFull, artId }) {
       <div className="flex flex-col lg:flex-row gap-8 min-h-screen">
         {/* Article Content - uses semantic HTML for article content */}
         <article className="lg:w-3/4 bg-white rounded-lg shadow-md p-6 mb-6">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+          <h1 className="text-lg md:text-3xl font-bold text-gray-800 mb-4">
             {articleFull.title}
           </h1>
 

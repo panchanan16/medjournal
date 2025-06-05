@@ -136,7 +136,7 @@ function StripePayement() {
           {isProceed ? (
             <LoaderCircleIcon className="animate-spin" />
           ) : (
-            `Proceed - ${selectedAmount} USD`
+            `Proceed - $ ${selectedAmount} USD`
           )}
         </button>
         <p className="mt-8 text-red-700 mx-auto bg-red-50 text-center rounded-2xl p-1">

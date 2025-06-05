@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "@/config/api.config";
+import Image from "next/image";
 
 function HeroSlider({ SliderImgs, HighlightInfo }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -13,7 +14,9 @@ function HeroSlider({ SliderImgs, HighlightInfo }) {
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + SliderImgs.length) % SliderImgs.length);
+    setCurrentSlide(
+      (prev) => (prev - 1 + SliderImgs.length) % SliderImgs.length
+    );
   };
 
   useEffect(() => {
@@ -37,21 +40,22 @@ function HeroSlider({ SliderImgs, HighlightInfo }) {
                     SliderImgs.length &&
                     `${BASE_URL}${SliderImgs[currentSlide].slider_img}`
                   }
+                  alt="slider images"
                 />
               </div>
               {/* Navigation */}
-              <button
+              <div
                 onClick={prevSlide}
                 className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-red-700 hover:bg-black/40 text-white p-2 rounded-full"
               >
                 <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button
+              </div>
+              <div
                 onClick={nextSlide}
                 className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-red-700 hover:bg-black/40 text-white p-2 rounded-full"
               >
                 <ChevronRight className="w-6 h-6" />
-              </button>
+              </div>
             </div>
 
             {/* Content */}
@@ -79,13 +83,13 @@ function HeroSlider({ SliderImgs, HighlightInfo }) {
             <div className="flex mt-3 justify-center space-x-2">
               {SliderImgs.length &&
                 SliderImgs.map((slider, index) => (
-                  <button
+                  <span
                     key={index}
                     onClick={() => setCurrentSlide(index)}
                     className={`w-3 h-3 rounded-full ${
                       index === currentSlide ? "bg-red-600" : "bg-gray-300"
                     }`}
-                  />
+                  ></span>
                 ))}
             </div>
           </div>
@@ -96,7 +100,7 @@ function HeroSlider({ SliderImgs, HighlightInfo }) {
             <div className="px-4 py-3 border-b border-gray-100">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold text-gray-800 truncate">
-                  {HighlightInfo ? HighlightInfo[0].journal_name : 'N/A'}
+                  {HighlightInfo ? HighlightInfo[0].journal_name : "N/A"}
                 </h3>
               </div>
             </div>
@@ -104,7 +108,7 @@ function HeroSlider({ SliderImgs, HighlightInfo }) {
             <div className="p-2">
               <div className="rounded-lg p-1 text-center">
                 <div className="flex justify-center">
-                  <img
+                  {/* <img
                     src={
                       HighlightInfo
                         ? `${BASE_URL}${HighlightInfo[0]?.thumbnail}`
@@ -112,6 +116,14 @@ function HeroSlider({ SliderImgs, HighlightInfo }) {
                     }
                     alt="Journal cover"
                     className="max-w-full h-auto"
+                  /> */}
+                  <Image
+                    src={`${BASE_URL}${HighlightInfo[0]?.thumbnail}`}
+                    alt="Journal cover"
+                    width={500}
+                    height={600}
+                    objectFit="fit"
+                    className="transition-opacity duration-300 max-w-full h-auto"
                   />
                 </div>
               </div>
@@ -121,12 +133,16 @@ function HeroSlider({ SliderImgs, HighlightInfo }) {
               <div className="flex items-center mb-2">
                 <div className="w-2 h-2 bg-red-600 rounded-full mr-2 flex-shrink-0"></div>
                 <span className="font-bold text-sm">ISSN (Print) : </span>
-                <span>{HighlightInfo ? HighlightInfo[0]?.issn_print : "N/A"}</span>
+                <span>
+                  {HighlightInfo ? HighlightInfo[0]?.issn_print : "N/A"}
+                </span>
               </div>
               <div className="flex items-center mb-2">
                 <div className="w-2 h-2 bg-red-600 rounded-full mr-2 flex-shrink-0"></div>
                 <span className="font-bold text-sm">ISSN (Online) :</span>{" "}
-                <span>{HighlightInfo ? HighlightInfo[0]?.issn_online : "N/A"}</span>
+                <span>
+                  {HighlightInfo ? HighlightInfo[0]?.issn_online : "N/A"}
+                </span>
               </div>
               <div className="flex items-center mb-2">
                 <div className="w-2 h-2 bg-red-600 rounded-full mr-2 flex-shrink-0"></div>

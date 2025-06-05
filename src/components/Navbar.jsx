@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { ChevronDown, FileText } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import JournalHeader from "./JournalHeader";
 import { _GET } from "@/request/request";
 
@@ -13,7 +13,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
     archives: false,
     author: false,
     special: false,
-    ethics: false
+    ethics: false,
   });
 
   const toggleDropdown = (menu) => {
@@ -74,6 +74,12 @@ export default function Navbar({ policy, JournalHeaderData }) {
                     Editor in chief
                   </Link>
                   <Link
+                    href="/editor-board"
+                    className="text-gray-700 hover:text-red-600 transition"
+                  >
+                    Editor Board
+                  </Link>
+                  <Link
                     href="/former_board"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
@@ -118,16 +124,28 @@ export default function Navbar({ policy, JournalHeaderData }) {
               {dropdownOpen.archives && (
                 <div className="pl-4 pt-2 flex flex-col space-y-2">
                   <Link
-                    href="/archives/2024"
+                    href="/author-instruction"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
-                    2024 Issues
+                    Authors Instruction
                   </Link>
                   <Link
-                    href="/archives/2023"
+                    href="/onlinesubmission"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
-                    2023 Issues
+                    Online Submission
+                  </Link>
+                  <Link
+                    href="/multimedia_process"
+                    className="text-gray-700 hover:text-red-600 transition"
+                  >
+                    Submit Multimedia Files
+                  </Link>
+                  <Link
+                    href="/referstyle"
+                    className="text-gray-700 hover:text-red-600 transition"
+                  >
+                    Refference Style
                   </Link>
                 </div>
               )}
@@ -149,16 +167,16 @@ export default function Navbar({ policy, JournalHeaderData }) {
               {dropdownOpen.author && (
                 <div className="pl-4 pt-2 flex flex-col space-y-2">
                   <Link
-                    href="/authors/guidelines"
+                    href="/reviewer_guidelines"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
-                    Submission Guidelines
+                    Guidelines For Reviewers
                   </Link>
                   <Link
-                    href="/authors/review"
+                    href="/review"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
-                    Review Process
+                    Reviewers
                   </Link>
                 </div>
               )}
@@ -179,18 +197,21 @@ export default function Navbar({ policy, JournalHeaderData }) {
               </button>
               {dropdownOpen.ethics && (
                 <div className="pl-4 pt-2 flex flex-col space-y-2">
-                  <Link
-                    href="/authors/guidelines"
-                    className="text-gray-700 hover:text-red-600 transition"
-                  >
-                    Submission Guidelines
-                  </Link>
-                  <Link
-                    href="/authors/review"
-                    className="text-gray-700 hover:text-red-600 transition"
-                  >
-                    Review Process
-                  </Link>
+                  {policy &&
+                    policy.length &&
+                    policy.map((pol, ind) => (
+                      <Link
+                        key={ind}
+                        href={
+                          pol.pageUrl
+                            ? `/policy/${pol.pageUrl}`
+                            : pol.redirectLink
+                        }
+                        className="text-gray-700 hover:text-red-600 transition"
+                      >
+                        {pol.name}
+                      </Link>
+                    ))}
                 </div>
               )}
             </div>
@@ -211,13 +232,13 @@ export default function Navbar({ policy, JournalHeaderData }) {
               {dropdownOpen.special && (
                 <div className="pl-4 pt-2 flex flex-col space-y-2">
                   <Link
-                    href="/special/current"
+                    href="/published-special-issue"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
                     Current Special Issue
                   </Link>
                   <Link
-                    href="/special/upcoming"
+                    href="/upcoming_special_issue"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
                     Upcoming Special Issues
@@ -246,20 +267,14 @@ export default function Navbar({ policy, JournalHeaderData }) {
             >
               Submit Article
             </Link>
-            <div className="pt-2">
+            {/* <div className="pt-2">
               <a
                 href="mailto:submission@ejmp.org.uk"
                 className="text-sm text-gray-700 hover:text-red-600 transition flex items-center gap-1"
               >
                 <FileText size={16} /> submission@ejmp.org.uk
               </a>
-              <Link
-                href="/faqs"
-                className="text-sm text-gray-700 hover:text-red-600 transition mt-2 block"
-              >
-                FAQs
-              </Link>
-            </div>
+            </div> */}
           </nav>
         </div>
       )}
@@ -434,15 +449,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
               >
                 Archives
               </Link>
-            </li>
-            {/* <li className="group relative min-w-fit">
-              <Link
-                href="/online-first"
-                className="px-4 py-3 text-sm inline-block font-medium hover:bg-red-800 transition"
-              >
-                Online First
-              </Link>
-            </li> */}
+            </li>            
             <li className="group relative min-w-fit">
               <Link
                 href="/article-charges"
@@ -462,25 +469,6 @@ export default function Navbar({ policy, JournalHeaderData }) {
           </ul>
         </nav>
       </div>
-
-      {/* Search Bar */}
-      {/* <div className="bg-gray-100 py-4 border-b">
-        <div className="container mx-auto px-4">
-          <div className="max-w-xl mx-auto">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search articles, topics, authors..."
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition"
-              />
-              <Search
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                size={18}
-              />
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 }

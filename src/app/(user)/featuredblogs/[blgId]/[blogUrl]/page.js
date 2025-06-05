@@ -1,5 +1,7 @@
 import BlogFull from "@/components/BlogFull";
 import { _GET } from "@/request/request";
+import { redirect } from "next/navigation";
+
 
 async function BlogDetailPage({ params }) {
     const { blgId, blogUrl } = await params;
@@ -7,6 +9,8 @@ async function BlogDetailPage({ params }) {
 
     if (blog.blog_url == blogUrl) {
         return <BlogFull FullBlog={blog ? blog : null} />
+    } else {
+       return redirect('/')
     }
 }
 

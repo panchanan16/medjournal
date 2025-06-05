@@ -50,12 +50,12 @@ const JournalHeader = ({ isMenuOpen, setIsMenuOpen, Data }) => {
             </Link>
           )}
         </div>
-        <button
+        <div
           className="md:hidden text-white"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        </div>
       </div>
     </header>
   );

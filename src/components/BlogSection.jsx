@@ -45,10 +45,11 @@ const BlogsSection = ({ Blogs }) => {
                   <div className="flex-1 min-w-0">
                     <Link
                       href={`/featuredblogs/${blog.blog_id}/${blog.blog_url}`}
+                      className="font-semibold text-gray-900 text-sm sm:text-base leading-snug mb-2 group-hover:text-red-600 transition-colors duration-200 line-clamp-2"
                     >
-                      <h3 className="font-semibold text-gray-900 text-sm sm:text-base leading-snug mb-2 group-hover:text-red-600 transition-colors duration-200 line-clamp-2">
-                        {blog.blog_title}
-                      </h3>
+                      {/* <h3  */}
+                      {blog.blog_title}
+                      {/* </h3> */}
                     </Link>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center text-gray-500 text-xs">
