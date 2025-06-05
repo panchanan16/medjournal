@@ -59,41 +59,6 @@ function FullArticle({ articleFull, artId }) {
 
           {/* Abstract Section */}
           <div className="bg-white">
-            {/* Abstract Section */}
-            <div className="mb-8">
-              <div className="border-b-2 border-red-600 pb-2 mb-6">
-                <h2 className="text-xl text-gray-800 font-bold flex items-center gap-2">
-                  <FileText className="w-5 h-5" />
-                  Abstract:
-                </h2>
-              </div>
-
-              <div className="text-gray-700 leading-relaxed space-y-4">
-                <p className="text-justify">{articleFull.abstract}</p>
-              </div>
-            </div>
-
-            {/* Keywords Section */}
-            <div className="mb-8">
-              <div className="border-b-2 border-red-600 pb-2 mb-4">
-                <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                  <Tag className="w-4 h-4" />
-                  Keywords:
-                </h3>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {articleFull.keywords.split(",").map((keyword, index) => (
-                  <span
-                    key={index}
-                    className="inline-block bg-red-100 hover:bg-red-200 transition-colors duration-200 px-3 py-1 rounded-full text-sm text-red-700 border border-red-300"
-                  >
-                    {keyword}
-                  </span>
-                ))}
-              </div>
-            </div>
-
             {/* DOI and Citation Information */}
             <div className="mb-8">
               <div className="border-b-2 border-red-600 pb-2 mb-4">
@@ -142,6 +107,16 @@ function FullArticle({ articleFull, artId }) {
                   </span>
                 </div>
 
+                {/* Page no */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <span className="font-semibold text-gray-700 text-sm uppercase tracking-wide min-w-fit">
+                    Pages:
+                  </span>
+                  <span className="text-gray-600 text-sm">
+                    {articleFull.pageFrom} - {articleFull.pageTo}
+                  </span>
+                </div>
+
                 {/* Received/Accepted Dates */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-200">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1">
@@ -171,6 +146,40 @@ function FullArticle({ articleFull, artId }) {
                 </div>
               </div>
             </div>
+            {/* Abstract Section */}
+            <div className="mb-8">
+              <div className="border-b-2 border-red-600 pb-2 mb-6">
+                <h2 className="text-xl text-gray-800 font-bold flex items-center gap-2">
+                  <FileText className="w-5 h-5" />
+                  Abstract:
+                </h2>
+              </div>
+
+              <div className="text-gray-700 leading-relaxed space-y-4">
+                <p className="text-justify">{articleFull.abstract}</p>
+              </div>
+            </div>
+
+            {/* Keywords Section */}
+            <div className="mb-8">
+              <div className="border-b-2 border-red-600 pb-2 mb-4">
+                <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+                  <Tag className="w-4 h-4" />
+                  Keywords:
+                </h3>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {articleFull.keywords.split(",").map((keyword, index) => (
+                  <span
+                    key={index}
+                    className="inline-block bg-red-100 hover:bg-red-200 transition-colors duration-200 px-3 py-1 rounded-full text-sm text-red-700 border border-red-300"
+                  >
+                    {keyword}
+                  </span>
+                ))}
+              </div>
+            </div>
 
             {/* Citation Box */}
             {/* <div className="mb-8">
@@ -194,10 +203,8 @@ function FullArticle({ articleFull, artId }) {
           </div>
 
           {/* Article Tabs */}
-          <div className="border-b-2 border-red-600 pb-2 mb-4">           
-              <h3 className="text-lg font-bold text-gray-800">
-                  Article :
-                </h3>
+          <div className="border-b-2 border-red-600 pb-2 mb-4">
+            <h3 className="text-lg font-bold text-gray-800">Article :</h3>
           </div>
 
           {/* Article Content */}

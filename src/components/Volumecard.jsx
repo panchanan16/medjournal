@@ -27,6 +27,12 @@ const ArticleCard = ({ article, links }) => {
         </div>
 
         <div className="flex flex-wrap gap-2 mb-3">
+          <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+            Pages {article.page_from}-{article.page_to}
+          </span>
+        </div>
+
+        <div className="flex flex-wrap gap-2 mb-3">
           <Link href={`${BASE_URL}${article.pdflink}`}>
             <span className="bg-red-100 text-red-800 cursor-default font-semibold text-xs px-2 py-1 rounded">
               PDF
