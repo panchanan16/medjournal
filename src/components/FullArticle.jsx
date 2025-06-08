@@ -79,7 +79,7 @@ function FullArticle({ articleFull, artId }) {
                     rel="noopener noreferrer"
                     className="text-red-600 hover:text-red-800 hover:underline transition-colors duration-200 flex items-center gap-1 text-sm break-all"
                   >
-                    {articleFull.DOIlink}
+                    {articleFull.DOI}
                     <ExternalLink className="w-3 h-3 flex-shrink-0" />
                   </a>
                 </div>
