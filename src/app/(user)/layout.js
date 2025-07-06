@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { _GET } from "@/request/request";
 import { AuthProvider } from "@/context/AuthContext";
+import ChatBot from "@/components/ChatBot";
+import WhatsAppButton from "@/components/WhatsappButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,6 +48,10 @@ export default async function RootLayout({ children }) {
           {children}
           <Footer FooterData={header ? header : {}} />
         </AuthProvider>
+        <div className="flex flex-col items-center justify-center">
+          <ChatBot />
+          <WhatsAppButton />
+        </div>
       </body>
     </html>
   );
