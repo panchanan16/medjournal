@@ -130,7 +130,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                     Authors Instruction
                   </Link>
                   <Link
-                    href="/onlinesubmission"
+                    href="/submit_article"
                     className="text-gray-700 hover:text-red-600 transition"
                   >
                     Online Submission
@@ -360,7 +360,7 @@ export default function Navbar({ policy, JournalHeaderData }) {
                   Authors Instruction
                 </Link>
                 <Link
-                  href="/onlinesubmission"
+                  href="/submit_article"
                   className="block px-4 py-2 text-gray-800 hover:bg-red-100 transition"
                 >
                   Online Submission

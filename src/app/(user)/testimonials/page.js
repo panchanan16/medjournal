@@ -3,45 +3,6 @@ import Link from 'next/link'
 import TestimonialSection from '@/components/TestimonialSection'
 import { _GET } from '@/request/request'
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Sarah Chen",
-    role: "Creative Writer",
-    avatar: "SC",
-    rating: 5,
-    text: "This journal has completely transformed my writing routine. The intuitive interface and beautiful design make it a joy to use every day. I've never been more consistent with my journaling!",
-    date: "2 weeks ago"
-  },
-  {
-    id: 2,
-    name: "Marcus Johnson",
-    role: "Student",
-    avatar: "MJ",
-    rating: 5,
-    text: "As someone who struggled with traditional paper journals, this digital solution is perfect. The search functionality and tags help me organize my thoughts like never before.",
-    date: "1 month ago"
-  },
-  {
-    id: 3,
-    name: "Elena Rodriguez",
-    role: "Life Coach",
-    avatar: "ER",
-    rating: 5,
-    text: "I recommend this journal to all my clients. The mood tracking and reflection prompts have helped them develop better self-awareness and emotional intelligence.",
-    date: "3 weeks ago"
-  },
-  {
-    id: 4,
-    name: "David Kim",
-    role: "Entrepreneur",
-    avatar: "DK",
-    rating: 5,
-    text: "The goal tracking feature is incredible. Being able to document my journey and see my progress over time has been invaluable for my personal and professional growth.",
-    date: "1 week ago"
-  }
-]
-
 export default async function TestimonialsPage() {
 
   const testimonis = await _GET(`testimonial/readAll`, 'core')
@@ -83,7 +44,7 @@ export default async function TestimonialsPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link href={'#'}>
+            <Link href={'/submit_article'}>
               <button className="group bg-white text-red-600 px-10 py-5 rounded-full font-bold text-xl hover:bg-red-50 transition-all duration-300 hover:scale-110 transform shadow-2xl hover:shadow-white/25">
                 <span className="flex items-center space-x-3">
                   <span>Submit Articles</span>

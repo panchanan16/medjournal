@@ -66,7 +66,7 @@ export default function ManuscriptSubmission() {
 
             <div className="bg-red-500 rounded-lg p-4 mb-6">
               <p className="text-center font-semibold">
-                Email: fastsubmission@farmclin.es
+                Email: {process.env.NEXT_PUBLIC_SUBMISSION_MAIL ? process.env.NEXT_PUBLIC_SUBMISSION_MAIL : "email@gmail.com"}
 
               </p>
             </div>
@@ -126,7 +126,7 @@ export default function ManuscriptSubmission() {
 
             <div className="bg-gray-100 rounded-lg p-4 mb-6 border border-gray-300">
               <p className="text-center font-semibold text-gray-800">
-                Email: submission@farmcline.es
+                Email:  Email: {process.env.NEXT_PUBLIC_SUBMISSION_MAIL ? process.env.NEXT_PUBLIC_SUBMISSION_MAIL : "email@gmail.com"}
               </p>
             </div>
 
