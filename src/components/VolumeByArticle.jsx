@@ -5,7 +5,7 @@ import ArticleCard from "./Volumecard";
 
 function VolumeByArticle({ AllArticles }) {
   const [articleSet, setArticleSet] = useState([]);
-  const [filterArticle, setFilterArticle] = useState(articleSet)
+  const [filterArticle, setFilterArticle] = useState(articleSet);
 
   function groupArticlesByType(articles, issue = 1) {
     const grouped = {};
@@ -33,7 +33,7 @@ function VolumeByArticle({ AllArticles }) {
       AllArticles ? AllArticles.articles : []
     );
     setArticleSet(articles);
-    setFilterArticle(articles)
+    setFilterArticle(articles);
   }, []);
 
   return (
@@ -71,16 +71,21 @@ function VolumeByArticle({ AllArticles }) {
           <div className="p-4">
             <ul>
               {AllArticles &&
-                AllArticles.vols.map((is, ind) => (
-                  <li
-                    key={ind}
-                    className="text-red-800 hover:underline cursor-pointer"
-                  >
-                    <span className="cursor-pointer" onClick={()=> FilterByIssue(is.issue_name)}>
-                      Issue {is.issue_name}
-                    </span>
-                  </li>
-                ))}
+                [...AllArticles.vols] // clone array so we don’t mutate original
+                  .sort((a, b) => Number(a.issue_name) - Number(b.issue_name))
+                  .map((is, ind) => (
+                    <li
+                      key={ind}
+                      className="text-red-800 hover:underline cursor-pointer"
+                    >
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => FilterByIssue(is.issue_name)}
+                      >
+                        Issue {is.issue_name}
+                      </span>
+                    </li>
+                  ))}
             </ul>
           </div>
         </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { BASE_URL } from "@/config/api.config";
 import { _POST } from "@/request/post_request";
 
 import { Save } from "lucide-react";
@@ -194,7 +195,7 @@ function EditorialBoardContent({ InitialValues }) {
 
         <div className="flex items-center">
           <span className="ml-2 text-sm text-gray-600">Old Img:</span>
-          <a href={`http://localhost:3100${formData.editorImg}`}>
+          <a href={`${BASE_URL}${formData.editorImg}`}>
             {formData.editorImg && formData.editorImg}
           </a>
         </div>

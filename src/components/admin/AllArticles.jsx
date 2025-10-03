@@ -12,9 +12,11 @@ function AllArticles({ articles }) {
   async function deleteItem(e, ID, setItems, items, key) {
     e.stopPropagation();
     e.preventDefault();
-    const response = await _DELETE(`article/remove?ariticle_id=${ID}`);
-    if (response) {
-      setItems(items.filter((el) => el[key] !== ID));
+    if (confirm("Are you sure you want to delete this item?")) {
+      const response = await _DELETE(`article/remove?ariticle_id=${ID}`);
+      if (response) {
+        setItems(items.filter((el) => el[key] !== ID));
+      }
     }
   }
 
@@ -67,9 +69,7 @@ function AllArticles({ articles }) {
                   selectedArticles.includes(article.id) ? "bg-red-50" : ""
                 }`}
               >
-                <td className="px-4 py-4 whitespace-nowrap">
-                  {id + 1}
-                </td>
+                <td className="px-4 py-4 whitespace-nowrap">{id + 1}</td>
                 <td className="px-4 py-4">
                   <Link href={`articles/addArticle/${article.ariticle_id}`}>
                     <div className="text-sm font-medium text-gray-800 hover:text-red-700 cursor-pointer">
@@ -94,7 +94,18 @@ function AllArticles({ articles }) {
                       In Press
                     </span>
                   ) : (
-                    <button onClick={(e)=> deleteItem(e, article.ariticle_id, setArticleList, articleList, 'ariticle_id') } className="inline-flex items-center cursor-pointer px-2 py-1 rounded text-xs font-medium bg-red-100 text-red-800 hover:bg-red-200">
+                    <button
+                      onClick={(e) =>
+                        deleteItem(
+                          e,
+                          article.ariticle_id,
+                          setArticleList,
+                          articleList,
+                          "ariticle_id"
+                        )
+                      }
+                      className="inline-flex items-center cursor-pointer px-2 py-1 rounded text-xs font-medium bg-red-100 text-red-800 hover:bg-red-200"
+                    >
                       <Trash2Icon size={14} className="mr-1" />
                       Delete
                     </button>
@@ -114,7 +125,7 @@ function AllArticles({ articles }) {
               Add A Article
             </button>
           </Link>
-        </div>     
+        </div>
       </div>
     </>
   );

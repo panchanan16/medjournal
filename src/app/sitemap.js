@@ -7,7 +7,7 @@ export default async function sitemap() {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 
     const blogs = await _GET('blog/readAll', 'core')
-    const journals = await _GET('article/readAll')
+    const journals = await _GET('articleMain/readAll', 'core')
 
     // Static routes
     const staticRoutes = [
@@ -156,7 +156,7 @@ export default async function sitemap() {
 
 
     // Dynamic journals routes
-    const journalRoutes = journals && journals?.articleList?.map((post) => ({
+    const journalRoutes = journals && journals?.map((post) => ({
         url: `${baseUrl}/article-read/${post.ariticle_id}/${post.url}`,
         lastModified: new Date(post.published_date !== "" && post.published_date),
         changeFrequency: 'weekly',

@@ -2,6 +2,7 @@ import { BASE_URL } from "@/config/api.config";
 import Link from "next/link";
 
 const ArticleCard = ({ article, links }) => {
+  console.log( 'pdf link',article.pdflink)
   return (
     <div className="mb-8 pb-6 border-b border-gray-200 last:border-b-0 last:pb-0">
       <h3 className="text-lg font-semibold mb-2 hover:text-red-700">
@@ -33,7 +34,7 @@ const ArticleCard = ({ article, links }) => {
         </div>
 
         <div className="flex flex-wrap gap-2 mb-3">
-          <Link href={`${BASE_URL}${article.pdflink}`}>
+          <Link href={`${BASE_URL}${article.pdflink}`} prefetch={false}>
             <span className="bg-red-100 text-red-800 cursor-default font-semibold text-xs px-2 py-1 rounded">
               PDF
             </span>

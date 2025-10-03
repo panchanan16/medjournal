@@ -46,7 +46,7 @@ export default async function EditorialTeamPage() {
                             <div key={key} className="flex flex-col md:flex-row items-center md:items-start gap-6 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <div className="relative w-40 h-40 overflow-hidden rounded-lg border-4 border-red-100">
                                     <img
-                                        src={`http://localhost:3100${chief.imgLink}`}
+                                        src={`${BASE_URL}${chief.imgLink}`}
                                         alt={chief.name}
                                         className="transition-transform duration-300 hover:scale-105 object-cover w-full h-full"
                                     />
